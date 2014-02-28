@@ -43,7 +43,19 @@
 </head>
 
 <body>
+<?php
+session_start();
+ob_start();
+$host="localhost"; // Host name 
+$username="root"; // Mysql username 
+$password=""; // Mysql password 
+$db_name="advanced_system_project"; // Database name 
 
+
+// Connect to server and select databse.
+mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
+mysql_select_db("$db_name")or die("cannot select DB");
+?>
 <div class="container">
 
    <div class="container">
@@ -68,8 +80,16 @@
               
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                
+              <?php
+              if(!isset($_SESSION['firstName'])){
+                echo '<li><a href="login.php">Log In</a></li>';
+                echo '<li><a href="newuser.php">Create Account</a></li>';
+              }else{
+                echo '<li><a href="cart.php">Cart</a></li>';
+              }
+              ?>
               
-              <li><a href="cart.php">Cart</a></li>
               
             </ul>
           </div><!--/.nav-collapse -->
