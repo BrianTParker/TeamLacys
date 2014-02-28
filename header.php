@@ -64,12 +64,12 @@
             <ul class="nav navbar-nav">
               <li><a href="mens.php">Mens</a></li>
               <li><a href="womens.php">Womens</a></li>
-              <li><a href="#">Children</a></li>
+              <li><a href="children.php">Children</a></li>
               
             </ul>
             <ul class="nav navbar-nav navbar-right">
               
-              <li><a href="#">Cart</a></li>
+              <li><a href="cart.php">Cart</a></li>
               
             </ul>
           </div><!--/.nav-collapse -->

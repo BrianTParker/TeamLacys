@@ -1,7 +1,7 @@
 <?php
 include "header.php";
 ?>
-Childrenswear listed here
+Cart items listed here
 
 <?
 include "footer.php";
