@@ -51,8 +51,8 @@ ob_start();
 
 
 $host="localhost"; // Host name 
-$username="bp72520"; // Mysql username 
-$password="32bC$85m"; // Mysql password 
+$username="root"; // Mysql username 
+$password=""; // Mysql password 
 $db_name="advanced_systems_project"; // Database name 
 
     # connect to the database  
