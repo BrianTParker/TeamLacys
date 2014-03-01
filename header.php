@@ -1,3 +1,7 @@
+<?php 
+session_start(); 
+ob_start();
+?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -44,11 +48,11 @@
 
 <body>
 <?php
-session_start();
-ob_start();
+
+
 $host="localhost"; // Host name 
-$username="root"; // Mysql username 
-$password=""; // Mysql password 
+$username="bp72520"; // Mysql username 
+$password="32bC$85m"; // Mysql password 
 $db_name="advanced_systems_project"; // Database name 
 
     # connect to the database  
@@ -91,7 +95,7 @@ $db_name="advanced_systems_project"; // Database name
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
-                echo '<li><a href="cart.php">Cart</a></li>';
+                echo '<li><a href="cart.php">Cart(0)</a></li>';
                 echo '<li><a href="logout.php">Logout</a></li>';
               }
               ?>

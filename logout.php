@@ -1,13 +1,8 @@
 <?php
-include 'header.php';
-
+include "header.php";
 unset($_SESSION);
-
 session_destroy();
-
+header("location:" . $_SERVER['HTTP_REFERER']);
+include "footer.php"
 ?>
 
-
-<?php
-include 'footer.php'
-?>
