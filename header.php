@@ -49,12 +49,17 @@ ob_start();
 $host="localhost"; // Host name 
 $username="root"; // Mysql username 
 $password=""; // Mysql password 
-$db_name="advanced_system_project"; // Database name 
+$db_name="advanced_systems_project"; // Database name 
 
-
-// Connect to server and select databse.
-mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
-mysql_select_db("$db_name")or die("cannot select DB");
+    # connect to the database  
+    try {  
+  # MySQL with PDO_MYSQL
+  $DBH = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+  
+  }
+	catch(PDOException $e) {
+    echo $e->getMessage();
+}
 ?>
 <div class="container">
 
@@ -87,6 +92,7 @@ mysql_select_db("$db_name")or die("cannot select DB");
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
                 echo '<li><a href="cart.php">Cart</a></li>';
+                echo '<li><a href="logout.php">Logout</a></li>';
               }
               ?>
               
