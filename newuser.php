@@ -103,6 +103,7 @@ function validateInfo(){
 		{
 			
             $_SESSION['firstName'] = $_POST['firstName'];
+            $_SESSION["cart"] = array();
             header("location: index.php");
 		}
 		//the form has been posted without, so save it

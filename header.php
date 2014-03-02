@@ -95,7 +95,7 @@ $db_name="advanced_systems_project"; // Database name
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
-                echo '<li><a href="cart.php">Cart(0)</a></li>';
+                echo '<li><a href="cart.php">Cart(' . count($_SESSION['cart']) . ')</a></li>';
                 echo '<li><a href="logout.php">Logout</a></li>';
               }
               ?>

@@ -45,6 +45,7 @@ function checkLogin(){
     $_SESSION["lastName"] = $lastName;
     $_SESSION["email"] = $email;
     $_SESSION["id"] = $id; 
+    $_SESSION["cart"] = array();
 
     header("location: index.php");
     }
