@@ -7,7 +7,7 @@ include "header.php";
         <?php
         
         if(isset($_SESSION['cart'])){
-            if(count($_SESSION['cart']) >1){
+            if(count($_SESSION['cart']) >0){
                 $items = "";
                 for($i = 0; $i<count($_SESSION['cart']); $i++){
                     
