@@ -8,7 +8,7 @@ phone varchar(20),
 email varchar(30) not null,
 password varchar(50) not null,
 PRIMARY KEY(id),
-CONSTRAINT uc_customer UNIQUE (first_name, last_name, email)
+CONSTRAINT uc_customer UNIQUE (email)
 );
 
 create table shipping
@@ -38,6 +38,9 @@ description varchar(500) not null,
 price decimal not null,
 promotion_id int,
 image_location varchar(100) not null,
+age_category varchar(20),
+gender_category varchar(20),
+article_category varchar(20),
 PRIMARY KEY(id),
 FOREIGN KEY(promotion_id) references promotions(id),
 CONSTRAINT uc_products UNIQUE (name)
