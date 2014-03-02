@@ -7,7 +7,8 @@ include "header.php";
         <div class="tabbable"> <!-- Only required for left/right tabs -->
                 <ul class="nav nav-tabs">
                     <?php 
-                    $sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'pants'");
+                    $pants_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'pants'");
+                    $shirts_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'shirts'");
                     ?>
                     <li class="active"><a href="#Pants" data-toggle="tab">Pants</a></li>
                     
@@ -19,27 +20,36 @@ include "header.php";
                     
                     <div class="tab-pane active" id="Pants">
                     
-                    <table class="table">
-                    <?php
-                    $sql->setFetchMode(PDO::FETCH_ASSOC);
-                    while($row = $sql->fetch()) {
-                        echo '<tr>' . "\n";
-                        echo '<td><img src="' . $row['image_location'] . '"/></td>' . "\n";
-                        echo '<td>' . $row['name'] . '</td>' . "\n";
-                        echo '<td>' . $row['description'] . '</td>' . "\n";
-                        echo '<td>$' . $row['price'] . '</td>' . "\n";
-                        echo '</tr>' . "\n";
-                    }
-                    ?>                        
-                    </table>
+                        <table class="table">
+                        <?php
+                        $pants_sql->setFetchMode(PDO::FETCH_ASSOC);
+                        while($row = $pants_sql->fetch()) {
+                            echo '<tr>' . "\n";
+                            echo '<td><img src="' . $row['image_location'] . '"/></td>' . "\n";
+                            echo '<td>' . $row['name'] . '</td>' . "\n";
+                            echo '<td>' . $row['description'] . '</td>' . "\n";
+                            echo '<td>$' . $row['price'] . '</td>' . "\n";
+                            echo '<td> <form method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button></form> <a href="#">Reviews</a></td>';
+                            echo '</tr>' . "\n";
+                        }
+                        ?>                        
+                        </table>
                     </div>
                     
                     <div class="tab-pane" id="Shirts">
-                        <ul>
-                        <li>shirt 1</li>
-                        <li>shirt 2</li>
-                        <li>shirt 3</li>
-                        </ul>
+                        <table class="table">
+                        <?php
+                        $shirts_sql->setFetchMode(PDO::FETCH_ASSOC);
+                        while($row = $shirts_sql->fetch()) {
+                            echo '<tr>' . "\n";
+                            echo '<td><img src="' . $row['image_location'] . '"/></td>' . "\n";
+                            echo '<td>' . $row['name'] . '</td>' . "\n";
+                            echo '<td>' . $row['description'] . '</td>' . "\n";
+                            echo '<td>$' . $row['price'] . '</td>' . "\n";
+                            echo '</tr>' . "\n";
+                        }
+                        ?>                        
+                        </table>
                     </div>
                 </div>
                 
