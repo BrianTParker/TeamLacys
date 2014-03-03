@@ -43,21 +43,18 @@ try {
 	// END TEST -nm
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-		if(!isset($_SESSION['firstName'])){
 		
-			header("location: login.php");
-			
-		}else{
-		
-			$CART_MGR = CartManager::init();
-		
-			$cart_sql->setFetchMode(PDO::FETCH_ASSOC);
+		// initialize cart manager -nm
+		$CART_MGR = CartManager::init();
 	
-			while($row = $cart_sql->fetch()) {
-			
-				$CART_MGR->addItem( $row );
-			}
+		// we want an associative array -nm
+		$cart_sql->setFetchMode(PDO::FETCH_ASSOC);
+
+		// for each row -nm
+		while($row = $cart_sql->fetch()) {
+		
+			// add the row to the cart via cart manager -nm
+			$CART_MGR->addItem( $row );
 		}
 	}
     
