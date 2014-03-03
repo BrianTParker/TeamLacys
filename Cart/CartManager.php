@@ -41,9 +41,17 @@ class CartManager {
 		
 	} // end method -nm
 	
+	// returns the number of items currently in the cart -nm
 	public function getItemCount(){
 	
 		return count( $this->items_l );
+	
+	} // end method -nm
+	
+	// returns a list of items -nm
+	public function getItems(){
+	
+		return $this->items_l;
 	
 	} // end method -nm
 	
