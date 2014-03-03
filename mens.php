@@ -29,7 +29,7 @@ include "header.php";
                             echo '<td>' . $row['name'] . '</td>' . "\n";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
-                            echo '<td> <form method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button>
+                            echo '<td> <form id="cartButton" method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button>
                                 <input type="hidden" name="id" value="' . $row['id'] . '"/> </form>' . "\n";
                             echo '</tr>' . "\n";
                         }
@@ -47,7 +47,7 @@ include "header.php";
                             echo '<td>' . $row['name'] . '</td>' . "\n";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
-                            echo '<td> <form method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button>
+                            echo '<td> <form id="cartForm" method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button>
                                 <input type="hidden" name="id" value="' . $row['id'] . '"/> </form>' . "\n";
                             echo '</tr>' . "\n";
                         }

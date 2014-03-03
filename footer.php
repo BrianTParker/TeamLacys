@@ -23,6 +23,40 @@
     });
   </script>
 
+    <script type="text/javascript" src="js/jquery.js">
+        
+        $('#cartButton').on('submit', function(){
+        
+            var that = $(this),
+                url = that.attr('action'),
+                method = that.attr('method'),
+                data = {};
+                
+            that.find('[name]').each(function(index, value){
+                var that = $(this),
+                    name = that.attr('name'),
+                    value = that.val();
+                data[name] = value;
+            });
+            
+            $.ajax({
+            
+                url: ",
+                type: type,
+                data: data,
+                success: function(response){
+                    alert("success!");
+                },
+                error: function (err)
+                { alert(err.responseText)}
+            });
+            return false;
+        });
+        
+            
+            
+        
+    </script>
 
   <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
        chromium.org/developers/how-tos/chrome-frame-getting-started -->
