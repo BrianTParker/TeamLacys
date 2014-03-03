@@ -41,6 +41,17 @@ class CartManager {
 		
 	} // end method -nm
 	
+	// remove item from the cart by numerical index -nm
+	public function removeItem( $index ){
+	
+		// delete item at index -nm
+		unset( $this->items_l[ $index ] );
+		
+		// reindex item list -nm
+		$this->items_l = array_values( $this->items_l );
+	
+	} // end method -nm
+	
 	// returns the number of items currently in the cart -nm
 	public function getItemCount(){
 	
