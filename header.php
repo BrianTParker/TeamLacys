@@ -1,3 +1,7 @@
+<?php 
+session_start(); 
+ob_start();
+?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -40,21 +44,27 @@
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 
 <body>
 <?php
-session_start();
-ob_start();
+
+
 $host="localhost"; // Host name 
 $username="root"; // Mysql username 
-$password=""; // Mysql password 
-$db_name="advanced_system_project"; // Database name 
+$password="admin"; // Mysql password 
+$db_name="advanced_systems_project"; // Database name 
 
-
-// Connect to server and select databse.
-mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
-mysql_select_db("$db_name")or die("cannot select DB");
+    # connect to the database  
+    try {  
+  # MySQL with PDO_MYSQL
+  $DBH = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+  
+  }
+	catch(PDOException $e) {
+    echo $e->getMessage();
+}
 ?>
 <div class="container">
 
@@ -79,14 +89,15 @@ mysql_select_db("$db_name")or die("cannot select DB");
               <li><a href="children.php">Children</a></li>
               
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul id="navbar" class="nav navbar-nav navbar-right">
                 
               <?php
               if(!isset($_SESSION['firstName'])){
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
-                echo '<li><a href="cart.php">Cart</a></li>';
+                echo '<li><a href="cart.php">Cart(' . count($_SESSION['cart']) . ')</a></li>';
+                echo '<li><a href="logout.php">Logout</a></li>';
               }
               ?>
               
