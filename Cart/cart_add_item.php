@@ -15,34 +15,20 @@ try {
 	$password="admin"; // Mysql password 
 	$db_name="advanced_systems_project"; // Database name 
 
+	// TEST -nm
+	
 	# MySQL with PDO_MYSQL
 	$DBH = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
     
-	// TODO: id as post data -nm
-	$cart_sql = $DBH->query("select id, name, description, image_location,price from products where id = '1'");
 	
-	
-	// TEST -nm
-	$CART_MGR = CartManager::init();
-		
-	$cart_sql->setFetchMode(PDO::FETCH_ASSOC);
-
-	while($row = $cart_sql->fetch()) {
-	
-		$CART_MGR->addItem( $row );
-	}
-	
-	echo $CART_MGR;
-	echo "<br>";
-	
-	foreach( $CART_MGR->getItems() as $value ){
-	
-		print_r( $value );
-		echo "<br>";
-	}
-	// END TEST -nm
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		
+		# MySQL with PDO_MYSQL
+		$DBH = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+		
+		// TODO: id as post data -nm
+		$cart_sql = $DBH->query("select id, name, description, image_location,price from products where id = '" . $_POST[ 'id' ] . "'");
 		
 		// initialize cart manager -nm
 		$CART_MGR = CartManager::init();
@@ -56,8 +42,9 @@ try {
 			// add the row to the cart via cart manager -nm
 			$CART_MGR->addItem( $row );
 		}
+		
+		echo $CART_MGR;
 	}
-    
     
 }catch( Exception $e ){
     

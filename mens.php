@@ -29,7 +29,7 @@ include "header.php";
                             echo '<td>' . $row['name'] . '</td>' . "\n";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
-                            echo '<td> <form id="cartButton" method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button>
+                            echo '<td> <form id="addCartForm" method="POST"> <button type="submit" class="btn btn-default">Add to cart</button>
                                 <input type="hidden" name="id" value="' . $row['id'] . '"/> </form>' . "\n";
                             echo '</tr>' . "\n";
                         }
@@ -47,7 +47,7 @@ include "header.php";
                             echo '<td>' . $row['name'] . '</td>' . "\n";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
-                            echo '<td> <form id="cartForm" method="POST" action="mens.php"> <button type="submit" class="btn btn-default">Add to cart</button>
+                            echo '<td> <form id="addCartForm" method="POST"> <button type="submit" class="btn btn-default">Add to cart</button>
                                 <input type="hidden" name="id" value="' . $row['id'] . '"/> </form>' . "\n";
                             echo '</tr>' . "\n";
                         }
@@ -61,18 +61,7 @@ include "header.php";
     </div>
     
 </div>
-<?php
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-    if(!isset($_SESSION['firstName'])){
-        header("location: login.php");
-    }else{
-        $id = $_POST['id'];
-        array_push($_SESSION['cart'], $id);
-    }
-    
-    
-}
+<?php
 include "footer.php"
 ?>
