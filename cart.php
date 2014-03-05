@@ -21,7 +21,8 @@ include "header.php";
 			
 			// for each item in the cart -nm
 			foreach( $CART_MGR->getItems() as $key => $item ){
-			
+				
+				//print_r( $item );
 				// print item to screen -nm
 				echo '<tr>' . "\n";
 				echo '<td><img src="' . $item['image_location'] . '"/></td>' . "\n";

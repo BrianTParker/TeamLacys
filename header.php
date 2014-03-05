@@ -7,6 +7,7 @@ include_once( "./Cart/CartManager.php" );
 <?php 
 session_start(); 
 ob_start();
+//$_SESSION['firstName'] = null;
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
