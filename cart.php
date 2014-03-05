@@ -1,43 +1,39 @@
 <?php
+/**********************************INCLUDE*********************************** *
+* **************************************************************************** */
+include_once( "./Cart/CartManager.php" );
+?>
+
+<?php
 include "header.php";
 ?>
 <div class="row">
+
     <div class="col-sm-8 col-sm-offset-1">
+	
         <h2>Cart</h2>
+		
+		<table class="table">
         <?php
         
-        if(isset($_SESSION['cart'])){
-            if(count($_SESSION['cart']) >0){
-                $items = "";
-                for($i = 0; $i<count($_SESSION['cart']); $i++){
-                    
-                    $items .= $_SESSION['cart'][$i];
-                    if(count($_SESSION['cart']) > 1 && $i < count($_SESSION['cart']) - 1){
-                        $items .= ",";
-                    }
-                    
-                }
-
-                
-                
-                $cart_sql = $DBH->query("select id, name, description, image_location,price from products where id in (" . $items . "   )");
-                ?>
-                <table class="table">
-                <?php
-                
-                
-                $cart_sql->setFetchMode(PDO::FETCH_ASSOC);
-                while($row = $cart_sql->fetch()) {
-                    echo '<tr>' . "\n";
-                    echo '<td><img src="' . $row['image_location'] . '"/></td>' . "\n";
-                    echo '<td>' . $row['name'] . '</td>' . "\n";
-                    echo '<td>' . $row['description'] . '</td>' . "\n";
-                    echo '<td>$' . $row['price'] . '</td>' . "\n";
-                    echo '</tr>' . "\n";
-                }
-
-            }
-        }
+			// initialize cart manager -nm
+			$CART_MGR = CartManager::init();
+			
+			// for each item in the cart -nm
+			foreach( $CART_MGR->getItems() as $key => $item ){
+			
+				// print item to screen -nm
+				echo '<tr>' . "\n";
+				echo '<td><img src="' . $item['image_location'] . '"/></td>' . "\n";
+				echo '<td>' . $item['name'] . '</td>' . "\n";
+				echo '<td>' . $item['description'] . '</td>' . "\n";
+				echo '<td>$' . $item['price'] . '</td>' . "\n";
+				
+				// TODO: action="cart_remove_item.php"
+				echo '<td> <form id="cartForm" method="POST" action=""> <button type="submit" class="btn btn-default">Remove</button>
+					<input type="hidden" name="id" value="' . $key . '"/> </form>' . "\n";
+				echo '</tr>' . "\n";
+			}
         ?>
         </table>
     </div>

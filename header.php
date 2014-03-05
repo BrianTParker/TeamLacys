@@ -1,3 +1,9 @@
+<?php
+/**********************************INCLUDE*********************************** *
+* **************************************************************************** */
+include_once( "./Cart/CartManager.php" );
+?>
+
 <?php 
 session_start(); 
 ob_start();
@@ -44,7 +50,6 @@ ob_start();
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
-  <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 
 <body>
@@ -96,7 +101,7 @@ $db_name="advanced_systems_project"; // Database name
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
-                echo '<li><a href="cart.php">Cart(' . count($_SESSION['cart']) . ')</a></li>';
+                echo '<li><a id="cartmgr" href="cart.php">'. CartManager::init() .'</a></li>';
                 echo '<li><a href="logout.php">Logout</a></li>';
               }
               ?>
