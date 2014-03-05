@@ -10,10 +10,10 @@ include_once( "./CartManager.php" );
  */
 try {
 
-	$host="localhost"; // Host name 
+	/* $host="localhost"; // Host name 
 	$username="root"; // Mysql username 
 	$password="admin"; // Mysql password 
-	$db_name="advanced_systems_project"; // Database name 
+	$db_name="advanced_systems_project"; // Database name */ 
     
 	
 	

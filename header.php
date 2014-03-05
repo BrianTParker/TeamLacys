@@ -103,7 +103,7 @@ $db_name="advanced_systems_project"; // Database name
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
                 echo '<li><a id="cartmgr" href="cart.php">'. CartManager::init() .'</a></li>';
-                echo '<li><a href="logout.php">Logout</a></li>';
+                echo '<li><a id="logout" href="logout.php">Logout</a></li>';
               }
               ?>
               
