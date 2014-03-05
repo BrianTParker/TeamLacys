@@ -14,6 +14,9 @@ try {
 	
 	// would an account class be useful? -nm
 	unset($_SESSION['firstName']);
+	unset($_SESSION['lastName']);
+	unset($_SESSION['email']);
+	unset($_SESSION['id']);
     
 }catch( Exception $e ){
     
