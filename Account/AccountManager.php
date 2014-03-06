@@ -1,7 +1,7 @@
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include "../db_connect.php";
+include "db_connect.php";
 
 /**
  * This class manages a user account.
@@ -77,7 +77,7 @@ class AccountManager {
         
     function checkLogin($email, $password){
         global $DBH;
-        
+        $success = 0;
         $password = sha1($password);
         
         $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "'");
@@ -90,14 +90,15 @@ class AccountManager {
             $lastName = $row['last_name'];
             
             $this->setSessionVariables($firstName, $lastName, $email);
-            
+            $success = 1;
+            return $success;
    
             
 
-            header("location: ../index.php");
+            
         }
         else {
-            echo "Wrong email and password";
+            return $success;
 
         }// end method -nm
     }
