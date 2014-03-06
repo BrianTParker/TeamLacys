@@ -1,0 +1,218 @@
+<?php
+/**********************************INCLUDE*********************************** *
+* **************************************************************************** */
+include "../db_connect.php";
+
+/**
+ * This class manages a user account.
+ *
+ *
+ */
+class AccountManager {
+    
+    // session ID -nm
+    protected static $instance = null;
+
+    protected function __construct()
+    {
+        //Thou shalt not construct that which is unconstructable!
+    }
+
+    protected function __clone()
+    {
+        //Me not like clones! Me smash clones!
+    }
+
+    public static function getInstance()
+    {
+        if (!isset(static::$instance)) {
+            static::$instance = new static;
+        }
+        return static::$instance;
+    }
+	
+	
+	private $firstName,
+            $lastName,
+            $email;
+    
+    
+
+    
+ 
+	
+	
+	public function __toString(){
+	
+		return "Cart(" . $this->getItemCount() . ")"; 
+		
+	} 
+    
+    
+    public static function init(){
+        
+		// Report simple running errors
+		error_reporting(E_ERROR | E_WARNING | E_PARSE);
+		
+		
+
+		 
+		if ( isset( $_SESSION[ self::SESSION_NAME ] ) === TRUE ){
+			 
+			
+			return unserialize( $_SESSION[ self::SESSION_NAME ] );
+			 
+		}else{
+			 
+			return new self();
+		}
+    }
+    
+    function setSessionVariables($firstName, $lastName, $email){
+        $_SESSION["firstName"] = $firstName;
+        $_SESSION["lastName"] = $lastName;
+        $_SESSION["email"] = $email;
+        
+    }
+        
+    function checkLogin($email, $password){
+        global $DBH;
+        
+        $password = sha1($password);
+        
+        $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "'");
+        if($STH->rowCount() == 1){
+            $sql = $DBH->query("SELECT id, first_name, last_name from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
+            $sql->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $sql->fetch();
+            $id = $row['id'];
+            $firstName = $row['first_name'];
+            $lastName = $row['last_name'];
+            
+            $this->setSessionVariables($firstName, $lastName, $email);
+            
+   
+            
+
+            header("location: ../index.php");
+        }
+        else {
+            echo "Wrong email and password";
+
+        }// end method -nm
+    }
+    
+    function createNewAccount($firstName, $lastName, $email, $phone, $password, $password_check){
+    
+    
+        global $DBH;
+        $errors = array(); /* declare the array for later use */
+        $success = 0;
+
+        if(isset($firstName))
+        {
+            //the user name exists
+            if(!ctype_alnum($firstName))
+            {
+                $errors[] = 'The first name can only contain letters and digits.';
+            }
+            if(strlen($firstName) > 30)
+            {
+                $errors[] = 'The first name cannot be longer than 30 characters.';
+            }
+        }
+        else
+        {
+            $errors[] = 'The first name field must not be empty.';
+        }
+        
+        if(isset($lastName))
+        {
+            //the user name exists
+            if(!ctype_alnum($lastName))
+            {
+                $errors[] = 'The last name can only contain letters and digits.';
+            }
+            if(strlen($lastName) > 30)
+            {
+                $errors[] = 'The last name cannot be longer than 30 characters.';
+            }
+        }
+        else
+        {
+            $errors[] = 'The last name field must not be empty.';
+        }
+        
+        if(isset($email)){
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'The email must be a valid format';
+            }
+        }else{
+            $errors[] = 'The email must not be empty';
+        }
+
+        if(isset($password))
+        {
+            if($password != $password_check)
+            {
+                $errors[] = 'The two passwords did not match.';
+            }
+        }
+        else
+        {
+            $errors[] = 'The password field cannot be empty.';
+        }
+
+        if(!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/
+        {
+            return array("success" => $success,
+                         "errors" => $errors);
+        }
+        else
+        {
+        
+            $firstName = $_POST['firstName'];
+            $lastName = $_POST['lastName'];
+            $password = sha1($_POST['password']);
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            
+            $sql = "Insert into customers(first_name, last_name, email, phone,password)
+                    values (:firstName, :lastName,:email, :phone, :password)";
+            $q = $DBH->prepare($sql);
+            $q->execute(array(':firstName'=>$firstName,
+                              ':lastName'=>$lastName,
+                              ':password'=>$password,
+                              ':email'=>$email,
+                              ':phone'=>$phone
+                              ));
+            
+            //$result = mysql_query($sql);
+            if(!$q)
+            {
+                //something went wrong, display the error
+                $errors[] = "There was an issue with the database";
+                return array("success" => $success,
+                             "errors" => $errors);
+                //echo mysql_error(); //debugging purposes, uncomment when needed
+            }
+            else
+            {
+                
+                $this->setSessionVariables($firstName, $lastName, $email);
+                $success = 1;
+                return array("success" => $success,
+                             "errors" => $errors);
+            }
+            //the form has been posted without, so save it
+            //notice the use of mysql_real_escape_string, keep everything safe!
+            //also notice the sha1 function which hashes the password
+            
+        }
+
+    
+    
+    }
+    
+    
+} // end class -n
