@@ -33,6 +33,8 @@ class CartManager {
         session_write_close();
         
     } // end destructor -nm
+    
+    
 	
 	// add item to the cart -nm
 	public function addItem( $aItem ){
@@ -92,5 +94,7 @@ class CartManager {
 			return new self();
 		}
     } // end method -nm
+    
+    
     
 } // end class -nm

@@ -74,6 +74,20 @@ class AccountManager {
         $_SESSION["email"] = $email;
         
     }
+    
+    function getFirstName(){
+        if(isset($_SESSION["firstName"])){
+            return $_SESSION["firstName"];
+        }
+    }
+    
+    function getLastName(){
+        if(isset($_SESSION["lastName"])){
+            return $_SESSION["lastName"];
+        }
+    }
+    
+    
         
     function checkLogin($email, $password){
         global $DBH;
@@ -107,6 +121,7 @@ class AccountManager {
     
     
         global $DBH;
+        global $firstName, $lastName, $email;
         $errors = array(); /* declare the array for later use */
         $success = 0;
 
