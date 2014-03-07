@@ -2,9 +2,6 @@
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
 
-// Report simple running errors (avoid notices) -nm
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
 /**
  * SessionSingleton 
  *
@@ -65,8 +62,7 @@ abstract class SessionSingleton {
     public function __destruct(){
         
         // start user session -nm
-        // start user session -nm
-        if (session_status() == PHP_SESSION_NONE) {
+        if ( session_status() == PHP_SESSION_NONE ) {
 		
 			session_start();
 		}
@@ -103,7 +99,7 @@ abstract class SessionSingleton {
         $sessionKey = get_called_class();
         
         // start user session -nm
-        if (session_status() == PHP_SESSION_NONE) {
+        if ( session_status() == PHP_SESSION_NONE ) {
 		
 			session_start();
 		}
