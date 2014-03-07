@@ -19,9 +19,6 @@ and open the template in the editor.
 		// instantiate two CartManager objects; both should reference the same instance -nm
         $CART_MGR  	= CartManager::getInstance();
         $CART_MGR2   = CartManager::getInstance();
-        
-		// clear all content from the cart -nm
-        $CART_MGR->emptyCart();
 		
         // both the first CartManager object and the second CartManager object should total two items -nm
         $CART_MGR->addItem( "Cart Manager 1 Item" );
@@ -39,10 +36,6 @@ and open the template in the editor.
 		print_r( "<h4>CartManager 2 : </h4>" );
         print_r( $CART_MGR2->getItems() );
 		
-		// test session unset -nm
-		unset( $CART_MGR );
-		unset( $CART_MGR2 );
-		
 		print_r( "<h4>Current Session Keys : </h4>" );
 		foreach( array_keys( $_SESSION ) as $key ){
 		
@@ -59,6 +52,9 @@ and open the template in the editor.
 			print_r( $key );
 			print_r( "<br>" );
 		}
+		
+		// clear all content from the cart -nm
+        $CART_MGR->emptyCart();
         ?>
     </body>
 </html>
