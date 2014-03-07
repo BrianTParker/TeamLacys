@@ -28,7 +28,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
  * // instance is stored in $_SESSION upon destruction
  * unset( $object );
  * 
- * foreach ( $_SESSION as $key ){
+ * foreach ( $_SESSION as $key => $value ){
  *	
  * 		echo $key; // outputs 'Child'
  * } 

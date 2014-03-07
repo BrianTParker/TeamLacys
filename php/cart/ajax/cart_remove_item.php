@@ -11,7 +11,7 @@ include_once( __DIR__ . '/../CartManager.php' );
  *************************************************************************** *
  * Example (JavaScript/JQuery):
  * ************************************************************************** *
- * // JSON object to represent an item
+ * // index of the item in the cart that we wish to remove
  * var index = 0;
  *
  * // callback function that is executed if the request succeeds

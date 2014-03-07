@@ -34,7 +34,8 @@ include_once( __DIR__ . '/../CartManager.php' );
  * $.post( "./php/cart/ajax/cart_add_item.php", itemData, successHandler );
  *************************************************************************** *
  * @param
- * $_POST	- Each key/value pair is stored into cart
+ * $_POST - Each key/value pair is copied into an item array; then the item
+ * 			is added to the cart
  *************************************************************************** *
  * @return 
  * On Success: 		String 	- e.g. 'Cart(0)'
@@ -50,7 +51,7 @@ try {
 	/* // TESTING!
 	// http://localhost/TeamLacys/php/cart/ajax/cart_add_item.php
 
-	// remove the element at the specified index id -nm
+	// add test item -nm
 	$CART_MGR->addItem( "Test Item" ); 
 	
 	// END TEST ! */
@@ -60,9 +61,10 @@ try {
 		// associative array to represent an item -nm
 		$item = array();
 		
-		// for each key and value -nm
+		// for each key/value -nm
 		foreach( $_POST as $key => $value ){
 		
+			// copy the key/value to the item array -nm
 			$item[ $key ] = $value;
 		}
 		
