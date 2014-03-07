@@ -1,5 +1,6 @@
 <?php
 include "header.php";
+include_once( "Account/AccountManager.php" );
 ?>
 <div class="row">
    <div class="col-sm-3 col-sm-offset-1">
@@ -23,36 +24,18 @@ include "header.php";
 <?php
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    checkLogin();
+
+    $ACCT_MGR = AccountManager::getInstance();
+    $status = $ACCT_MGR->checkLogin($_POST['email'], $_POST['password']);
+    
+    if($status === 1){
+        header("location: index.php");
+    }else{
+        echo "That email and password is not valid";
+    }
+    
+
 }
 
-function checkLogin(){
-    global $DBH;
-    $email = $_POST['email'];
-    $password = sha1($_POST['password']);
-    
-    $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "'");
-    if($STH->rowCount() == 1){
-    $sql = $DBH->query("SELECT id, first_name, last_name from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
-    $sql->setFetchMode(PDO::FETCH_ASSOC);
-    $row = $sql->fetch();
-    $id = $row['id'];
-    $firstName = $row['first_name'];
-    $lastName = $row['last_name'];
-    $email = $_POST['email'];
-    
-    $_SESSION["firstName"] = $firstName;
-    $_SESSION["lastName"] = $lastName;
-    $_SESSION["email"] = $email;
-    $_SESSION["id"] = $id; 
-    $_SESSION["cart"] = array();
-
-    header("location: index.php");
-    }
-    else {
-        echo "Wrong email and password";
-
-    }
-}
 include "footer.php";
 ?>

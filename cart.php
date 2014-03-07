@@ -1,7 +1,7 @@
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include_once( "./Cart/CartManager.php" );
+include_once( __DIR__ . '/php/cart/CartManager.php' );
 ?>
 
 <?php
@@ -17,11 +17,12 @@ include "header.php";
         <?php
         
 			// initialize cart manager -nm
-			$CART_MGR = CartManager::init();
+			$CART_MGR = CartManager::getInstance();
 			
 			// for each item in the cart -nm
-			foreach( $CART_MGR->getItems() as $key => $item ){
-			
+			foreach( $CART_MGR->getItems() as $index => $item ){
+				
+				//print_r( $item );
 				// print item to screen -nm
 				echo '<tr>' . "\n";
 				echo '<td><img src="' . $item['image_location'] . '"/></td>' . "\n";
@@ -31,7 +32,7 @@ include "header.php";
 				
 				// TODO: action="cart_remove_item.php"
 				echo '<td> <form id="cartForm" method="POST" action=""> <button type="submit" class="btn btn-default">Remove</button>
-					<input type="hidden" name="id" value="' . $key . '"/> </form>' . "\n";
+					<input type="hidden" name="index" value="' . $index . '"/> </form>' . "\n";
 				echo '</tr>' . "\n";
 			}
         ?>

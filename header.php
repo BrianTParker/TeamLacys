@@ -1,12 +1,16 @@
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include_once( "./Cart/CartManager.php" );
+include_once( __DIR__ . '/php/cart/CartManager.php' );
 ?>
 
 <?php 
 session_start(); 
 ob_start();
+//$_SESSION['firstName'] = null;
+
+// Report simple running errors (avoid notices) -nm
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -55,21 +59,7 @@ ob_start();
 <body>
 <?php
 
-
-$host="localhost"; // Host name 
-$username="root"; // Mysql username 
-$password="admin"; // Mysql password 
-$db_name="advanced_systems_project"; // Database name 
-
-    # connect to the database  
-    try {  
-  # MySQL with PDO_MYSQL
-  $DBH = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
-  
-  }
-	catch(PDOException $e) {
-    echo $e->getMessage();
-}
+include "db_connect.php";
 ?>
 <div class="container">
 
@@ -101,8 +91,8 @@ $db_name="advanced_systems_project"; // Database name
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
-                echo '<li><a id="cartmgr" href="cart.php">'. CartManager::init() .'</a></li>';
-                echo '<li><a href="logout.php">Logout</a></li>';
+                echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
+                echo '<li><a id="logout" href="logout.php">Logout</a></li>';
               }
               ?>
               
