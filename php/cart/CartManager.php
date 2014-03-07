@@ -21,11 +21,15 @@ include_once( __DIR__ . '/../SessionSingleton.php' );
  *
  * echo $CART_MGR->getItemCount(); // prints 0
  *
- * $CART_MGR->addItem( 'Some Item' );
+ * $CART_MGR->addItem( 'Any Type' );
  * 
  * echo $CART_MGR->getItemCount(); // prints 1
  *
- * unset( $CART_MGR ); // instance is written to session
+ * $CART_MGR->emptyCart();
+ * 
+ * echo $CART_MGR->getItemCount(); // prints 0
+ *
+ * unset( $CART_MGR ); // instance is written to session (not required, but encouraged)
  *************************************************************************** *
  * @author(s) nicholas malacarne <nicholas.malacarne@gmail.com>
  */
@@ -69,6 +73,13 @@ class CartManager extends SessionSingleton {
 	public function __toString(){
 	
 		return "Cart(" . $this->getItemCount() . ")"; 
+		
+	} // end method -nm
+	
+	// empties the cart -nm
+	public function emptyCart(){
+	
+		$this->cart = array();
 		
 	} // end method -nm
     
