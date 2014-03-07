@@ -49,6 +49,9 @@ abstract class SessionSingleton {
         // if the instance has not been loaded -nm
         if ( !isset( self::$instances[ $className ] ) ){
             
+			// force current instance to destruct -nm
+			unset( self::$instances[ $className ] );
+			
             // load the instance from the session -nm
             self::$instances[ $className ] = static::sessionLoad();
         }

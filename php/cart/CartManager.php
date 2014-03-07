@@ -13,7 +13,7 @@ include_once( __DIR__ . '/../SessionSingleton.php' );
  *
  *************************************************************************** *
  * Example:
- * ************************************************************************** *
+ *************************************************************************** *
  * // load CartManager class via relative path
  * include_once( __DIR__ . '/CartManager.php' );
  *
@@ -30,7 +30,7 @@ include_once( __DIR__ . '/../SessionSingleton.php' );
  * echo $CART_MGR->getItemCount(); // prints 0
  *
  * unset( $CART_MGR ); // instance is written to session (not required, but encouraged)
- *************************************************************************** *
+ ****************************************************************************
  * @author(s) nicholas malacarne <nicholas.malacarne@gmail.com>
  */
 class CartManager extends SessionSingleton {

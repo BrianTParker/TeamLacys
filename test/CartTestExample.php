@@ -38,6 +38,27 @@ and open the template in the editor.
 		// list the contents of CartManager that was instantiated second -nm
 		print_r( "<h4>CartManager 2 : </h4>" );
         print_r( $CART_MGR2->getItems() );
+		
+		// test session unset -nm
+		unset( $CART_MGR );
+		unset( $CART_MGR2 );
+		
+		print_r( "<h4>Current Session Keys : </h4>" );
+		foreach( array_keys( $_SESSION ) as $key ){
+		
+			print_r( $key );
+			print_r( "<br>" );
+		}
+		
+		print_r( "<h4>Current Session Keys : </h4>" );
+		unset( $_SESSION[ "CartManager" ] );
+		
+		print_r( "<h4>Current Session Keys : </h4>" );
+		foreach( array_keys( $_SESSION ) as $key ){
+		
+			print_r( $key );
+			print_r( "<br>" );
+		}
         ?>
     </body>
 </html>
