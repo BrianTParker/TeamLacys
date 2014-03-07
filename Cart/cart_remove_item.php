@@ -4,20 +4,11 @@
 include_once( "./CartManager.php" );
 
 /**
- * Adds an item to the CartManager. 
+ * Removes an item from the CartManager. This script should be called via AJAX.
  *
  * @author(s) nicholas malacarne <nicholas.malacarne@gmail.com>
  */
 try {
-
-	// TEST -nm
-	$CART_MGR = CartManager::init();
-		
-	$CART_MGR->removeItem( 0 );
-	
-	echo $CART_MGR;
-	
-	// END TEST -nm
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
     

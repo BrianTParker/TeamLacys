@@ -88,7 +88,7 @@ include "db_connect.php";
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
-                echo '<li><a id="cartmgr" href="cart.php">'. CartManager::init() .'</a></li>';
+                echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
                 echo '<li><a id="logout" href="logout.php">Logout</a></li>';
               }
               ?>

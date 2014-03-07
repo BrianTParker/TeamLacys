@@ -3,6 +3,9 @@
 * **************************************************************************** */
 
 
+// Report simple running errors (avoid notices) -nm
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 /**
  * This class manages a shopping cart.
  *
@@ -13,6 +16,9 @@ class CartManager {
     // session ID -nm
     const SESSION_NAME = "CART_MGR";
 	
+	// current CartManager instance -nm
+	private static $instance;
+	
 	// list of items currently in the cart -nm
 	private $items_l = array();
     
@@ -22,6 +28,23 @@ class CartManager {
 		// do nothing -nm
 		
     } // end constructor -nm
+	
+	// load serialized instance from session -nm
+	private static function load(){
+	
+		// start user session -nm
+		session_start();
+	
+		if ( isset( $_SESSION[ self::SESSION_NAME ] ) === TRUE ){
+			 
+			// unserialize and return the existing object -nm
+			return unserialize( $_SESSION[ self::SESSION_NAME ] );
+			 
+		}else{
+			 
+			return new self();
+		}
+	}
     
     // destructor -nm
     public function __destruct() {
@@ -33,8 +56,6 @@ class CartManager {
         session_write_close();
         
     } // end destructor -nm
-    
-    
 	
 	// add item to the cart -nm
 	public function addItem( $aItem ){
@@ -75,26 +96,19 @@ class CartManager {
 	} // end method -nm
     
     // init method -nm
-    public static function init(){
-        
-		// Report simple running errors
-		error_reporting(E_ERROR | E_WARNING | E_PARSE);
-		
-		// start user session -nm
-		session_start();
+    public static function getInstance(){
 
-		 
-		if ( isset( $_SESSION[ self::SESSION_NAME ] ) === TRUE ){
-			 
-			// unserialize and return the existing object -nm
-			return unserialize( $_SESSION[ self::SESSION_NAME ] );
-			 
-		}else{
-			 
-			return new self();
+		// check if an instance exists -nm
+		if ( !isset( static::$instance ) ){
+			
+			// load the cart manager -nm
+			static::$instance = static::load();
+			
 		}
+		
+		// return the current instance -nm
+		return static::$instance;
+		
     } // end method -nm
-    
-    
     
 } // end class -nm

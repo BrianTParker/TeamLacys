@@ -17,7 +17,7 @@ include "header.php";
         <?php
         
 			// initialize cart manager -nm
-			$CART_MGR = CartManager::init();
+			$CART_MGR = CartManager::getInstance();
 			
 			// for each item in the cart -nm
 			foreach( $CART_MGR->getItems() as $key => $item ){
