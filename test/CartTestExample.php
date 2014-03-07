@@ -50,7 +50,7 @@ and open the template in the editor.
 			print_r( "<br>" );
 		}
 		
-		print_r( "<h4>Current Session Keys : </h4>" );
+		print_r( "<h4>Unsetting CartManager Session ! </h4>" );
 		unset( $_SESSION[ "CartManager" ] );
 		
 		print_r( "<h4>Current Session Keys : </h4>" );

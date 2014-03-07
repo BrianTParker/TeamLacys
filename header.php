@@ -8,9 +8,6 @@ include_once( __DIR__ . '/php/cart/CartManager.php' );
 session_start(); 
 ob_start();
 //$_SESSION['firstName'] = null;
-
-// Report simple running errors (avoid notices) -nm
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

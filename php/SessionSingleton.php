@@ -65,7 +65,11 @@ abstract class SessionSingleton {
     public function __destruct(){
         
         // start user session -nm
-        session_start();
+        // start user session -nm
+        if (session_status() == PHP_SESSION_NONE) {
+		
+			session_start();
+		}
         
         // the session key for the serialized instance (class name of instance) -nm
         $sessionKey = get_called_class();
@@ -73,8 +77,8 @@ abstract class SessionSingleton {
         // serialize instance to session -nm
         $_SESSION[ $sessionKey ] = serialize( self::$instances[ $sessionKey ] );
         
-        // close user session -nm
-        session_write_close();
+        // close user session; may remove this -nm
+        //session_write_close();
         
     } // end method -nm
     
@@ -99,7 +103,10 @@ abstract class SessionSingleton {
         $sessionKey = get_called_class();
         
         // start user session -nm
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+		
+			session_start();
+		}
         
         // if the session key exists -nm
         if ( isset( $_SESSION[ $sessionKey ] ) === TRUE ){
