@@ -163,6 +163,11 @@ class AccountManager {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors[] = 'The email must be a valid format';
             }
+	    
+	    $STH = $DBH->query("select * from customers where email = '" . $email . "'");
+	    if($STH->rowCount() == 1){
+		$errors[] = 'That email is already associated with an account';
+	    }
         }else{
             $errors[] = 'The email must not be empty';
         }

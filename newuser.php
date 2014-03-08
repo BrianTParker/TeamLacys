@@ -15,11 +15,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($status["success"] === 1){
         header("location: index.php");
     }else{
-        foreach($status["errors"] as $key => $value) /* walk through the array so all the errors get displayed */
-		{
-			echo '<li>' . $value . '</li>'; 
-		}
-		echo '</ul>';
+    
+	echo '<div class="row">';
+		echo '<div class="col-sm-8 col-sm-offset-1">';
+			foreach($status["errors"] as $key => $value) /* walk through the array so all the errors get displayed */
+				{
+					echo '<li>' . $value . '</li>'; 
+				}
+				echo '</ul>';
+		echo '</div>';
+	echo '</div>';
     }
 
 
