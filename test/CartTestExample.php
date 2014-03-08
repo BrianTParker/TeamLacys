@@ -20,13 +20,6 @@ and open the template in the editor.
         $CART_MGR  	= CartManager::getInstance();
         $CART_MGR2   = CartManager::getInstance();
         
-		// clear all content from the cart -nm
-        $CART_MGR->emptyCart();
-		
-        // both the first CartManager object and the second CartManager object should total two items -nm
-        $CART_MGR->addItem( "Cart Manager 1 Item" );
-	    $CART_MGR2->addItem( "Cart Manager 2 Item" );
-        
 		// are both CartManager objects the same instance? -nm
 		print_r( "<h4>CartManager 1 === CartManager2 ? </h4>" );
         print_r($CART_MGR === $CART_MGR2); // 1 == TRUE, 0 == FALSE
@@ -39,10 +32,6 @@ and open the template in the editor.
 		print_r( "<h4>CartManager 2 : </h4>" );
         print_r( $CART_MGR2->getItems() );
 		
-		// test session unset -nm
-		unset( $CART_MGR );
-		unset( $CART_MGR2 );
-		
 		print_r( "<h4>Current Session Keys : </h4>" );
 		foreach( array_keys( $_SESSION ) as $key ){
 		
@@ -50,7 +39,7 @@ and open the template in the editor.
 			print_r( "<br>" );
 		}
 		
-		print_r( "<h4>Current Session Keys : </h4>" );
+		print_r( "<h4>Unsetting CartManager Session ! </h4>" );
 		unset( $_SESSION[ "CartManager" ] );
 		
 		print_r( "<h4>Current Session Keys : </h4>" );
@@ -59,6 +48,8 @@ and open the template in the editor.
 			print_r( $key );
 			print_r( "<br>" );
 		}
+		
+		phpinfo();
         ?>
     </body>
 </html>

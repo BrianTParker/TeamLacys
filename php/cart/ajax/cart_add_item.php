@@ -47,14 +47,6 @@ try {
 
 	// initialize cart manager -nm
 	$CART_MGR = CartManager::getInstance();
-
-	/* // TESTING!
-	// http://localhost/TeamLacys/php/cart/ajax/cart_add_item.php
-
-	// add test item -nm
-	$CART_MGR->addItem( "Test Item" ); 
-	
-	// END TEST ! */
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
