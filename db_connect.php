@@ -1,7 +1,7 @@
 <?php
 $host="localhost"; // Host name 
 $username="root"; // Mysql username 
-$password=""; // Mysql password 
+$password="root"; // Mysql password 
 $db_name="advanced_systems_project"; // Database name 
 
     # connect to the database  
