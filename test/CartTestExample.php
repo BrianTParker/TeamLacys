@@ -19,10 +19,6 @@ and open the template in the editor.
 		// instantiate two CartManager objects; both should reference the same instance -nm
         $CART_MGR  	= CartManager::getInstance();
         $CART_MGR2   = CartManager::getInstance();
-		
-        // both the first CartManager object and the second CartManager object should total two items -nm
-        $CART_MGR->addItem( "Cart Manager 1 Item" );
-	    $CART_MGR2->addItem( "Cart Manager 2 Item" );
         
 		// are both CartManager objects the same instance? -nm
 		print_r( "<h4>CartManager 1 === CartManager2 ? </h4>" );
@@ -53,8 +49,7 @@ and open the template in the editor.
 			print_r( "<br>" );
 		}
 		
-		// clear all content from the cart -nm
-        $CART_MGR->emptyCart();
+		phpinfo();
         ?>
     </body>
 </html>
