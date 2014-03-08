@@ -5,7 +5,7 @@ include_once( __DIR__ . '/php/cart/CartManager.php' );
 ?>
 
 <?php 
-session_start(); 
+//session_start(); 
 ob_start();
 //$_SESSION['firstName'] = null;
 ?>
