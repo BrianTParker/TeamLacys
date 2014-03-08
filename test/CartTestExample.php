@@ -16,31 +16,23 @@ and open the template in the editor.
 		
         include_once( __DIR__ . "/../php/cart/CartManager.php" );
         
-		// instantiate two CartManager objects; both should reference the same instance -nm
+		print_r( "<h6>Initializing Cart Manager 1</h6>" );
         $CART_MGR  	= CartManager::getInstance();
+		
+		print_r( "<h6>Initializing Cart Manager 2</h6>" );
         $CART_MGR2   = CartManager::getInstance();
         
-		// are both CartManager objects the same instance? -nm
-		print_r( "<h4>CartManager 1 === CartManager2 ? </h4>" );
+		// instance check -nm
+		print_r( "<h4>CartManager 1 === CartManager2 :</h4>" );
         print_r($CART_MGR === $CART_MGR2); // 1 == TRUE, 0 == FALSE
 		
 		// list the contents of CartManager that was instantiated first -nm
-		print_r( "<h4>CartManager 1 : </h4>" );
+		print_r( "<h4>CartManager 1 Contents : </h4>" );
         print_r( $CART_MGR->getItems() );
 		
 		// list the contents of CartManager that was instantiated second -nm
-		print_r( "<h4>CartManager 2 : </h4>" );
+		print_r( "<h4>CartManager 2 Contents : </h4>" );
         print_r( $CART_MGR2->getItems() );
-		
-		print_r( "<h4>Current Session Keys : </h4>" );
-		foreach( array_keys( $_SESSION ) as $key ){
-		
-			print_r( $key );
-			print_r( "<br>" );
-		}
-		
-		print_r( "<h4>Unsetting CartManager Session ! </h4>" );
-		unset( $_SESSION[ "CartManager" ] );
 		
 		print_r( "<h4>Current Session Keys : </h4>" );
 		foreach( array_keys( $_SESSION ) as $key ){
