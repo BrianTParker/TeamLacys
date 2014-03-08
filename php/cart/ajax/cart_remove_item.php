@@ -46,17 +46,6 @@ try {
 
 	// initialize cart manager -nm
 	$CART_MGR = CartManager::getInstance();
-
-	// TESTING!
-	// http://localhost/TeamLacys/php/cart/ajax/cart_remove_item.php
-
-	// initialize cart manager -nm
-	$CART_MGR = CartManager::getInstance();
-
-	// remove the element at the specified index id -nm
-	$CART_MGR->removeItem( 0 ); 
-	
-	// END TEST !
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
