@@ -25,7 +25,7 @@
  * // instance is stored in $_SESSION upon destruction
  * unset( $object );
  * 
- * foreach ( $_SESSION as $key => $value ){
+ * foreach ( array_keys( $_SESSION ) as $key ){
  *	
  * 		echo $key; // outputs 'Child'
  * } 
@@ -59,13 +59,10 @@ abstract class SessionSingleton {
     } // end method -nm
     
     // serializes the instance to the session -nm
-    public function __destruct(){
+    final public function __destruct(){
         
         // start user session -nm
-        if ( session_status() == PHP_SESSION_NONE ) {
-		
-			session_start();
-		}
+        if ( !isset( $_SESSION ) ) { session_start(); }
         
         // the session key for the serialized instance (class name of instance) -nm
         $sessionKey = get_called_class();
@@ -99,10 +96,7 @@ abstract class SessionSingleton {
         $sessionKey = get_called_class();
         
         // start user session -nm
-        if ( session_status() == PHP_SESSION_NONE ) {
-		
-			session_start();
-		}
+        if ( !isset( $_SESSION ) ) { session_start(); }
         
         // if the session key exists -nm
         if ( isset( $_SESSION[ $sessionKey ] ) === TRUE ){
@@ -117,5 +111,5 @@ abstract class SessionSingleton {
         }
         
     } // end method -nm
-    
+	
 } // end class -nm
