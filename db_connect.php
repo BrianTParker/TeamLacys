@@ -13,6 +13,4 @@ $db_name="advanced_systems_project"; // Database name
 	catch(PDOException $e) {
     echo $e->getMessage();
 }
-
-
 ?>
