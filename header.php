@@ -7,15 +7,14 @@ ob_start();
 * **************************************************************************** */
 include_once( __DIR__ . '/php/cart/CartManager.php' );
 ?>
-<<<<<<< HEAD
+
 
 <?php 
 //session_start(); 
 ob_start();
 //$_SESSION['firstName'] = null;
 ?>
-=======
->>>>>>> ded42b9d8f7d9f2f0bda43f317ddbb0f1d0432da
+
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
