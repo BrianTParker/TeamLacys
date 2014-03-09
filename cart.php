@@ -31,7 +31,7 @@ include "header.php";
 				echo '<td>$' . $item['price'] . '</td>' . "\n";
 				
 				// TODO: action="cart_remove_item.php"
-				echo '<td> <form id="cartForm" method="POST" action=""> <button type="submit" class="btn btn-default">Remove</button>
+				echo '<td> <form id="removeCartForm" method="POST" action=""> <button id="remove" type="submit" class="btn btn-default">Remove</button>
 					<input type="hidden" name="index" value="' . $index . '"/> </form>' . "\n";
 				echo '</tr>' . "\n";
 			}

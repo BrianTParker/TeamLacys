@@ -22,13 +22,11 @@ and open the template in the editor.
 		print_r( "<h4>Current Items In Cart : ". $CART_MGR ."</h4>" );
 		print_r( $CART_MGR->getItems() );
 		
-		print_r( "<h4>Removing 1x Item From Cart (index 0) ! </h4>" );
+		print_r( "<h4>Removing 1 Item From Cart (index 0) ! </h4>" );
 		print_r( $CART_MGR->removeItem( 0 ) );
 		
 		print_r( "<h4>Remaining Items In Cart : ". $CART_MGR ."</h4>" );
 		print_r( $CART_MGR->getItems() );
-		
-		phpinfo();
         ?>
     </body>
 </html>
