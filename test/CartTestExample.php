@@ -15,8 +15,6 @@ and open the template in the editor.
 		// URL to test: http://localhost/TeamLacys/test/CartTestExample.php -nm
 		
         include_once( __DIR__ . "/../php/cart/CartManager.php" );
-        
-		session_start();
 		
 		print_r( "<h6>Initializing Cart Manager 1 Object</h6>" );
         $CART_MGR  	= CartManager::getInstance();
@@ -29,11 +27,11 @@ and open the template in the editor.
         print_r($CART_MGR === $CART_MGR2); // 1 == TRUE, 0 == FALSE
 		
 		// list the contents of the first CartManager -nm
-		print_r( "<h4>CartManager 1 Contents : </h4>" );
+		print_r( "<h4>CartManager 1 Contents : ". $CART_MGR ."</h4>" );
         print_r( $CART_MGR->getItems() );
 		
 		// list the contents of the second CartManager -nm
-		print_r( "<h4>CartManager 2 Contents : </h4>" );
+		print_r( "<h4>CartManager 2 Contents : ". $CART_MGR2 ."</h4>" );
         print_r( $CART_MGR2->getItems() );
 		
 		print_r( "<h4>Current Session Keys : </h4>" );
@@ -42,6 +40,9 @@ and open the template in the editor.
 			print_r( $key );
 			print_r( "<br>" );
 		}
+		
+		unset( $CART_MGR );
+		unset( $CART_MGR2 );
 		
 		phpinfo();
         ?>
