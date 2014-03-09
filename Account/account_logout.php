@@ -12,11 +12,8 @@ ob_start();
  
 try {
 	
-	// would an account class be useful? -nm
-	unset($_SESSION['firstName']);
-	unset($_SESSION['lastName']);
-	unset($_SESSION['email']);
-	unset($_SESSION['id']);
+	unset($_SESSION);
+	session_destroy();
     
 }catch( Exception $e ){
     

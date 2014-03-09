@@ -27,9 +27,9 @@ include_once( __DIR__ . '/../SessionSingleton.php' );
  *
  * $CART_MGR->emptyCart();
  * 
- * echo $CART_MGR->getItemCount(); // prints 0
+ * echo $CART_MGR; // prints Cart(0)
  *
- * unset( $CART_MGR ); // instance is written to session (not required, but encouraged)
+ * unset( $CART_MGR ); // not required, but encouraged
  ****************************************************************************
  * @author(s) nicholas malacarne <nicholas.malacarne@gmail.com>
  */

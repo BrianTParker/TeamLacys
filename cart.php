@@ -1,11 +1,10 @@
 <?php
+include "header.php";
+?>
+<?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
 include_once( __DIR__ . '/php/cart/CartManager.php' );
-?>
-
-<?php
-include "header.php";
 ?>
 <div class="row">
 
@@ -31,7 +30,7 @@ include "header.php";
 				echo '<td>$' . $item['price'] . '</td>' . "\n";
 				
 				// TODO: action="cart_remove_item.php"
-				echo '<td> <form id="cartForm" method="POST" action=""> <button type="submit" class="btn btn-default">Remove</button>
+				echo '<td> <form id="removeCartForm" method="POST" action=""> <button id="remove" type="submit" class="btn btn-default">Remove</button>
 					<input type="hidden" name="index" value="' . $index . '"/> </form>' . "\n";
 				echo '</tr>' . "\n";
 			}

@@ -12,38 +12,47 @@ and open the template in the editor.
     <body>
 		<h1>CartManager Test Example</h1>
         <?php
-		// URL to test: http://localhost/TeamLacys/test/CartTestExample.php -nm
+		// RUN: http://localhost/TeamLacys/test/CartTestExample.php
 		
         include_once( __DIR__ . "/../php/cart/CartManager.php" );
-        
-		session_start();
 		
-		print_r( "<h6>Initializing Cart Manager 1 Object</h6>" );
-        $CART_MGR  	= CartManager::getInstance();
-		
-		print_r( "<h6>Initializing Cart Manager 2 Object</h6>" );
-        $CART_MGR2   = CartManager::getInstance();
+        $CART_MGR  	= CartManager::getInstance(); // OK!
+		$CART_MGR2	= CartManager::getInstance(); // OK!
+		//$CART_MGR3   = unserialize( $_SESSION[ 'CartManager' ] ); NOT OK!
         
 		// instance check -nm
-		print_r( "<h4>CartManager 1 === CartManager2 :</h4>" );
-        print_r($CART_MGR === $CART_MGR2); // 1 == TRUE, 0 == FALSE
+        If ($CART_MGR === $CART_MGR2){
+		
+			echo "<b>Status: <font color='green'>OK</font></b>";
+			
+		}else{
+		
+			echo "<b>Status: <font color='red'>ERROR</font></b>";
+		};
 		
 		// list the contents of the first CartManager -nm
-		print_r( "<h4>CartManager 1 Contents : </h4>" );
-        print_r( $CART_MGR->getItems() );
+		echo "<h4>". $CART_MGR ."</h4>";
 		
-		// list the contents of the second CartManager -nm
-		print_r( "<h4>CartManager 2 Contents : </h4>" );
-        print_r( $CART_MGR2->getItems() );
+        echo "<table width='800' border='1'>";
 		
-		print_r( "<h4>Current Session Keys : </h4>" );
-		foreach( array_keys( $_SESSION ) as $key ){
+		$cartItems = $CART_MGR->getItems();
 		
-			print_r( $key );
-			print_r( "<br>" );
+		foreach( $cartItems  as $key => $value ){
+			
+			echo "<tr>";
+			
+			foreach( $value as $inKey => $inValue ){
+				
+				echo "<th>" . $inKey . "</th>";
+			}
+			
+			echo "</tr>";
 		}
 		
-		phpinfo();
+		echo "</table>";
+		
+		unset( $CART_MGR );
+		unset( $CART_MGR2 );
         ?>
     </body>
 </html>

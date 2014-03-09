@@ -1,14 +1,21 @@
+<?php 
+session_start(); 
+ob_start();
+?>
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
 include_once( __DIR__ . '/php/cart/CartManager.php' );
 ?>
+<<<<<<< HEAD
 
 <?php 
 //session_start(); 
 ob_start();
 //$_SESSION['firstName'] = null;
 ?>
+=======
+>>>>>>> ded42b9d8f7d9f2f0bda43f317ddbb0f1d0432da
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -38,6 +45,7 @@ ob_start();
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <link href="css/custom_css.css" rel="stylesheet">
   
   
 
@@ -64,17 +72,20 @@ include "db_connect.php";
 
       <!-- Static navbar -->
       <div class="navbar navbar-default" role="navigation">
+        
         <div class="container-fluid">
-          <div class="navbar-header">
+          <div class="navbar-header center-block">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Lacy's</a>
+         
+            <a class="navbar-brand" href="index.php"><h1>Lacy's</h1></a>
+       
           </div>
-          <div class="navbar-collapse collapse">
+          <h4><div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="mens.php">Mens</a></li>
               <li><a href="womens.php">Womens</a></li>
@@ -89,14 +100,15 @@ include "db_connect.php";
                 echo '<li><a href="newuser.php">Create Account</a></li>';
               }else{
                 echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
-                echo '<li><a id="logout" href="logout.php">Logout</a></li>';
+                echo '<li><a id="logout" href="">Logout</a></li>';
               }
               ?>
               
               
             </ul>
-          </div><!--/.nav-collapse -->
+          </div></h4><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
+     
       </div>
     </div>
 </div>

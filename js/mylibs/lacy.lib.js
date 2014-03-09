@@ -13,6 +13,19 @@
 		} );
 	} );
 	
+	// remove from cart AJAX functionality -nm
+	$( "#removeCartForm" ).submit( function( event ){
+	
+		event.preventDefault();
+		
+		$.post( "./php/cart/ajax/cart_remove_item.php", $( this ).serialize(), function( data ){
+		
+			// reload page -nm
+			location.reload(true);
+			//console.log(data);
+		} );
+	} );
+	
 	// add to cart AJAX functionality -nm
 	$( "#logout" ).click( function( event ){
 	
