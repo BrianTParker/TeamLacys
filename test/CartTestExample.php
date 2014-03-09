@@ -12,7 +12,7 @@ and open the template in the editor.
     <body>
 		<h1>CartManager Test Example</h1>
         <?php
-		// URL to test: http://localhost/TeamLacys/test/CartTestExample.php -nm
+		// RUN: http://localhost/TeamLacys/test/CartTestExample.php
 		
         include_once( __DIR__ . "/../php/cart/CartManager.php" );
 		
