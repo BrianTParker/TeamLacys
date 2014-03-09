@@ -30,11 +30,11 @@ include "header.php";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
                             echo '<td> <form id="addCartForm" method="POST"> <button type="submit" class="btn btn-default">Add to cart</button>';
-                            echo  '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
-							echo  '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
-							echo  '<input type="hidden" name="description" value="' . $row['description'] . '"/>';
-							echo  '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
-							echo  '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
+                            echo '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
+							echo '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
+							echo '<input type="hidden" name="description" value="' . $row['description'] . '"/>';
+							echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
+							echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
 							echo '</form>' . "\n";
                             echo '</tr>' . "\n";
                         }
