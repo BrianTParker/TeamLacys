@@ -1,13 +1,11 @@
+<?php 
+session_start(); 
+ob_start();
+?>
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
 include_once( __DIR__ . '/php/cart/CartManager.php' );
-?>
-
-<?php 
-session_start(); 
-ob_start();
-//$_SESSION['firstName'] = null;
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

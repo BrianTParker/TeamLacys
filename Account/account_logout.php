@@ -12,8 +12,6 @@ ob_start();
  
 try {
 	
-	// would an account class be useful? -nm
-	
 	unset($_SESSION);
 	session_destroy();
     
