@@ -235,5 +235,13 @@ class AccountManager {
     
     }
     
+    function isLoggedIn(){
+        if(isset($_SESSION['firstName'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     
 } // end class -n

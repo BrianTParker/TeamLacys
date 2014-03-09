@@ -6,6 +6,7 @@ ob_start();
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
 include_once( __DIR__ . '/php/cart/CartManager.php' );
+
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -56,6 +57,7 @@ include_once( __DIR__ . '/php/cart/CartManager.php' );
 <?php
 
 include "db_connect.php";
+
 ?>
 <div class="container">
 
