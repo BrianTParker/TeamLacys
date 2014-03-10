@@ -83,7 +83,7 @@ include "db_connect.php";
               <span class="icon-bar"></span>
             </button>
          
-            <a class="navbar-red" href="index.php"><h1>Lacy's</h1></a>
+            <a class="navbar-red" href="index.php"><h1>Lacy's  </h1></a>
        
           </div>
           <h4><div class="navbar">
