@@ -2,6 +2,7 @@
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
 include_once( __DIR__ . '/../CartManager.php' );
+include_once( __DIR__ . '/../../../Account/AccountManager.php' );
 
 /**
  * Adds an item to the cart via CartManager.
@@ -45,23 +46,27 @@ include_once( __DIR__ . '/../CartManager.php' );
  */
 try {
 
-	// initialize cart manager -nm
+	// initialize cart/account managers -nm
 	$CART_MGR = CartManager::getInstance();
+	$ACCT_MGR = AccountManager::getInstance();
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
-		// associative array to represent an item -nm
-		$item = array();
+		if ( $ACCT_MGR->isLoggedIn() ){
 		
-		// for each key/value -nm
-		foreach( $_POST as $key => $value ){
-		
-			// copy the key/value to the item array -nm
-			$item[ $key ] = $value;
+			// associative array to represent an item -nm
+			$item = array();
+			
+			// for each key/value -nm
+			foreach( $_POST as $key => $value ){
+			
+				// copy the key/value to the item array -nm
+				$item[ $key ] = $value;
+			}
+			
+			// add item to cart -nm
+			$CART_MGR->addItem( $item );
 		}
-		
-		// add item to cart -nm
-		$CART_MGR->addItem( $item );
 	}
 	
 	// return cart manager as string -nm
