@@ -5,7 +5,7 @@ ob_start();
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include_once( __DIR__ . '/php/cart/CartManager.php' );
+include_once( __DIR__ . './php/cart/CartManager.php' );
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

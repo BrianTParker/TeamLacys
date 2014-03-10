@@ -76,7 +76,7 @@ abstract class SessionSingleton {
     } // end method -nm
     
     // prevent cloning (there should only ever be one instance per child class) -nm
-    protected function __clone() {
+    final protected function __clone() {
         
         // do nothing -nm
         
