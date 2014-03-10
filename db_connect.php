@@ -1,8 +1,8 @@
 <?php
-$host="web245.webfaction.com"; // Host name 
-$username="teamlacys"; // Mysql username 
-$password="lacys"; // Mysql password 
-$db_name="advanced_systems_project"; // Database name 
+$host="localhost"; // Host name 
+$username="nicholas_lacysUS"; // Mysql username 
+$password="GTC_WEB"; // Mysql password 
+$db_name="nicholas_lacys"; // Database name 
 
     # connect to the database  
     try {  
