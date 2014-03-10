@@ -35,6 +35,15 @@ include "header.php";
 							echo '<input type="hidden" name="description" value="' . $row['description'] . '"/>';
 							echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
 							echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
+                            
+                            echo '<select name="quantity">';
+                            echo '<option>1</option>';
+                            echo '<option>2</option>';
+                            echo '<option>3</option>';
+                            echo '<option>4</option>';
+                            echo '<option>5</option>';
+                            echo '</select>';
+                            echo 'Qty';
 							echo '</form>' . "\n";
                             echo '</tr>' . "\n";
                         }

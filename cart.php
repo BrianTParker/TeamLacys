@@ -25,6 +25,7 @@ include "header.php";
 				echo '<td>' . $item['name'] . '</td>' . "\n";
 				echo '<td>' . $item['description'] . '</td>' . "\n";
 				echo '<td>$' . $item['price'] . '</td>' . "\n";
+                echo '<td> Qty:' . $item['quantity'] . '</td>' . "\n";
 				
 				// TODO: action="cart_remove_item.php"
 				echo '<td> <form id="removeCartForm" method="POST" action=""> <button id="remove" type="submit" class="btn btn-default">Remove</button>
