@@ -5,12 +5,10 @@ ob_start();
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-<<<<<<< HEAD
 include_once( __DIR__ . './php/cart/CartManager.php' );
+/* <<<<<<< HEAD
 =======
-include_once( __DIR__ . '/php/cart/CartManager.php' );
-
->>>>>>> origin/databasefix
+>>>>>>> origin/databasefix */
 ?>
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

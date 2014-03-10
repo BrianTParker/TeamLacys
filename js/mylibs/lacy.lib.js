@@ -33,8 +33,8 @@
 		
 		$.post( "./Account/account_logout.php", function( data ){
 		
-			// reload page -nm
-			location.reload(true);
+			// load the index page -nm
+			window.location.href = "./index.php";
 		} );
 	} );
 	
