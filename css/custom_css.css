@@ -1,3 +1,21 @@
 .navbar .nav > li > a {
-	color: #B22222;
+	color: #FFFFFF;
 }
+.navbar-red{
+    color: #FF0000;
+}
+
+.navbar-nav>li {
+  float: right;
+  text-align: center;
+  display: table-cell;
+}*/
+@media (min-width: 768px){
+.navbar-nav{
+    margin:10px;
+    display: table;
+    table-layout: fixed;
+    float:none;
+
+}
+}  

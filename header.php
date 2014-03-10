@@ -65,29 +65,27 @@ ob_start();
 
 include "db_connect.php";
 ?>
-<div class="container">
 
-   <div class="container">
 
       <!-- Static navbar -->
-      <div class="navbar navbar-default" role="navigation">
+      <div class="navbar navbar-inverse navbar-default" role="navigation">
         
         <div class="container-fluid">
-          <div class="navbar-header center-block">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
          
-            <a class="navbar-brand" href="index.php"><h1>Lacy's</h1></a>
+            <a class="navbar-red" href="index.php"><h1>Lacy's</h1></a>
        
           </div>
-          <h4><div class="navbar-collapse collapse">
+          <h4><div class="navbar">
             <ul class="nav navbar-nav">
-              <li><a href="mens.php">Mens</a></li>
-              <li><a href="womens.php">Womens</a></li>
+              <li><a href="mens.php">Men</a></li>
+              <li><a href="womens.php">Women</a></li>
               <li><a href="children.php">Children</a></li>
               
             </ul>
@@ -109,5 +107,4 @@ include "db_connect.php";
         </div><!--/.container-fluid -->
      
       </div>
-    </div>
-</div>
+
