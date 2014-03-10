@@ -1,7 +1,7 @@
 <?php
-$host="localhost"; // Host name 
-$username="root"; // Mysql username 
-$password="root"; // Mysql password 
+$host="web245.webfaction.com"; // Host name 
+$username="teamlacys"; // Mysql username 
+$password="lacys"; // Mysql password 
 $db_name="advanced_systems_project"; // Database name 
 
     # connect to the database  
