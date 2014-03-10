@@ -1,10 +1,7 @@
 <?php
-include "header.php";
-?>
-<?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include_once( __DIR__ . '/php/cart/CartManager.php' );
+include "header.php";
 ?>
 <div class="row">
 

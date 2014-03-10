@@ -19,15 +19,13 @@ include_once( __DIR__ . '/../SessionSingleton.php' );
  *
  * $CART_MGR = CartManager::getInstance();
  *
- * echo $CART_MGR->getItemCount(); // prints 0
+ * $CART_MGR->emptyCart();
+ *
+ * echo $CART_MGR->getItemCount(); // prints '0'
  *
  * $CART_MGR->addItem( 'Any Type' );
  * 
- * echo $CART_MGR->getItemCount(); // prints 1
- *
- * $CART_MGR->emptyCart();
- * 
- * echo $CART_MGR; // prints Cart(0)
+ * echo $CART_MGR; // prints 'Cart(1)'
  *
  * unset( $CART_MGR ); // not required, but encouraged
  ****************************************************************************

@@ -1,7 +1,7 @@
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include "db_connect.php";
+include __DIR__ . "/../db_connect.php"; // relative path include -nm
 
 /**
  * This class manages a user account.
