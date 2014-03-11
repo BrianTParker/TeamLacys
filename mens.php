@@ -29,13 +29,8 @@ include "header.php";
                             echo '<td>' . $row['name'] . '</td>' . "\n";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
-                            echo '<td> <form id="addCartForm" method="POST"> <button type="submit" class="btn btn-default">Add to cart</button>';
-                            echo '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
-							echo '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
-							echo '<input type="hidden" name="description" value="' . $row['description'] . '"/>';
-							echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
-							echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
-                            
+                            echo '<td>';
+                            echo '<form id="addCartForm" method="POST" class="form">'; 
                             echo '<select name="quantity">';
                             echo '<option>1</option>';
                             echo '<option>2</option>';
@@ -44,6 +39,23 @@ include "header.php";
                             echo '<option>5</option>';
                             echo '</select>';
                             echo 'Qty';
+                            echo '<br/>';
+                            echo '<select name="size">';
+                            echo '<option>S</option>';
+                            echo '<option>M</option>';
+                            echo '<option>L</option>';
+                            echo '<option>XL</option>';
+                            echo '<option>XXL</option>';
+                            echo '</select>';
+                            echo 'Size';
+                            echo '<button type="submit" class="btn btn-default">Add to cart</button>';
+                            echo '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
+							echo '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
+							echo '<input type="hidden" name="description" value="' . $row['description'] . '"/>';
+							echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
+							echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
+                            
+                            
 							echo '</form>' . "\n";
                             echo '</tr>' . "\n";
                         }

@@ -5,17 +5,18 @@ include "header.php";
 ?>
 <div class="row">
 
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-8 col-sm-offset-1">
 	
         <h2>Cart</h2>
 		
-		<table class="table">
+		<table class="table table-condensed">
             <head>
                 <th></th>
                 <th>Item</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Qty</th>
+                <th>Size</th>
                 <th>Sub Total</th>
                 <th></th>
                 
@@ -37,6 +38,7 @@ include "header.php";
 				echo '<td>' . $item['description'] . '</td>' . "\n";
 				echo '<td>$' . $item['price'] . '</td>' . "\n";
                 echo '<td> x' . $item['quantity'] . '</td>' . "\n";
+                echo '<td> ' . $item['size'] . '</td>' . "\n";
                 $subTotal += ($item['price'] * $item['quantity']);
                 $total += ($item['price'] * $item['quantity']);
                 echo '<td>$' . $subTotal . '</td>';
