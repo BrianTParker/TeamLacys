@@ -26,7 +26,7 @@ PRIMARY KEY(id)
 create table promotions
 (
 id int not null AUTO_INCREMENT,
-percentage decimal not null,
+percentage decimal(10,2) not null,
 PRIMARY KEY(id)
 );
 
@@ -35,7 +35,7 @@ create table products
 id int not null AUTO_INCREMENT,
 name varchar(50) not null,
 description varchar(500) not null,
-price decimal not null,
+price decimal(10,2) not null,
 promotion_id int,
 image_location varchar(100) not null,
 age_category varchar(20),
@@ -61,7 +61,7 @@ CONSTRAINT uc_reviews UNIQUE(product_id, customer_id)
 create table purchase_summary
 (
 id int not null AUTO_INCREMENT,
-amount_total decimal not null,
+amount_total decimal(10,2) not null,
 purchase_date date not null,
 shipping_id int,
 PRIMARY KEY(id),
@@ -73,7 +73,7 @@ create table purchase_details
 id int not null AUTO_INCREMENT,
 customer_id int not null,
 product_id int not null,
-amount decimal not null,
+amount decimal(10,2) not null,
 purchase_summary_id int not null,
 PRIMARY KEY(id),
 FOREIGN KEY(customer_id) references customers(id),
