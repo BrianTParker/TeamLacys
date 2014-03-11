@@ -43,6 +43,12 @@ class CartManager extends SessionSingleton {
 		
 	} // end method -nm
 	
+	public function addItem( $aKey, $aItem ){
+	
+		$this->cart[ $key ] = $aItem;
+		
+	} // end method -nm
+	
 	// remove item from the cart by numerical index -nm
 	public function removeItem( $index ){
 	
