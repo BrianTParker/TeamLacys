@@ -50,6 +50,9 @@ $total = 0;
 			
 		</tr>
         </table>
+    </div>
+    
+    <div class="col-sm-4 col-sm-offset-1">
         <form class="form-group" method="POST" action="">
 		<h2>Credit Card Information</h2>
 		Card Type <br/>
@@ -66,7 +69,10 @@ $total = 0;
 		Expiration Date <br/>
 		<input type="text" name="expDate"/> <br/>
 		<br/>
-		<h2>Shipping Information (optional)</h2> <br/>
+        <input type="radio" name="shipping" value="ship" checked="true"/>Ship to Address &nbsp; &nbsp; &nbsp; 
+        <input type="radio" name="shipping" value="pickup" />Pickup in Store <br/>
+        <div id="shippingInput">
+		<h2>Shipping Information </h2> <br/>
 		Street Address <br/>
 		<input type="text" name="street"/> <br/>
 		Apt# <br/>
@@ -77,7 +83,9 @@ $total = 0;
 		<input type="text" name="state"/> <br/>
 		Zip <br/>
 		<input type="text" name="zip"/> <br/>
-		<br/>
+		
+        </div>
+        <br/>
 		<input type="submit" name="submit" value="Continue Checkout"/> <br/>
 	</form>
 	

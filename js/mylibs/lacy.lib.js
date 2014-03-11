@@ -37,5 +37,14 @@
 			window.location.href = "./index.php";
 		} );
 	} );
+    
+    // hides/reveals shipping inputs on the checkout page
+    $("input[name='shipping']").change(function(){
+        if($(this).val() === "pickup"){
+            $("#shippingInput").hide();
+        }else{
+            $("#shippingInput").show();
+        }
+    });
 	
 })( jQuery );
