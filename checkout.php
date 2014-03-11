@@ -5,7 +5,7 @@ $total = 0;
 
 <div class="row">
 
-    <div class="col-sm-8 col-sm-offset-1">
+    <div class="col-sm-4 col-sm-offset-1">
     
         <h1>Checkout</h1>
         
@@ -35,20 +35,55 @@ $total = 0;
                     
                 }
                 ?>
-
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><strong>Total</strong></td>
+			
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>$<?php echo $total; ?></td>
+			
+		</tr>
         </table>
-        <table class="table">
-            <head>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Total</th>
-            </head>
-            
-            <tr>
-            
-            </tr>
-        </table>
+        <form class="form-group" method="POST" action="">
+		<h2>Credit Card Information</h2>
+		Card Type <br/>
+		<select name="type">
+			<option>Visa</option>
+			<option>Mastercard</option>
+		</select> <br/>
+		Name on the card <br/>
+		<input type="text" name="name"/><br/>
+		Card Number <br/>
+		<input type="text" name="number"/> <br/>
+		Security Code <br/>
+		<input type="text" name="security"/> <br/>
+		Expiration Date <br/>
+		<input type="text" name="expDate"/> <br/>
+		<br/>
+		<h2>Shipping Information (optional)</h2> <br/>
+		Street Address <br/>
+		<input type="text" name="street"/> <br/>
+		Apt# <br/>
+		<input type="text" name="apt#"/> <br/>
+		City <br/>
+		<input type="text" name="city"/> <br/>
+		State <br/>
+		<input type="text" name="state"/> <br/>
+		Zip <br/>
+		<input type="text" name="zip"/> <br/>
+		<br/>
+		<input type="submit" name="submit" value="Continue Checkout"/> <br/>
+	</form>
+	
+	
+	
+	
     
     </div>
     
