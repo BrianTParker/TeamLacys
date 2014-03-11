@@ -53,7 +53,7 @@ try {
 		$CART_MGR->removeItem( $_POST[ "index" ] ); 
 		
 	}
-	
+
 	// return cart manager as string -nm
 	echo $CART_MGR;
 	

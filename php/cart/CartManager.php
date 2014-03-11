@@ -43,7 +43,7 @@ class CartManager extends SessionSingleton {
 		
 	} // end method -nm
 	
-	public function addItem( $aKey, $aItem ){
+	public function addItemByKey( $aKey, $aItem ){
 	
 		$this->cart[ $key ] = $aItem;
 		
