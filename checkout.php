@@ -53,7 +53,7 @@ $total = 0;
     </div>
     
     <div class="col-sm-4 col-sm-offset-1">
-        <form class="form-group" method="POST" action="">
+        <form class="form-group" method="POST" action="process_checkout.php">
 		<h2>Credit Card Information</h2>
 		Card Type <br/>
 		<select name="type">
@@ -76,7 +76,7 @@ $total = 0;
 		Street Address <br/>
 		<input type="text" name="street"/> <br/>
 		Apt# <br/>
-		<input type="text" name="apt#"/> <br/>
+		<input type="text" name="street2"/> <br/>
 		City <br/>
 		<input type="text" name="city"/> <br/>
 		State <br/>

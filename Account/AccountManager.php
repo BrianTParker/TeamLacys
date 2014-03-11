@@ -42,31 +42,9 @@ class AccountManager {
  
 	
 	
-	public function __toString(){
-	
-		return "Cart(" . $this->getItemCount() . ")"; 
-		
-	} 
-    
-    
-    public static function init(){
-        
-		// Report simple running errors
-		error_reporting(E_ERROR | E_WARNING | E_PARSE);
-		
-		
 
-		 
-		if ( isset( $_SESSION[ self::SESSION_NAME ] ) === TRUE ){
-			 
-			
-			return unserialize( $_SESSION[ self::SESSION_NAME ] );
-			 
-		}else{
-			 
-			return new self();
-		}
-    }
+    
+
     
     function setSessionVariables($firstName, $lastName, $email){
         $_SESSION["firstName"] = $firstName;
