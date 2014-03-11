@@ -13,8 +13,8 @@ $total = 0;
             
             <head>
                 <th>Item</th>
-                <th>Qty</th>
                 <th>Price</th>
+                <th>Qty</th>
                 <th>Subtotal</th>
             </head>
                 
