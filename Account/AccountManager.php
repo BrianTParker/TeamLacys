@@ -42,31 +42,9 @@ class AccountManager {
  
 	
 	
-	public function __toString(){
-	
-		return "Cart(" . $this->getItemCount() . ")"; 
-		
-	} 
-    
-    
-    public static function init(){
-        
-		// Report simple running errors
-		error_reporting(E_ERROR | E_WARNING | E_PARSE);
-		
-		
 
-		 
-		if ( isset( $_SESSION[ self::SESSION_NAME ] ) === TRUE ){
-			 
-			
-			return unserialize( $_SESSION[ self::SESSION_NAME ] );
-			 
-		}else{
-			 
-			return new self();
-		}
-    }
+    
+
     
     function setSessionVariables($firstName, $lastName, $email){
         $_SESSION["firstName"] = $firstName;
@@ -128,7 +106,7 @@ class AccountManager {
         if(isset($firstName))
         {
             //the user name exists
-            if(!ctype_alnum($firstName))
+            if(!ctype_alnum((str_replace(' ','',$firstName))))
             {
                 $errors[] = 'The first name can only contain letters and digits.';
             }
