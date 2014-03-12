@@ -1,6 +1,35 @@
 <?php
 include "header.php";
 $total = 0;
+
+
+$ACCT_MGR = AccountManager::getInstance();
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $cardName = $_POST['name'];
+    $cardNumber = $_POST['number'];
+    $security = $_POST['security'];
+    $expiration = $_POST['expDate'];
+    $shipping = $_POST['shipping'];
+    $street = $_POST['street'];
+    $street2 = $_POST['street2'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+    
+    $status = $ACCT_MGR->validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip);
+    
+    
+    if($status["success"] === 1){
+    
+    }else{
+    
+    }
+    
+    
+    
+}
 ?>
 
 <div class="row">
@@ -53,7 +82,7 @@ $total = 0;
     </div>
     
     <div class="col-sm-4 col-sm-offset-1">
-        <form class="form-group" method="POST" action="process_checkout.php">
+        <form class="form-group" method="POST" action="">
 		<h2>Credit Card Information</h2>
 		Card Type <br/>
 		<select name="type">
