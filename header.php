@@ -99,14 +99,14 @@ include "db_connect.php";
       </form>-->
       <ul class="nav navbar-nav navbar-right">
         <?php
-              if(!isset($_SESSION['firstName'])){
-                echo '<li><a href="login.php">Log In</a></li>';
-                echo '<li><a href="newuser.php">Create Account</a></li>';
-              }else{
-                echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
-                echo '<li><a id="logout" href="">Logout</a></li>';
-              }
-              ?>
+          if(!isset($_SESSION['firstName'])){
+            echo '<li><a href="login.php">Log In</a></li>';
+            echo '<li><a href="newuser.php">Create Account</a></li>';
+          }else{
+            echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
+            echo '<li><a id="logout" href="">Logout</a></li>';
+          }
+        ?>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
