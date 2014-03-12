@@ -106,7 +106,7 @@ class AccountManager {
         if(isset($firstName))
         {
             //the user name exists
-            if(!ctype_alnum($firstName))
+            if(!ctype_alnum((str_replace(' ','',$firstName))))
             {
                 $errors[] = 'The first name can only contain letters and digits.';
             }

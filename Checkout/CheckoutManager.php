@@ -26,66 +26,66 @@ class CheckoutManager{
     }
     
     
-    public validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip){
+    public function validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip){
         
         $errors = array(); /* declare the array for later use */
         $success = 0;
         
-        if(isset($cardName)){
-        
+        if(empty($cardName)){
+            $errors[] = 'The card name cannot be blank.';
+            
+        }else{
             if(!ctype_alnum((str_replace(' ','',$cardName)))){
                 $errors[] = 'The card name can only contain letters and digits.';
             }
-        }else{
-            $errors[] = 'The card name cannot be blank.';
         }
         
-        if(isset($cardNumber){
+        if(!empty($cardNumber)){
             
         }else{
-            $errors[] = 'The card number feild must not be blank.';
+            $errors[] = 'The card number field cannot be blank.';
         }
         
-        if(isset($security){
+        if(!empty($security)){
             if(!is_numeric($security)){
                 $errors[]= 'The security code must be numeric only';
             }
-            if($strlen($security) != 3){
+            if(strlen($security) != 3){
                 $errors[] = 'The security code must be 3 digits';
             }
         }else{
-            $errors[] = 'The security code feild must not be blank';
+            $errors[] = 'The security code field cannot be blank';
         }
         
-        if(isset($expiration){
+        if(!empty($expiration)){
         
         }else{
-            $errors[] = 'The credit card expiration date must not be blank';
+            $errors[] = 'The credit card expiration date cannot be blank';
         }
         
-        if(isset($shipping){
-            if(isset($street){
+        if($shipping === "ship"){
+            if(!empty($street)){
                 
             }else{
-                $errors[] = 'Street address must not be blank';
+                $errors[] = 'Street address cannot be blank';
             }
             
-            if(isset($city)){
+            if(!empty($city)){
                 
             }else{
-                $errors[] = 'City must not be blank';
+                $errors[] = 'City cannot be blank';
             }
             
-            if(isset($state)){
+            if(!empty($state)){
                 
             }else{
-                $errors[] = 'State must not be blank';
+                $errors[] = 'State cannot be blank';
             }
             
-            if(isset($zip)){
-                $errors[] = 'Zip code must not be blank';
+            if(!empty($zip)){
+                
             }else{
-            
+                $errors[] = 'Zip code cannot be blank';
             }
         }
         

@@ -1,34 +1,64 @@
 <?php
 include "header.php";
+include_once( "Checkout/CheckoutManager.php" );
 $total = 0;
 
 
-$ACCT_MGR = AccountManager::getInstance();
+$CHECKOUT_MGR = CheckoutManager::getInstance();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-    $cardName = $_POST['name'];
-    $cardNumber = $_POST['number'];
-    $security = $_POST['security'];
-    $expiration = $_POST['expDate'];
-    $shipping = $_POST['shipping'];
-    $street = $_POST['street'];
-    $street2 = $_POST['street2'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zip = $_POST['zip'];
     
-    $status = $ACCT_MGR->validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip);
-    
-    
-    if($status["success"] === 1){
-    
-    }else{
+    if(isset($_POST['checkoutInput'])){
+        $cardName = $_POST['name'];
+        $cardNumber = $_POST['number'];
+        $security = $_POST['security'];
+        $expiration = $_POST['expDate'];
+        $shipping = $_POST['shipping'];
+        $street = $_POST['street'];
+        $street2 = $_POST['street2'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $zip = $_POST['zip'];
+        
+        $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip);
+        
+        
+        if($status["success"] === 1){
+            echo "The value for card name is: " . $cardName;
+            if(empty($cardName)){
+                echo "\n It's empty!";
+            }
+        }else{
+            echo '<div class="row">';
+                echo '<div class="col-sm-4 col-sm-offset-1">';
+                echo '</div>';
+                echo '<div class="col-sm-4 col-sm-offset-1">';
+                    foreach($status["errors"] as $key => $value) /* walk through the array so all the errors get displayed */
+                        {
+                            echo '<li>' . $value . '</li>'; 
+                        }
+                        echo '</ul>';
+                echo '</div>';
+            echo '</div>';
+        }
     
     }
     
     
     
+}
+
+if(!isset($cardName)){
+    $cardName = '';
+    $cardNumber = '';
+    $security = '';
+    $expiration = '';
+    $shipping = '';
+    $street = '';
+    $street2 = '';
+    $city = '';
+    $state = '';
+    $zip = '';
 }
 ?>
 
@@ -90,32 +120,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			<option>Mastercard</option>
 		</select> <br/>
 		Name on the card <br/>
-		<input type="text" name="name"/><br/>
+		<input type="text" name="name" value="<?php echo $cardName; ?>"/><br/>
 		Card Number <br/>
-		<input type="text" name="number"/> <br/>
+		<input type="text" name="number" value="<?php echo $cardNumber; ?>"/> <br/>
 		Security Code <br/>
-		<input type="text" name="security"/> <br/>
+		<input type="text" name="security" value="<?php echo $security; ?>"/> <br/>
 		Expiration Date <br/>
-		<input type="text" name="expDate"/> <br/>
+		<input type="text" name="expDate" value="<?php echo $expiration; ?>"/> <br/>
 		<br/>
         <input type="radio" name="shipping" value="ship" checked="true"/>Ship to Address &nbsp; &nbsp; &nbsp; 
         <input type="radio" name="shipping" value="pickup" />Pickup in Store <br/>
         <div id="shippingInput">
 		<h2>Shipping Information </h2> <br/>
 		Street Address <br/>
-		<input type="text" name="street"/> <br/>
+		<input type="text" name="street" value="<?php echo $street; ?>"/> <br/>
 		Apt# <br/>
-		<input type="text" name="street2"/> <br/>
+		<input type="text" name="street2" value="<?php echo $street2; ?>"/> <br/>
 		City <br/>
-		<input type="text" name="city"/> <br/>
+		<input type="text" name="city" value="<?php echo $city; ?>"/> <br/>
 		State <br/>
-		<input type="text" name="state"/> <br/>
+		<input type="text" name="state" value="<?php echo $state; ?>"/> <br/>
 		Zip <br/>
-		<input type="text" name="zip"/> <br/>
+		<input type="text" name="zip" value="<?php echo $zip; ?>"/> <br/>
 		
         </div>
         <br/>
-		<input type="submit" name="submit" value="Continue Checkout"/> <br/>
+		<input type="submit" name="checkoutInput" value="Continue Checkout"/> <br/>
 	</form>
 	
 	

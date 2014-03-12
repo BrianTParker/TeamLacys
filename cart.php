@@ -88,7 +88,7 @@ include "header.php";
             <?php echo "Total: $" . $total . "\n "; ?>
             
                 <input type="hidden" name="total" value="<?php echo $total; ?>"/>
-                <button class="btn btn-default" type="submit" name="submit" value="Checkout">Check out</button>
+                <button class="btn btn-default" type="submit" name="beginCheckout" value="Checkout">Check out</button>
             </form>
         
         </div>
