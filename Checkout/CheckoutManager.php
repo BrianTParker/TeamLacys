@@ -101,6 +101,14 @@ class CheckoutManager{
         
         
     }
+    
+    public function setCheckoutSummary($summary){
+        $_SESSION['summary'] = $summary;
+    }
+    
+    public function getNewSummary(){
+        unset($_SESSION['summary']);
+    }
 
 }
 
