@@ -70,32 +70,35 @@ include "db_connect.php";
 
 ?>
 
+<nav class="navbar navbar-inverse navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.php">Lacy's</a>
+    </div>
 
-      <!-- Static navbar -->
-      <div class="navbar navbar-inverse navbar-default" role="navigation">
-        
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-         
-            <a class="navbar-red" href="index.php"><h1>Lacy's  </h1></a>
-       
-          </div>
-          <h4><div class="navbar">
-            <ul class="nav navbar-nav">
-              <li><a href="mens.php">Men</a></li>
-              <li><a href="womens.php">Women</a></li>
-              <li><a href="children.php">Children</a></li>
-              
-            </ul>
-            <ul id="navbar" class="nav navbar-nav navbar-right">
-                
-              <?php
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!--<li class="active"><a href="#">Link</a></li>-->
+        <li><a href="mens.php">Men</a></li>
+        <li><a href="womens.php">Women</a></li>
+        <li><a href="children.php">Children</a></li>
+      </ul>
+      <!--<form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <?php
               if(!isset($_SESSION['firstName'])){
                 echo '<li><a href="login.php">Log In</a></li>';
                 echo '<li><a href="newuser.php">Create Account</a></li>';
@@ -104,11 +107,10 @@ include "db_connect.php";
                 echo '<li><a id="logout" href="">Logout</a></li>';
               }
               ?>
-              
-              
-            </ul>
-          </div></h4><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-     
-      </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+  
 
+      
