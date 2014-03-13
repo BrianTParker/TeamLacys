@@ -9,6 +9,7 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $CHECKOUT_MGR->getNewSummary();
     if(isset($_POST['checkoutInput'])){
+        $cardType = $_POST['type'];
         $cardName = $_POST['name'];
         $cardNumber = $_POST['number'];
         $security = $_POST['security'];
@@ -21,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $zip = $_POST['zip'];
         $total = $_POST['total'];
         
+        
         //validate the checkout information
         $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip);
         
@@ -28,11 +30,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         if($status["success"] === 1){
             $summary = array(
-                        'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
+                        'cardType' => $cardType,'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
                         'expiration' => $expiration, 'shipping' => $shipping, 'street' => $street, 
                         'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'total' => $total);
             $CHECKOUT_MGR->setCheckoutSummary($summary);
-            header("location: checkout_final.php");
+            header("location: checkout_summary.php");
         }else{
             echo '<div class="row">';
                 echo '<div class="col-sm-4 col-sm-offset-1">';
@@ -137,9 +139,9 @@ if(!isset($cardName)){
         <input type="radio" name="shipping" value="pickup" />Pickup in Store <br/>
         <div id="shippingInput">
 		<h2>Shipping Information </h2> <br/>
-		Street Address <br/>
+		Street <br/>
 		<input type="text" name="street" value="<?php echo $street; ?>"/> <br/>
-		Apt# <br/>
+		Street 2 <br/>
 		<input type="text" name="street2" value="<?php echo $street2; ?>"/> <br/>
 		City <br/>
 		<input type="text" name="city" value="<?php echo $city; ?>"/> <br/>

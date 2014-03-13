@@ -44,12 +44,23 @@ class AccountManager {
 	
 
     
-
+    function setID(){
+        global $DBH;
+        
+        $sql = $DBH->query("SELECT id, first_name, last_name from customers where email = '" . $email . "'"); 			
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $sql->fetch();
+        $id = $row['id'];
+        
+        $_SESSION['id'] = $id;
+            
+    }
     
     function setSessionVariables($firstName, $lastName, $email){
         $_SESSION["firstName"] = $firstName;
         $_SESSION["lastName"] = $lastName;
         $_SESSION["email"] = $email;
+        $this->setID();
         
     }
     
@@ -212,6 +223,8 @@ class AccountManager {
     
     
     }
+    
+    
     
     function isLoggedIn(){
         if(isset($_SESSION['firstName'])){

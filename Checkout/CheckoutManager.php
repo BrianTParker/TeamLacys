@@ -3,6 +3,7 @@
 include __DIR__ . "/../db_connect.php"; 
 
 
+
 class CheckoutManager{
 
     protected static $instance = null;
@@ -108,6 +109,104 @@ class CheckoutManager{
     
     public function getNewSummary(){
         unset($_SESSION['summary']);
+    }
+    
+    public function getCardType(){
+        if(isset($_SESSION['summary']['cardType'])){
+            return $_SESSION['summary']['cardType'];
+        }
+    }
+    
+    public function getCardName(){
+        if(isset($_SESSION['summary']['name'])){
+            return $_SESSION['summary']['name'];
+        }
+    }
+    
+    public function getCardNumber(){
+        if(isset($_SESSION['summary']['number'])){
+            return $_SESSION['summary']['number'];
+        }
+    }
+    
+    public function getCardSecurity(){
+        if(isset($_SESSION['summary']['security'])){
+            return $_SESSION['summary']['security'];
+        }
+    }
+    
+    public function getCardExpiration(){
+        if(isset($_SESSION['summary']['expiration'])){
+            return $_SESSION['summary']['expiration'];
+        }
+    }
+    
+    public function getShippingOption(){
+        if(isset($_SESSION['summary']['shipping'])){
+            return $_SESSION['summary']['shipping'];
+        }
+    }
+    
+    public function getStreet1(){
+        if(isset($_SESSION['summary']['street'])){
+            return $_SESSION['summary']['street'];
+        }
+    }
+    
+    public function getStreet2(){
+        if(isset($_SESSION['summary']['street2'])){
+            return $_SESSION['summary']['street2'];
+        }
+    }
+    
+    public function getCity(){
+        if(isset($_SESSION['summary']['city'])){
+            return $_SESSION['summary']['city'];
+        }
+    }
+    
+    public function getState(){
+        if(isset($_SESSION['summary']['state'])){
+            return $_SESSION['summary']['state'];
+        }
+    }
+    
+    public function getZip(){
+        if(isset($_SESSION['summary']['zip'])){
+            return $_SESSION['summary']['zip'];
+        }
+    }
+    
+    public function checkout(){
+        global $DBH;
+        
+        $sql = "Insert into purchase_details(first_name, last_name, email, phone,password)
+                    values (:firstName, :lastName,:email, :phone, :password)";
+        $q = $DBH->prepare($sql);
+        $q->execute(array(':firstName'=>$firstName,
+                          ':lastName'=>$lastName,
+                          ':password'=>$password,
+                          ':email'=>$email,
+                          ':phone'=>$phone
+                          ));
+        
+        //$result = mysql_query($sql);
+        if(!$q)
+        {
+            //something went wrong, display the error
+            $errors[] = "There was an issue with the database";
+            return array("success" => $success,
+                         "errors" => $errors);
+            //echo mysql_error(); //debugging purposes, uncomment when needed
+        }
+        else
+        {
+            
+            $this->setSessionVariables($firstName, $lastName, $email);
+            $success = 1;
+            return array("success" => $success,
+                         "errors" => $errors);
+        }
     }
 
 }
