@@ -7,8 +7,9 @@ $total = 0;
 $CHECKOUT_MGR = CheckoutManager::getInstance();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
+    $CHECKOUT_MGR->getNewSummary();
     if(isset($_POST['checkoutInput'])){
+        $cardType = $_POST['type'];
         $cardName = $_POST['name'];
         $cardNumber = $_POST['number'];
         $security = $_POST['security'];
@@ -19,15 +20,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $city = $_POST['city'];
         $state = $_POST['state'];
         $zip = $_POST['zip'];
+        $total = $_POST['total'];
         
+        
+        //validate the checkout information
         $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip);
         
         
+        
         if($status["success"] === 1){
-            echo "The value for card name is: " . $cardName;
-            if(empty($cardName)){
-                echo "\n It's empty!";
-            }
+            $summary = array(
+                        'cardType' => $cardType,'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
+                        'expiration' => $expiration, 'shipping' => $shipping, 'street' => $street, 
+                        'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'total' => $total);
+            $CHECKOUT_MGR->setCheckoutSummary($summary);
+            header("location: checkout_summary.php");
         }else{
             echo '<div class="row">';
                 echo '<div class="col-sm-4 col-sm-offset-1">';
@@ -132,9 +139,9 @@ if(!isset($cardName)){
         <input type="radio" name="shipping" value="pickup" />Pickup in Store <br/>
         <div id="shippingInput">
 		<h2>Shipping Information </h2> <br/>
-		Street Address <br/>
+		Street <br/>
 		<input type="text" name="street" value="<?php echo $street; ?>"/> <br/>
-		Apt# <br/>
+		Street 2 <br/>
 		<input type="text" name="street2" value="<?php echo $street2; ?>"/> <br/>
 		City <br/>
 		<input type="text" name="city" value="<?php echo $city; ?>"/> <br/>
@@ -144,6 +151,7 @@ if(!isset($cardName)){
 		<input type="text" name="zip" value="<?php echo $zip; ?>"/> <br/>
 		
         </div>
+        <input type="hidden" name="total" value="<?php echo $total; ?>"/>
         <br/>
 		<input type="submit" name="checkoutInput" value="Continue Checkout"/> <br/>
 	</form>

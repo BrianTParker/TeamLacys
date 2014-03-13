@@ -41,15 +41,30 @@ class AccountManager {
     
  
 	
-	
+	public function getId(){
+        if(isset($_SESSION['id'])){
+            return $_SESSION['id'];
+        }
+    }
 
     
-
+    function setID(){
+        global $DBH;
+        
+        $sql = $DBH->query("SELECT id, first_name, last_name from customers where email = '" . $email . "'"); 			
+        $sql->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $sql->fetch();
+        $id = $row['id'];
+        
+        $_SESSION['id'] = $id;
+            
+    }
     
-    function setSessionVariables($firstName, $lastName, $email){
+    function setSessionVariables($firstName, $lastName, $email, $id){
         $_SESSION["firstName"] = $firstName;
         $_SESSION["lastName"] = $lastName;
         $_SESSION["email"] = $email;
+        $_SESSION["id"] = $id;
         
     }
     
@@ -81,7 +96,7 @@ class AccountManager {
             $firstName = $row['first_name'];
             $lastName = $row['last_name'];
             
-            $this->setSessionVariables($firstName, $lastName, $email);
+            $this->setSessionVariables($firstName, $lastName, $email, $id);
             $success = 1;
             return $success;
    
@@ -197,8 +212,8 @@ class AccountManager {
             }
             else
             {
-                
-                $this->setSessionVariables($firstName, $lastName, $email);
+                $id = $DBH->lastInsertId();
+                $this->setSessionVariables($firstName, $lastName, $email, $id);
                 $success = 1;
                 return array("success" => $success,
                              "errors" => $errors);
@@ -212,6 +227,8 @@ class AccountManager {
     
     
     }
+    
+    
     
     function isLoggedIn(){
         if(isset($_SESSION['firstName'])){
