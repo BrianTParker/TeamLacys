@@ -4,6 +4,7 @@ include __DIR__ . "/../db_connect.php";
 
 
 
+
 class CheckoutManager{
 
     protected static $instance = null;
@@ -111,6 +112,12 @@ class CheckoutManager{
         unset($_SESSION['summary']);
     }
     
+    public function getTotal(){
+        if(isset($_SESSION['summary']['total'])){
+            return $_SESSION['summary']['total'];
+        }
+    }
+    
     public function getCardType(){
         if(isset($_SESSION['summary']['cardType'])){
             return $_SESSION['summary']['cardType'];
@@ -180,8 +187,10 @@ class CheckoutManager{
     public function checkout(){
         global $DBH;
         $success = 0;
-        $shippingId = null;
+        $errors = array();
+        $shippingId = null; //If the customer selected shipping this will get updated
         
+        //shipping insert
         if($this->getShippingOption() === "ship"){
             $sql = "Insert into shipping(street_address1, street_address2, city, state,zip)
                     values (:street_address1, :street_address2,:city, :state, :zip)";
@@ -208,8 +217,64 @@ class CheckoutManager{
             }
         }
         
+        $date = date('Y-m-d');
+        //purchase_summary insert
+        $sql2 = "Insert into purchase_summary(amount_total, puchase_date, shipping_id)
+                    values (:amount_total, :purchase_date,:shipping_id)";
+        $q = $DBH->prepare($sql2);
+        $q->execute(array(':amount_total'=>$this->getTotal(),
+                          ':purchase_date'=>$date,
+                          ':shipping_id'=>$shippingId
+                          ));
+    
         
-        //$result = mysql_query($sql);
+        
+        if(!$q)
+        {
+            //something went wrong, display the error
+            $errors[] = "There was an issue with the database";
+            return array("success" => $success,
+                         "errors" => $errors);
+            //echo mysql_error(); //debugging purposes, uncomment when needed
+        }
+        else
+        {
+            $summaryId = $DBH->lastInsertId();
+            
+        }
+        
+        
+        $CART_MGR = CartManager::getInstance();
+		$ACCT_MGR = AccountManager::getInstance();	
+        // for each item in the cart -nm
+        foreach( $CART_MGR->getItems() as $index => $item ){
+            //purchase_details insert
+            $sql3 = "Insert into purchase_details(customer_id, product_id, amount, quantity, size)
+                        values (:customer_id, :product_id,:amount, :quantity, :size)";
+            $q = $DBH->prepare($sql3);
+            $q->execute(array(':customer_id'=>$ACCT_MGR->getId(),
+                              ':product_id'=>$date,
+                              ':amount'=>$shippingId,
+                              ':quantity'=>$item['quantity'],
+                              ':size'=>$item['size']
+                              ));
+        }
+        if(!$q)
+        {
+            //something went wrong, display the error
+            $errors[] = "There was an issue with the database";
+            return array("success" => $success,
+                         "errors" => $errors);
+            //echo mysql_error(); //debugging purposes, uncomment when needed
+        }
+        else
+        {
+            $success = 1;
+            return array("success" => $success,
+                             "errors" => $errors);
+            
+        }
+        
         
         
     }

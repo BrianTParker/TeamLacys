@@ -41,7 +41,11 @@ class AccountManager {
     
  
 	
-	
+	public function getId(){
+        if(isset($_SESSION['id'])){
+            return $_SESSION['id'];
+        }
+    }
 
     
     function setID(){
