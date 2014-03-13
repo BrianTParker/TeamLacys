@@ -4,20 +4,24 @@ include_once( "Checkout/CheckoutManager.php" );
 include_once( "Account/AccountManager.php" );
 $total = 0;
 $CHECKOUT_MGR = CheckoutManager::getInstance();
-
+$CART_MGR = CartManager::getInstance();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     $status = $CHECKOUT_MGR->checkout();
     
+   
+    
     if($status["success"] === 1){
-        echo "Thanks for your purchase";
+        $CART_MGR->emptyCart();
+        $CHECKOUT_MGR->getNewSummary();
+        header("location: index.php");
     }else{
         echo '<div class="row">';
             echo '<div class="col-sm-4 col-sm-offset-1">';
             echo '</div>';
             echo '<div class="col-sm-4 col-sm-offset-1">';
-                foreach($status["errors"] as $key => $value) /* walk through the array so all the errors get displayed */
+                foreach($status["errors"] as $key => $value) 
                     {
                         echo '<li>' . $value . '</li>'; 
                     }

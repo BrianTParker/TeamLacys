@@ -199,7 +199,7 @@ class CheckoutManager{
                               ':street_address2'=>$this->getStreet2(),
                               ':city'=>$this->getCity(),
                               ':state'=>$this->getState(),
-                              ':zip'=>$this->getZip
+                              ':zip'=>$this->getZip()
                               ));
                               
             if(!$q)
@@ -217,19 +217,26 @@ class CheckoutManager{
             }
         }
         
-        $date = date('Y-m-d');
+        
+        
+        
+        $raw_date = new DateTime();
+        $date = $raw_date->format('Y-m-d');
+        
+        
+        
         //purchase_summary insert
-        $sql2 = "Insert into purchase_summary(amount_total, puchase_date, shipping_id)
+        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id)
                     values (:amount_total, :purchase_date,:shipping_id)";
-        $q = $DBH->prepare($sql2);
-        $q->execute(array(':amount_total'=>$this->getTotal(),
+        $q2 = $DBH->prepare($sql2);
+        $q2->execute(array(':amount_total'=>$this->getTotal(),
                           ':purchase_date'=>$date,
                           ':shipping_id'=>$shippingId
                           ));
     
         
         
-        if(!$q)
+        if(!$q2)
         {
             //something went wrong, display the error
             $errors[] = "There was an issue with the database";
@@ -244,36 +251,43 @@ class CheckoutManager{
         }
         
         
+        
         $CART_MGR = CartManager::getInstance();
 		$ACCT_MGR = AccountManager::getInstance();	
+        
         // for each item in the cart -nm
         foreach( $CART_MGR->getItems() as $index => $item ){
+            
             //purchase_details insert
-            $sql3 = "Insert into purchase_details(customer_id, product_id, amount, quantity, size)
-                        values (:customer_id, :product_id,:amount, :quantity, :size)";
-            $q = $DBH->prepare($sql3);
-            $q->execute(array(':customer_id'=>$ACCT_MGR->getId(),
-                              ':product_id'=>$date,
-                              ':amount'=>$shippingId,
+            $sql3 = "Insert into purchase_details(customer_id, product_id, amount, quantity, size, purchase_summary_id)
+                        values (:customer_id, :product_id,:amount, :quantity, :size, :purchase_summary_id)";
+            $q3 = $DBH->prepare($sql3);
+            $q3->execute(array(':customer_id'=>$ACCT_MGR->getId(),
+                              ':product_id'=>$item['id'],
+                              ':amount'=>$item['price'],
                               ':quantity'=>$item['quantity'],
-                              ':size'=>$item['size']
+                              ':size'=>$item['size'],
+                              ':purchase_summary_id'=>$summaryId
                               ));
-        }
-        if(!$q)
-        {
-            //something went wrong, display the error
-            $errors[] = "There was an issue with the database";
-            return array("success" => $success,
-                         "errors" => $errors);
-            //echo mysql_error(); //debugging purposes, uncomment when needed
-        }
-        else
-        {
-            $success = 1;
-            return array("success" => $success,
+            
+          
+                        
+            if(!$q3)
+            {
+                //something went wrong, display the error
+                $errors[] = "There was an issue with the database";
+                return array("success" => $success,
                              "errors" => $errors);
+                //echo mysql_error(); //debugging purposes, uncomment when needed
+            }
             
         }
+        
+        $success = 1;
+        return array("success" => $success,
+                         "errors" => $errors);
+            
+        
         
         
         

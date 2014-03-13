@@ -60,11 +60,11 @@ class AccountManager {
             
     }
     
-    function setSessionVariables($firstName, $lastName, $email){
+    function setSessionVariables($firstName, $lastName, $email, $id){
         $_SESSION["firstName"] = $firstName;
         $_SESSION["lastName"] = $lastName;
         $_SESSION["email"] = $email;
-        $this->setID();
+        $_SESSION["id"] = $id;
         
     }
     
@@ -96,7 +96,7 @@ class AccountManager {
             $firstName = $row['first_name'];
             $lastName = $row['last_name'];
             
-            $this->setSessionVariables($firstName, $lastName, $email);
+            $this->setSessionVariables($firstName, $lastName, $email, $id);
             $success = 1;
             return $success;
    
@@ -212,8 +212,8 @@ class AccountManager {
             }
             else
             {
-                
-                $this->setSessionVariables($firstName, $lastName, $email);
+                $id = $DBH->lastInsertId();
+                $this->setSessionVariables($firstName, $lastName, $email, $id);
                 $success = 1;
                 return array("success" => $success,
                              "errors" => $errors);
