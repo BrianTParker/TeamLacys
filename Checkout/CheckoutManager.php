@@ -179,34 +179,39 @@ class CheckoutManager{
     
     public function checkout(){
         global $DBH;
+        $success = 0;
+        $shippingId = null;
         
-        $sql = "Insert into purchase_details(first_name, last_name, email, phone,password)
-                    values (:firstName, :lastName,:email, :phone, :password)";
-        $q = $DBH->prepare($sql);
-        $q->execute(array(':firstName'=>$firstName,
-                          ':lastName'=>$lastName,
-                          ':password'=>$password,
-                          ':email'=>$email,
-                          ':phone'=>$phone
-                          ));
+        if($this->getShippingOption() === "ship"){
+            $sql = "Insert into shipping(street_address1, street_address2, city, state,zip)
+                    values (:street_address1, :street_address2,:city, :state, :zip)";
+            $q = $DBH->prepare($sql);
+            $q->execute(array(':street_address1'=>$this->getStreet1(),
+                              ':street_address2'=>$this->getStreet2(),
+                              ':city'=>$this->getCity(),
+                              ':state'=>$this->getState(),
+                              ':zip'=>$this->getZip
+                              ));
+                              
+            if(!$q)
+            {
+                //something went wrong, display the error
+                $errors[] = "There was an issue with the database";
+                return array("success" => $success,
+                             "errors" => $errors);
+                //echo mysql_error(); //debugging purposes, uncomment when needed
+            }
+            else
+            {
+                $shippingId = $DBH->lastInsertId();
+                
+            }
+        }
+        
         
         //$result = mysql_query($sql);
-        if(!$q)
-        {
-            //something went wrong, display the error
-            $errors[] = "There was an issue with the database";
-            return array("success" => $success,
-                         "errors" => $errors);
-            //echo mysql_error(); //debugging purposes, uncomment when needed
-        }
-        else
-        {
-            
-            $this->setSessionVariables($firstName, $lastName, $email);
-            $success = 1;
-            return array("success" => $success,
-                         "errors" => $errors);
-        }
+        
+        
     }
 
 }
