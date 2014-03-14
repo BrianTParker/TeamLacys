@@ -30,7 +30,31 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  
+  <footer>
+    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="glyphicon glyphicon-copyright-mark"></span>
+          </div>
+          <div class="col-md-4">
+            <ul class="nav nav-pills">
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">About Us</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-1">
+            <a class="navbar-brand text-right" href="index.php">Lacy's</a>
+          </div>
+        </div>
+        </div>
+      </nav>
+      </footer>
 </body>
 </html>
 <?php ob_flush(); ?>
