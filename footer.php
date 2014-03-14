@@ -31,7 +31,7 @@
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
   <footer>
-    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom" role="navigation">
+    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom"     role="navigation">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
@@ -54,7 +54,7 @@
         </div>
         </div>
       </nav>
-      </footer>
-</body>
+    </footer>
+  </body>
 </html>
 <?php ob_flush(); ?>
