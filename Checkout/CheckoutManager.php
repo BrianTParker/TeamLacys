@@ -43,7 +43,9 @@ class CheckoutManager{
         }
         
         if(!empty($cardNumber)){
-            
+            if(strlen($cardNumber) < 10){
+				$errors[] = "The credit card number must be at least 10 digits.";
+			}
         }else{
             $errors[] = 'The card number field cannot be blank.';
         }

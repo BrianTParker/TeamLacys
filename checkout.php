@@ -67,6 +67,7 @@ if(!isset($cardName)){
     $state = '';
     $zip = '';
 }
+$total = 0;
 ?>
 
 <div class="row">
