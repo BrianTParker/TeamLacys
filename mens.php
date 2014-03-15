@@ -3,7 +3,7 @@ include "header.php";
 ?>
 
 <div class="row">
-   <div class="col-sm-8 col-sm-offset-1">
+   <div class="col-sm-2 col-sm-offset-5">
         <div class="tabbable"> <!-- Only required for left/right tabs -->
                 <ul class="nav nav-tabs">
                     <?php 
@@ -26,38 +26,7 @@ include "header.php";
                         while($row = $pants_sql->fetch()) {
                             echo '<tr>' . "\n";
                             echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a></td>' . "\n";
-                            echo '<td>' . $row['name'] . '</td>' . "\n";
-                            echo '<td>' . $row['description'] . '</td>' . "\n";
-                            echo '<td>$' . $row['price'] . '</td>' . "\n";
-                            echo '<td>';
-                            echo '<form id="addCartForm" method="POST" class="form">'; 
-                            echo '<select name="quantity">';
-                            echo '<option>1</option>';
-                            echo '<option>2</option>';
-                            echo '<option>3</option>';
-                            echo '<option>4</option>';
-                            echo '<option>5</option>';
-                            echo '</select>';
-                            echo 'Qty';
-                            echo '<br/>';
-                            echo '<select name="size">';
-                            echo '<option>S</option>';
-                            echo '<option>M</option>';
-                            echo '<option>L</option>';
-                            echo '<option>XL</option>';
-                            echo '<option>XXL</option>';
-                            echo '</select>';
-                            echo 'Size';
-			    echo '<br/>';
-                            echo '<button type="submit" class="btn btn-default">Add to cart</button>';
-                            echo '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
-							echo '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
-							echo '<input type="hidden" name="description" value="' . $row['description'] . '"/>';
-							echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
-							echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
-                            
-                            
-							echo '</form>' . "\n";
+                            echo '<td><a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a></td>' . "\n";
                             echo '</tr>' . "\n";
                         }
                         ?>                        
