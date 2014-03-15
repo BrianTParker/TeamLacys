@@ -64,6 +64,8 @@ include_once( "Account/AccountManager.php" );
 			echo '<button type="submit" class="btn btn-default">Post Review</button>' . "\n";
 			
 			echo '</form>';
+		}else{
+			echo '<a href="login.php"> Log in</a> to write a review';
 		}
 		
 	echo '</div>' . "\n";
