@@ -38,10 +38,10 @@
             <span class="glyphicon glyphicon-copyright-mark"></span>
           </div>
           <div class="col-md-4">
-            <ul class="nav nav-pills">
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">About Us</a></li>
+            <ul class="nav navbar-nav">
+              <li><a href="contact.php">Contact Us</a></li>
+              <li><a href="privacy.php">Privacy Policy</a></li>
+              <li><a href="about.php">About Us</a></li>
             </ul>
           </div>
           <div class="col-md-2">
