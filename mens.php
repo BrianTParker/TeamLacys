@@ -25,7 +25,7 @@ include "header.php";
                         $pants_sql->setFetchMode(PDO::FETCH_ASSOC);
                         while($row = $pants_sql->fetch()) {
                             echo '<tr>' . "\n";
-                            echo '<td><img src="' . $row['image_location'] . '"/></td>' . "\n";
+                            echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a></td>' . "\n";
                             echo '<td>' . $row['name'] . '</td>' . "\n";
                             echo '<td>' . $row['description'] . '</td>' . "\n";
                             echo '<td>$' . $row['price'] . '</td>' . "\n";
