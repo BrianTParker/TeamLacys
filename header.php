@@ -5,8 +5,7 @@ ob_start();
 <?php
 /**********************************INCLUDE*********************************** *
 * **************************************************************************** */
-include_once( __DIR__ . './php/cart/CartManager.php' );
-
+include_once( __DIR__ . '/php/cart/CartManager.php' );
 /* <<<<<<< HEAD
 =======
 >>>>>>> origin/databasefix */

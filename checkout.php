@@ -119,46 +119,96 @@ if(!isset($cardName)){
     </div>
     
     <div class="col-sm-4 col-sm-offset-1">
-        <form class="form-group" method="POST" action="">
-		<h2>Credit Card Information</h2>
-		Card Type <br/>
-		<select name="type">
-			<option>Visa</option>
-			<option>Mastercard</option>
-		</select> <br/>
-		Name on the card <br/>
-		<input type="text" name="name" value="<?php echo $cardName; ?>"/><br/>
-		Card Number <br/>
-		<input type="text" name="number" value="<?php echo $cardNumber; ?>"/> <br/>
-		Security Code <br/>
-		<input type="text" name="security" value="<?php echo $security; ?>"/> <br/>
-		Expiration Date <br/>
-		<input type="text" name="expDate" value="<?php echo $expiration; ?>"/> <br/>
-		<br/>
-        <input type="radio" name="shipping" value="ship" checked="true"/>Ship to Address &nbsp; &nbsp; &nbsp; 
-        <input type="radio" name="shipping" value="pickup" />Pickup in Store <br/>
-        <div id="shippingInput">
-		<h2>Shipping Information </h2> <br/>
-		Street <br/>
-		<input type="text" name="street" value="<?php echo $street; ?>"/> <br/>
-		Street 2 <br/>
-		<input type="text" name="street2" value="<?php echo $street2; ?>"/> <br/>
-		City <br/>
-		<input type="text" name="city" value="<?php echo $city; ?>"/> <br/>
-		State <br/>
-		<input type="text" name="state" value="<?php echo $state; ?>"/> <br/>
-		Zip <br/>
-		<input type="text" name="zip" value="<?php echo $zip; ?>"/> <br/>
-		
-        </div>
-        <input type="hidden" name="total" value="<?php echo $total; ?>"/>
-        <br/>
-		<input type="submit" name="checkoutInput" value="Continue Checkout"/> <br/>
-	</form>
-	
-	
-	
-	
+        <form class="form-horizontal" method="POST" action="">
+            <h2>Credit Card Information</h2>
+            <div class="form-group">
+                <label for="" class="control-label col-xs-4">Card Type</label>
+                <div class="col-xs-6">
+                        <select class="form-control" name="type">
+                            <option>Visa</option>
+                            <option>Mastercard</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label col-xs-4">Name on Card</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="name" value="<?php echo $cardName; ?>"/>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label col-xs-4">Card Number</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="number" value="<?php echo $cardNumber; ?>"/>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label col-xs-4">Security Code</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="security" value="<?php echo $security; ?>"/>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label col-xs-4">Expiration Date</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="expDate" value="<?php echo $expiration; ?>"/>
+                        </div>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="shipping" value="ship" checked="true"/>
+                        Ship to Address
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="shipping" value="pickup"/>
+                        Pick Up in Store
+                      </label>
+                    </div>
+		        <div id="shippingInput">
+                    <h2>Shipping Information </h2> <br/>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-4">Street</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="street" value="<?php echo $street; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-4">Street 2</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="street2" value="<?php echo $street2; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-4">City</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="city" value="<?php echo $city; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-4">State</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="state" value="<?php echo $state; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-4">Zip</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="zip" value="<?php echo $zip; ?>"/>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="total" value="<?php echo $total; ?>"/>
+                    <br/>
+        
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-10">
+                            <button type="submit" class="btn btn-primary" name="checkoutInput" value="Continue Checkout"/>Continue Checkout</button>
+                        </div>
+                    </div>
+	        </form>
+    <br/><br/><br/><br/>
     
     </div>
     
