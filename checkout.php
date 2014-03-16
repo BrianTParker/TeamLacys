@@ -187,12 +187,10 @@ $total = 0;
                             <input type="text" class="form-control" name="city" value="<?php echo $city; ?>"/>
                         </div>
                     </div>
-
-
                     <div class="form-group">
                         <label for="" class="control-label col-xs-4">State</label>
-                        <div class="col-xs-8">
-                            <select name="state"> 
+                        <div class="col-xs-6">
+                            <select class="form-control" name="state"> 
                             <option value="" selected="selected">Select a State</option> 
                             <option value="AL">Alabama</option> 
                             <option value="AK">Alaska</option> 
