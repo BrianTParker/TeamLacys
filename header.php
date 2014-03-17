@@ -1,117 +1,102 @@
 <?php 
-session_start(); 
-ob_start();
-?>
-<?php
-/**********************************INCLUDE*********************************** *
-* **************************************************************************** */
-include_once( __DIR__ . './php/cart/CartManager.php' );
-
-/* <<<<<<< HEAD
-=======
->>>>>>> origin/databasefix */
-?>
-
-
-<?php 
-//session_start(); 
-ob_start();
-//$_SESSION['firstName'] = null;
-?>
-
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-
-  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
-       More info: h5bp.com/b/378 -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <title>Lacy's</title>
-  <meta name="description" content="">
-  <meta name="TeamLacys" content="">
-
-  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
-
-  <!-- CSS: implied media=all -->
-  <!-- CSS concatenated and minified via ant build script-->
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/bootstrap-theme.css" rel="stylesheet">
-  <link href="css/custom_css.css" rel="stylesheet">
+  session_start(); 
+  ob_start();
+  ?>
+  <?php
+  /**********************************INCLUDE*********************************** *
+  * **************************************************************************** */
+ include_once( __DIR__ . '/php/cart/CartManager.php' );
+  
+  /* <<<<<<< HEAD
+  =======
+  >>>>>>> origin/databasefix */
+  ?>
   
   
-
-  <!-- Custom styles for this template -->
+  <?php 
+  //session_start(); 
+  ob_start();
+  //$_SESSION['firstName'] = null;
+  ?>
   
-  <!-- end CSS-->
-
-  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
-
-  <!-- All JavaScript at the bottom, except for Modernizr / Respond.
-       Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
-       For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
-</head>
-
-<body>
-<?php
-
-include "db_connect.php";
-
-?>
-
-<nav class="navbar navbar-inverse navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.php">Lacy's</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <!--<li class="active"><a href="#">Link</a></li>-->
-        <li><a href="mens.php">Men</a></li>
-        <li><a href="womens.php">Women</a></li>
-        <li><a href="children.php">Children</a></li>
-      </ul>
-      <!--<form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>-->
-      <ul class="nav navbar-nav navbar-right">
-        <?php
-          if(!isset($_SESSION['firstName'])){
-            echo '<li><a href="login.php">Log In</a></li>';
-            echo '<li><a href="newuser.php">Create Account</a></li>';
-          }else{
-            echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
-            echo '<li><a id="logout" href="">Logout</a></li>';
-          }
-        ?>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+  <!doctype html>
+  <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+  <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+  <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+  <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+  <!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+  <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
   
-
-      
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+         More info: h5bp.com/b/378 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
+    <title>Lacy's</title>
+    <meta name="description" content="">
+    <meta name="TeamLacys" content="">
+  
+    <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+  
+    <!-- CSS: implied media=all -->
+    <!-- CSS concatenated and minified via ant build script-->
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/custom_css.css" rel="stylesheet">
+  
+    <!-- All JavaScript at the bottom, except for Modernizr / Respond.
+         Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
+         For optimal performance, use a custom Modernizr build: www.modernizr.com/download/ -->
+    <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  </head>
+  
+  <body>
+  <?php
+  
+  include "db_connect.php";
+  
+  ?>
+  
+  <nav class="navbar navbar-inverse navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.php">Lacy's</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="mens.php">Men</a></li>
+          <li><a href="womens.php">Women</a></li>
+          <li><a href="children.php">Children</a></li>
+        </ul>
+        <!--<form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>-->
+        <ul class="nav navbar-nav navbar-right">
+          <?php
+            if(!isset($_SESSION['firstName'])){
+              echo '<li><a href="login.php">Log In</a></li>';
+              echo '<li><a href="newuser.php">Create Account</a></li>';
+            }else{
+              echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
+              echo '<li><a id="logout" href="">Logout</a></li>';
+            }
+          ?>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
