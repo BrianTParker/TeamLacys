@@ -9,7 +9,9 @@
 		
 		$.post( "./php/cart/ajax/cart_add_item.php", $( this ).serialize(), function( data ){
 		
-			$( "#cartmgr" ).html( data );
+			//$( "#cartmgr" ).html( data );
+			// load the cart page -nm
+			window.location.href = "./cart.php";
 		} );
 	} );
 	
