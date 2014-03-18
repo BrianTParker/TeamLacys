@@ -5,7 +5,7 @@ include "header.php";
 ?>
 <div class="row">
 
-    <div class="col-sm-8 col-sm-offset-1">
+    <div class="col-sm-10 col-sm-offset-1">
 	
         <h2>Cart</h2>
 		
@@ -66,7 +66,7 @@ include "header.php";
                 echo '<td>$' . $subTotal . '</td>';
 				
 				echo '<td>';
-				echo '<button type="submit" class="btn btn-default">Remove</button>';
+				echo '<button type="submit" class="btn btn-danger btn-sm">Remove</button>';
 				echo '</td>';
 				
 				echo '<input type="hidden" name="id" value="' . $item['id'] . '"/>';
@@ -83,18 +83,19 @@ include "header.php";
 			}
         ?>
         </table>
+        <div class="form-group">
         <div class="col-sm-4 col-sm-offset-8" align="right">
             <form action="checkout.php" method="POST" id="checkout">
-            <?php echo "Total: $" . $total . "\n "; ?>
+            <?php echo "<h4>Total: $" . $total . "\n </h4>"; ?>
             
-                <input type="hidden" name="total" value="<?php echo $total; ?>"/>
-                <button class="btn btn-default" type="submit" name="beginCheckout" value="Checkout">Check out</button>
+                <input type="hidden" name="total" value="<?php echo $total; ?>"/><br/><br/>
+                <button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout">Check Out</button>
             </form>
-        
+        </div>
         </div>
     </div>
 </div>
-
+<br/><br/><br/><br/><br/><br/>
 <?php
 include "footer.php";
 ?>
