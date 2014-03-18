@@ -83,7 +83,7 @@ include "header.php";
                             echo '<option>XXL</option>';
                             echo '</select>';
                             echo 'Size';
-                echo '<br/>';
+                            echo '<br/>';
                             echo '<button type="submit" class="btn btn-default">Add to cart</button>';
                             echo '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
                             echo '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
@@ -100,7 +100,7 @@ include "header.php";
                     <div class="tab-pane" id="Watches">
                         <table class="table">
                         <?php
-                        $wathces_sql->setFetchMode(PDO::FETCH_ASSOC);
+                        $watches_sql->setFetchMode(PDO::FETCH_ASSOC);
                         while($row = $watches_sql->fetch()) {
                             echo '<tr>' . "\n";
                             echo '<td><img src="' . $row['image_location'] . '"/></td>' . "\n";
@@ -117,7 +117,7 @@ include "header.php";
                             echo '<option>5</option>';
                             echo '</select>';
                             echo 'Qty';
-                echo '<br/>';
+                            echo '<br/>';
                             echo '<button type="submit" class="btn btn-default">Add to cart</button>';
                             echo '<input type="hidden" name="id" value="' . $row['id'] . '"/>';
                             echo '<input type="hidden" name="name" value="' . $row['name'] . '"/>';
