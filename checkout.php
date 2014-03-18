@@ -124,7 +124,7 @@ $total = 0;
             <h2>Credit Card Information</h2>
             <div class="form-group">
                 <label for="" class="control-label col-xs-4">Card Type</label>
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                         <select class="form-control" name="type">
                             <option>Visa</option>
                             <option>Mastercard</option>
@@ -155,13 +155,14 @@ $total = 0;
                             <input type="text" class="form-control" name="expDate" value="<?php echo $expiration; ?>"/>
                         </div>
                 </div>
-                <div class="radio">
+                <br/><br/><br/>
+                <div class="radio-inline">
                     <label>
                         <input type="radio" name="shipping" value="ship" checked="true"/>
                         Ship to Address
                       </label>
                     </div>
-                    <div class="radio">
+                    <div class="radio-inline">
                       <label>
                         <input type="radio" name="shipping" value="pickup"/>
                         Pick Up in Store
