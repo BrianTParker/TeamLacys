@@ -259,8 +259,8 @@ $total = 0;
                     <br/>
         
                     <div class="form-group">
-                        <div class="col-xs-offset-2 col-xs-10">
-                            <button type="submit" class="btn btn-primary" name="checkoutInput" value="Continue Checkout"/>Continue Checkout</button>
+                        <div class="col-xs-offset-4 col-xs-10">
+                            <button type="submit" class="btn btn-success btn-sm" name="checkoutInput" value="Continue Checkout"/>Continue Checkout</button>
                         </div>
                     </div>
 	        </form>
