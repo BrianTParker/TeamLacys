@@ -37,7 +37,7 @@ include "header.php";
 				echo '<td><img src="' . $item['image_location'] . '"/></td>' . "\n";
 				echo '<td>' . $item['name'] . '</td>' . "\n";
 				echo '<td>' . $item['description'] . '</td>' . "\n";
-				echo '<td>$' . $item['price'] . '</td>' . "\n";
+				echo '<td>$' . number_format($item['price'], 2) . '</td>' . "\n";
 				echo '<td>';
 				echo '<form id="removeCartForm" method="POST" action="./php/cart/ajax/cart_remove_item.php">'; 
 				/* echo '<select name="quantity">';
@@ -63,7 +63,7 @@ include "header.php";
 				$subTotal 	+= ( $item[ 'price' ] * $item[ 'quantity' ] );
                 $total 		+= ( $item[ 'price' ] * $item[ 'quantity' ] );
 				
-                echo '<td>$' . $subTotal . '</td>';
+                echo '<td>$' . number_format($subTotal, 2) . '</td>';
 				
 				echo '<td>';
 				echo '<button type="submit" class="btn btn-danger btn-sm">Remove</button>';
@@ -86,7 +86,7 @@ include "header.php";
         <div class="form-group">
         <div class="col-sm-4 col-sm-offset-8" align="right">
             <form action="checkout.php" method="POST" id="checkout">
-            <?php echo "<h4>Total: $" . $total . "\n </h4>"; ?>
+            <?php echo "<h4>Total: $" . number_format($total, 2) . "\n </h4>"; ?>
             
                 <input type="hidden" name="total" value="<?php echo $total; ?>"/><br/><br/>
                 <button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout">Check Out</button>

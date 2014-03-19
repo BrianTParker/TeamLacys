@@ -93,11 +93,11 @@ $total = 0;
                     // print item to screen -nm
                     echo '<tr>' . "\n";
                     echo '<td>' . $item['name'] . '</td>' . "\n";
-                    echo '<td>$' . $item['price'] . '</td>' . "\n";
+                    echo '<td>$' . number_format($item['price'], 2) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
                     $subTotal += ($item['price'] * $item['quantity']);
                     $total += ($item['price'] * $item['quantity']);
-                    echo '<td>$' . $subTotal . '</td>';
+                    echo '<td>$' . number_format($subTotal, 2) . '</td>';
                     echo '</tr>' . "\n";
                     
                 }
@@ -113,7 +113,7 @@ $total = 0;
 			<td></td>
 			<td></td>
 			<td></td>
-			<td>$<?php echo $total; ?></td>
+			<td>$<?php echo number_format($total, 2); ?></td>
 			
 		</tr>
         </table>
@@ -257,7 +257,7 @@ $total = 0;
                     </div>
                     <input type="hidden" name="total" value="<?php echo $total; ?>"/>
                     <br/>
-        
+				</div>
                     <div class="form-group">
                         <div class="col-xs-offset-4 col-xs-10">
                             <button type="submit" class="btn btn-success btn-sm" name="checkoutInput" value="Continue Checkout"/>Continue Checkout</button>
