@@ -3,6 +3,7 @@ include "header.php";
 include_once( "Account/AccountManager.php" );
 
 $promotional_price = 0;
+$promotion = false;
 
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -74,9 +75,9 @@ $promotional_price = 0;
 	echo '</div>' . "\n";
 
 
-	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price, pr.percentage, pr.expiration_date 
+	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
-								left join promotions pr on pr.product_id = p.id 								
+								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()							
 								where p.id = " . $productId);
 	echo '<div class="col-sm-2 col-sm-offset-1">' . "\n";
 
@@ -96,8 +97,15 @@ $promotional_price = 0;
 	echo '<tr>';
 	echo '<td>' . $row['product_desc'] . '</td>' . "\n";
 	echo '<tr>';
-	if(isset($row['percentage'])){
+	if(isset($row['percentage']) ){
+		
+		$promotion = true;
 		$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
+		$exp_date = strtotime($row['expiration_date']);
+		
+		
+	}
+	if($promotion){
 		echo '<td>$' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <strong>' . $row['percentage'] * 100 . '% off!</strong></td>' . "\n"; 
 	}else{
 		echo '<td>$' . $row['price'] . '</td>' . "\n";
@@ -132,7 +140,7 @@ $promotional_price = 0;
 	echo '<input type="hidden" name="name" value="' . $row['product_name'] . '"/>';
 	echo '<input type="hidden" name="description" value="' . $row['product_desc'] . '"/>';
 	echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
-	if(isset($row['percentage'])){
+	if($promotion){
 		echo '<input type="hidden" name="price" value="' . $promotional_price . '"/>';
 	}else{
 		echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
