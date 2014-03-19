@@ -28,6 +28,24 @@
 		} );
 	} );
 	
+	// redirect to login page -nm
+	$( "#gotoLogin" ).click( function( event ){
+	
+		event.preventDefault();
+		
+		// load the login page -nm
+		window.location.href = "./login.php";
+	} );
+	
+	// redirect to newuser page -nm
+	$( "#gotoNewUser" ).click( function( event ){
+	
+		event.preventDefault();
+		
+		// load the newuser page -nm
+		window.location.href = "./newuser.php";
+	} );
+	
 	// add to cart AJAX functionality -nm
 	$( "#logout" ).click( function( event ){
 	
