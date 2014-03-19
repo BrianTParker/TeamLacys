@@ -86,5 +86,12 @@ class CartManager extends SessionSingleton {
 		$this->cart = array();
 		
 	} // end method -nm
+	
+	// determines whether the cart is empty -nm
+	public function isEmpty(){
+	
+		return ( empty( $this->cart ) );
+		
+	} // end method -nm
     
 } // end class -nm
