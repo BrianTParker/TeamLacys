@@ -76,10 +76,7 @@ include "header.php";
 				echo '<input type="hidden" name="price" value="' . $item['price'] . '"/>';
 				echo '<input type="hidden" name="index" value="' . $index . '"/>';
 				echo '</form>' . "\n";
-				echo '</tr>' . "\n";
-				
-                
-                
+				echo '</tr>' . "\n";        
 			}
         ?>
         </table>
@@ -91,7 +88,7 @@ include "header.php";
                 <input type="hidden" name="total" value="<?php echo $total; ?>"/><br/><br/>
                 <button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout">Check Out</button>
             </form>
-        </div>
+        	</div>
         </div>
     </div>
 </div>
