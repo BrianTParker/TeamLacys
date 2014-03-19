@@ -28,12 +28,18 @@ include "header.php";
 			// initialize cart manager -nm
 			$CART_MGR = CartManager::getInstance();
 			
+			echo '<tr>' . "\n";
+			echo '<form action="./index.php">' . "\n";
+			echo '<button class="btn btn-success btn-sm pull-right" type="submit">Continue Shopping</button>' . "\n";
+			echo '</form>' . "\n";
+			echo '</tr>' . "\n";
+			
 			// for each item in the cart -nm
 			foreach( $CART_MGR->getItems() as $index => $item ){
 				$subTotal = 0;
 				//print_r( $item );
 				// print item to screen -nm
-				echo '<tr>' . "\n";
+				echo '<tr>';
 				echo '<td><img src="' . $item['image_location'] . '"/></td>' . "\n";
 				echo '<td>' . $item['name'] . '</td>' . "\n";
 				echo '<td>' . $item['description'] . '</td>' . "\n";
@@ -66,7 +72,7 @@ include "header.php";
                 echo '<td>$' . number_format($subTotal, 2) . '</td>';
 				
 				echo '<td>';
-				echo '<button type="submit" class="btn btn-danger btn-sm">Remove</button>';
+				echo '<button type="submit" class="btn btn-danger btn-sm pull-right">Remove</button>';
 				echo '</td>';
 				
 				echo '<input type="hidden" name="id" value="' . $item['id'] . '"/>';
@@ -81,13 +87,20 @@ include "header.php";
         ?>
         </table>
         <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-8" align="right">
-            <form action="checkout.php" method="POST" id="checkout">
-            <?php echo "<h4>Total: $" . number_format($total, 2) . "\n </h4>"; ?>
-            
-                <input type="hidden" name="total" value="<?php echo $total; ?>"/><br/><br/>
-                <button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout">Check Out</button>
-            </form>
+			<div class="col-sm-4 col-sm-offset-8" align="right">
+				<form action="./index.php">
+
+						<button class="btn btn-success btn-sm" type="submit">Continue Shopping</button>
+						
+				</form>
+				
+				<form action="checkout.php" method="POST" id="checkout">
+				<?php echo "<h4>Total: $" . number_format($total, 2) . "\n </h4>"; ?>
+				
+					<input type="hidden" name="total" value="<?php echo $total; ?>"/><br/><br/>
+					<button class="btn btn-success btn-sm pull-right" type="submit" name="beginCheckout" value="Checkout">Check Out</button>
+					
+				</form>
         	</div>
         </div>
     </div>
