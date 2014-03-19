@@ -30,11 +30,11 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
                     echo '<tr>' . "\n";
                     echo '<td>' . $item['name'] . '</td>' . "\n";
                     echo '<td>' . $item['size'] . '</td>' . "\n";
-                    echo '<td>$' . $item['price'] . '</td>' . "\n";
+                    echo '<td>$' . number_format($item['price']) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
                     $subTotal += ($item['price'] * $item['quantity']);
                     $total += ($item['price'] * $item['quantity']);
-                    echo '<td>$' . $subTotal . '</td>';
+                    echo '<td>$' . number_format($subTotal, 2) . '</td>';
                     echo '</tr>' . "\n";
                     
                 }
@@ -52,7 +52,7 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>$<?php echo $total; ?></td>
+                <td>$<?php echo number_format($total, 2); ?></td>
                 
             </tr>
         </table>

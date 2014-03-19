@@ -2,6 +2,7 @@
 include "header.php";
 include_once( "Account/AccountManager.php" );
 
+$promotional_price = 0;
 
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -9,14 +10,16 @@ include_once( "Account/AccountManager.php" );
 		$productId = $_POST['product_id'];
 		$customerId = $_POST['customer_id'];
 		$review = $_POST['review'];
+		if(!empty($_POST['review'])){
+			$review_insert_sql = "insert into reviews (product_id, customer_id, review)
+									values (:productId, :customerId,:review)";
+			$review_insert_sql = $DBH->prepare($review_insert_sql);
+			$review_insert_sql->execute(array(':productId'=>$productId,
+							  ':customerId'=>$customerId,
+							  ':review'=>$review
+							  ));
+		}
 		
-		$review_insert_sql = "insert into reviews (product_id, customer_id, review)
-                    values (:productId, :customerId,:review)";
-            $review_insert_sql = $DBH->prepare($review_insert_sql);
-            $review_insert_sql->execute(array(':productId'=>$productId,
-                              ':customerId'=>$customerId,
-                              ':review'=>$review
-                              ));
 										
 	}
 	
@@ -71,8 +74,9 @@ include_once( "Account/AccountManager.php" );
 	echo '</div>' . "\n";
 
 
-	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price 
-								from products p 
+	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price, pr.percentage, pr.expiration_date 
+								from products p
+								left join promotions pr on pr.product_id = p.id 								
 								where p.id = " . $productId);
 	echo '<div class="col-sm-2 col-sm-offset-1">' . "\n";
 
@@ -92,7 +96,13 @@ include_once( "Account/AccountManager.php" );
 	echo '<tr>';
 	echo '<td>' . $row['product_desc'] . '</td>' . "\n";
 	echo '<tr>';
-	echo '<td>$' . $row['price'] . '</td>' . "\n";
+	if(isset($row['percentage'])){
+		$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
+		echo '<td>$' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <strong>' . $row['percentage'] * 100 . '% off!</strong></td>' . "\n"; 
+	}else{
+		echo '<td>$' . $row['price'] . '</td>' . "\n";
+	}
+	
 	echo '</tr>';
 
 	echo '<td>';
@@ -122,7 +132,12 @@ include_once( "Account/AccountManager.php" );
 	echo '<input type="hidden" name="name" value="' . $row['product_name'] . '"/>';
 	echo '<input type="hidden" name="description" value="' . $row['product_desc'] . '"/>';
 	echo '<input type="hidden" name="image_location" value="' . $row['image_location'] . '"/>';
-	echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
+	if(isset($row['percentage'])){
+		echo '<input type="hidden" name="price" value="' . $promotional_price . '"/>';
+	}else{
+		echo '<input type="hidden" name="price" value="' . $row['price'] . '"/>';
+	}
+	
 	echo '</form>' . "\n";
 	echo '</table>';
 		
