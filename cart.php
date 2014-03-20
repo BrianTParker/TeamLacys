@@ -6,9 +6,16 @@ include "header.php";
 <div class="row">
 
     <div class="col-sm-10 col-sm-offset-1">
-	
-        <h2>Cart</h2>
-		
+	<div><?php
+		echo '<tr>' . "\n";
+			echo '<form action="./index.php">' . "\n";
+			echo '<button class="btn btn-default btn-xs pull-right" type="submit">Continue Shopping</button>' . "\n";
+			echo '</form>' . "\n";
+			echo '</tr>' . "\n";
+			?>
+		</div>
+        <h1>Cart</h1>
+
 		<table class="table table-condensed">
             <head>
                 <th></th>
@@ -28,11 +35,7 @@ include "header.php";
 			// initialize cart manager -nm
 			$CART_MGR = CartManager::getInstance();
 			
-			echo '<tr>' . "\n";
-			echo '<form action="./index.php">' . "\n";
-			echo '<button class="btn btn-primary btn-sm pull-left" type="submit">Continue Shopping</button>' . "\n";
-			echo '</form>' . "\n";
-			echo '</tr>' . "\n";
+			
 			
 			if ($CART_MGR->isEmpty()){
 				
@@ -93,19 +96,23 @@ include "header.php";
 					echo '</form>' . "\n";
 					echo '</tr>' . "\n";        
 				}
-				
+
 				echo '</table>';
-				echo '<div class="form-group">';
-				echo '<div class="col-sm-4 col-sm-offset-8" align="right">';
-				echo '<form action="./index.php">';
-				echo '<button class="btn btn-primary btn-sm" type="submit">Continue Shopping</button>';
+
+				#echo '<div class="form-group">';
+				#echo '<div class="col-sm-4 col-sm-offset-0" align="left">';
+				#echo '<form action="./index.php">';
+				#echo '<button class="btn btn-primary btn-sm pull-left" type="submit">Continue Shopping</button>';
 						
 				echo '</form>';
-				
+				echo '</div>';
+
+				echo '<div class="form-group">';
+				echo '<div class="col-sm-4 col-sm-offset-6" align="right">';
 				echo '<form action="checkout.php" method="POST" id="checkout">';
 				echo "<h4>Total: $" . number_format($total, 2) . "\n </h4>";
 				
-				echo '<input type="hidden" name="total" value="' . $total . '"/><br/><br/>';
+				echo '<input type="hidden" name="total" value="' . $total . '"/><br/>';
 				echo '<button class="btn btn-success btn-sm pull-right" type="submit" name="beginCheckout" value="Checkout">Check Out</button>';
 					
 				echo '</form>';
@@ -114,8 +121,9 @@ include "header.php";
 			}
         ?>
     </div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 </div>
-<br/><br/><br/><br/><br/><br/>
+
 <?php
 include "footer.php";
 ?>
