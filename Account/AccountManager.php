@@ -118,63 +118,63 @@ class AccountManager {
         $errors = array(); /* declare the array for later use */
         $success = 0;
 
-        if(isset($firstName))
+        if(!empty($firstName))
         {
             //the user name exists
-            if(!ctype_alnum((str_replace(' ','',$firstName))))
+            if(!ctype_alpha((str_replace(' ','',$firstName))))
             {
-                $errors[] = 'The first name can only contain letters and digits.';
+                $errors['firstName'] = 'The first name can only contain letters.';
             }
             if(strlen($firstName) > 30)
             {
-                $errors[] = 'The first name cannot be longer than 30 characters.';
+                $errors['firstName'] = 'The first name cannot be longer than 30 characters.';
             }
         }
         else
         {
-            $errors[] = 'The first name field must not be empty.';
+            $errors['firstName'] = 'The first name field must not be empty.';
         }
         
-        if(isset($lastName))
+        if(!empty($lastName))
         {
             //the user name exists
-            if(!ctype_alnum($lastName))
+            if(!ctype_alpha($lastName))
             {
-                $errors[] = 'The last name can only contain letters and digits.';
+                $errors['lastName'] = 'The last name can only contain letters';
             }
             if(strlen($lastName) > 30)
             {
-                $errors[] = 'The last name cannot be longer than 30 characters.';
+                $errors['lastName'] = 'The last name cannot be longer than 30 characters.';
             }
         }
         else
         {
-            $errors[] = 'The last name field must not be empty.';
+            $errors['lastName'] = 'The last name field must not be empty.';
         }
         
-        if(isset($email)){
+        if(!empty($email)){
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors[] = 'The email must be a valid format';
+                $errors['email'] = 'The email must be a valid format';
             }
 	    
 	    $STH = $DBH->query("select * from customers where email = '" . $email . "'");
 	    if($STH->rowCount() == 1){
-		$errors[] = 'That email is already associated with an account';
+		$errors['email'] = 'That email is already associated with an account';
 	    }
         }else{
-            $errors[] = 'The email must not be empty';
+            $errors['email'] = 'The email must not be empty';
         }
 
-        if(isset($password))
+        if(!empty($password))
         {
             if($password != $password_check)
             {
-                $errors[] = 'The two passwords did not match.';
+                $errors['password'] = 'The two passwords did not match.';
             }
         }
         else
         {
-            $errors[] = 'The password field cannot be empty.';
+            $errors['password'] = 'The password field cannot be empty.';
         }
 
         if(!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/
@@ -205,7 +205,7 @@ class AccountManager {
             if(!$q)
             {
                 //something went wrong, display the error
-                $errors[] = "There was an issue with the database";
+                $errors['database'] = "There was an issue with the database";
                 return array("success" => $success,
                              "errors" => $errors);
                 //echo mysql_error(); //debugging purposes, uncomment when needed
