@@ -31,8 +31,9 @@
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
   <footer>
-    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom"     role="navigation">
+    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom" role="navigation">
       <div class="container">
+        <div class="navbar-collapse collapse bottom-collapse">
         <div class="row">
           <div class="col-md-4">
             <span class="glyphicon glyphicon-copyright-mark"></span>
@@ -51,6 +52,7 @@
             <a class="navbar-brand text-right" href="index.php">Lacy's</a>
           </div>
         </div>
+</div>
         </div>
       </nav>
     </footer>

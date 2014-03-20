@@ -30,7 +30,7 @@ include "header.php";
 			
 			echo '<tr>' . "\n";
 			echo '<form action="./index.php">' . "\n";
-			echo '<button class="btn btn-success btn-sm pull-left" type="submit">Continue Shopping</button>' . "\n";
+			echo '<button class="btn btn-primary btn-sm pull-left" type="submit">Continue Shopping</button>' . "\n";
 			echo '</form>' . "\n";
 			echo '</tr>' . "\n";
 			
@@ -81,7 +81,7 @@ include "header.php";
 					echo '<td>$' . number_format($subTotal, 2) . '</td>';
 					
 					echo '<td>';
-					echo '<button type="submit" class="btn btn-danger btn-sm pull-right">Remove</button>';
+					echo '<button type="submit" class="btn btn-danger btn-xs pull-right">Remove</button>';
 					echo '</td>';
 					
 					echo '<input type="hidden" name="id" value="' . $item['id'] . '"/>';
@@ -98,7 +98,7 @@ include "header.php";
 				echo '<div class="form-group">';
 				echo '<div class="col-sm-4 col-sm-offset-8" align="right">';
 				echo '<form action="./index.php">';
-				echo '<button class="btn btn-success btn-sm" type="submit">Continue Shopping</button>';
+				echo '<button class="btn btn-primary btn-sm" type="submit">Continue Shopping</button>';
 						
 				echo '</form>';
 				
