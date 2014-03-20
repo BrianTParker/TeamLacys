@@ -5,6 +5,7 @@ include_once( "Account/AccountManager.php" );
 $promotional_price = 0;
 $promotion = false;
 
+$ACCT_MGR = AccountManager::getInstance();
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
@@ -59,7 +60,6 @@ $promotion = false;
 			echo '<h3>Be the first to write a review</h3>';
 		}
 		
-		$ACCT_MGR = AccountManager::getInstance();
 		if($ACCT_MGR->isLoggedIn()){
 			echo '<form class="form-group" method="POST" action="">' . "\n";
 			echo '<textarea name ="review" class="form-control" rows="3"></textarea>';
@@ -135,7 +135,17 @@ $promotion = false;
 	echo ' Size';
 	echo '<br/>';
 	echo '<br/>';
-	echo '<button type="submit" class="btn btn-default">Add to cart</button>';
+	
+	if ($ACCT_MGR->isLoggedIn()){
+	
+		echo '<button type="submit" class="btn btn-default">Add to cart</button>';
+		
+	}else{
+	
+		echo '<button id="gotoLogin" class="btn btn-primary">Login</button>';
+		echo '<button id="gotoNewUser" class="btn btn-success">New User</button>';
+	}
+	
 	echo '<input type="hidden" name="id" value="' . $row['product_id'] . '"/>';
 	echo '<input type="hidden" name="name" value="' . $row['product_name'] . '"/>';
 	echo '<input type="hidden" name="description" value="' . $row['product_desc'] . '"/>';
