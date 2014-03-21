@@ -38,7 +38,7 @@ $ACCT_MGR = AccountManager::getInstance();
 			<input type="hidden" name="phone" value="<?php echo $ACCT_MGR->getPhone(); ?>">
 			<button class="btn btn-default" name="editAccount" type="submit">Edit Account</button>
 		</form>
-		<form>
+		<form method="POST" action="change_password.php">
 			<input type="hidden" name="email" value="<?php echo $ACCT_MGR->getEmail(); ?>">
 			<button class="btn btn-default" name="changePassword" type="submit">Change Password</button>
 		</form>
