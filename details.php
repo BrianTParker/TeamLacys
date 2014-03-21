@@ -41,7 +41,7 @@ $ACCT_MGR = AccountManager::getInstance();
 	echo '<div class="row">' . "\n";
 	echo '<div class="col-sm-3 col-sm-offset-1">' . "\n";
 
-echo '<div class="panel panel-default">' . "\n";
+echo '<div class="panel panel-default" style="text-align:center;">' . "\n";
   echo '<div class="panel-heading">' . "\n";
   echo '<class="panel-title"><h3>Reviews</h3>' . "\n";
   echo '</div>' . "\n";
@@ -61,7 +61,7 @@ echo '<div class="panel panel-default">' . "\n";
 			echo '<br/>';
 			echo '<h4></h4/>';
 		}else{
-			echo '<h3>Be the first to write a review</h3>';
+			echo '<p><i><h5>(No reviews yet)</h5></p> </i>';
 		}
 				
 echo '<div class="panel-footer">' . "\n";
