@@ -18,6 +18,11 @@
   }
 }
 
-img { max-height: 150px; }
+.img { max-height: 150px; }
 
+.img-details { max-height: 150px; }
 
+.img-responsive{
+  position: relative;
+  max-width: 120px;
+}
