@@ -79,6 +79,18 @@ class AccountManager {
             return $_SESSION["lastName"];
         }
     }
+	
+	function getEmail(){
+		if(isset($_SESSION["email"])){
+			return $_SESSION["email"];
+		}
+	}
+	
+	function getPhone(){
+		if(isset($_SESSION["phone"])){
+			return $_SESSION["phone"];
+		}
+	}
     
     
         
