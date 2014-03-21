@@ -118,7 +118,7 @@ echo '<td><h3>' . $row['product_name'] . '</h3></td>' . "\n";
 	echo '</tr>';
 
 	echo '<td style="text-align:center;">';
-	echo '<form class="form-inline">';
+	//echo '<form class="form-inline">';
 	echo '<form id="addCartForm" method="POST" class="form">'; 
 	echo '<label>Qty</label>';
 	echo '<br/>';
@@ -141,17 +141,9 @@ echo '<td><h3>' . $row['product_name'] . '</h3></td>' . "\n";
 	echo '</select>';
 	echo '<br/>';
 	echo '<br/>';
-	echo '</form>';
 	
-	if ($ACCT_MGR->isLoggedIn()){
 	
-		echo '<p style="text-align:center;"><button type="submit" class="btn btn-default">Add to cart</button></p>';
-		
-	}else{
-	
-		echo '<button id="gotoLogin" class="btn btn-primary">Login</button>';
-		echo '<button id="gotoNewUser" class="btn btn-success">New User</button>';
-	}
+	echo '<p style="text-align:center;"><button type="submit" class="btn btn-default">Add to cart</button></p>';
 	
 	echo '<input type="hidden" name="id" value="' . $row['product_id'] . '"/>';
 	echo '<input type="hidden" name="name" value="' . $row['product_name'] . '"/>';
@@ -164,6 +156,7 @@ echo '<td><h3>' . $row['product_name'] . '</h3></td>' . "\n";
 	}
 	
 	echo '</form>' . "\n";
+	//echo '</form>';
 
 	echo '</table>';
 

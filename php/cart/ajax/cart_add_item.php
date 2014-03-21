@@ -52,21 +52,18 @@ try {
 	
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
-		if ( $ACCT_MGR->isLoggedIn() ){
+		// associative array to represent an item -nm
+		$item = array();
 		
-			// associative array to represent an item -nm
-			$item = array();
-			
-			// for each key/value -nm
-			foreach( $_POST as $key => $value ){
-			
-				// copy the key/value to the item array -nm
-				$item[ $key ] = $value;
-			}
-			
-			// add item to cart -nm
-			$CART_MGR->addItem( $item );
+		// for each key/value -nm
+		foreach( $_POST as $key => $value ){
+		
+			// copy the key/value to the item array -nm
+			$item[ $key ] = $value;
 		}
+		
+		// add item to cart -nm
+		$CART_MGR->addItem( $item );
 	}
 	
 	// return cart manager as string -nm
