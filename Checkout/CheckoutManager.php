@@ -28,7 +28,7 @@ class CheckoutManager{
     }
     
     
-    public function validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip){
+    public function validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip){
         
         $errors = array(); /* declare the array for later use */
         $success = 0;
@@ -61,11 +61,6 @@ class CheckoutManager{
             $errors[] = 'The security code field cannot be blank';
         }
         
-        if(!empty($expiration)){
-        
-        }else{
-            $errors[] = 'The credit card expiration date cannot be blank';
-        }
         
         if($shipping === "ship"){
             if(!empty($street)){
@@ -144,9 +139,15 @@ class CheckoutManager{
         }
     }
     
-    public function getCardExpiration(){
-        if(isset($_SESSION['summary']['expiration'])){
-            return $_SESSION['summary']['expiration'];
+    public function getExpirationMonth(){
+        if(isset($_SESSION['summary']['expirationMonth'])){
+            return $_SESSION['summary']['expirationMonth'];
+        }
+    }
+    
+    public function getExpirationYear(){
+        if(isset($_SESSION['summary']['expirationYear'])){
+            return $_SESSION['summary']['expirationYear'];
         }
     }
     

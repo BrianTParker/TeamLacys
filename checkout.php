@@ -13,7 +13,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cardName = $_POST['name'];
         $cardNumber = $_POST['number'];
         $security = $_POST['security'];
-        $expiration = $_POST['expDate'];
+        $expirationMonth = $_POST['expMonth'];
+        $expirationYear = $_POST['expYear'];
         $shipping = $_POST['shipping'];
         $street = $_POST['street'];
         $street2 = $_POST['street2'];
@@ -24,14 +25,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         
         //validate the checkout information
-        $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expiration,$shipping,$street,$street2,$city,$state,$zip);
+        $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip);
         
         
         
         if($status["success"] === 1){
             $summary = array(
                         'cardType' => $cardType,'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
-                        'expiration' => $expiration, 'shipping' => $shipping, 'street' => $street, 
+                        'expirationMonth' => $expirationMonth, 'expirationYear' => $expirationYear,'shipping' => $shipping, 'street' => $street, 
                         'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'total' => $total);
             $CHECKOUT_MGR->setCheckoutSummary($summary);
             header("location: checkout_summary.php");
@@ -59,7 +60,7 @@ if(!isset($cardName)){
     $cardName = '';
     $cardNumber = '';
     $security = '';
-    $expiration = '';
+    
     $shipping = '';
     $street = '';
     $street2 = '';
@@ -152,7 +153,36 @@ $total = 0;
                 <div class="form-group">
                     <label for="" class="control-label col-xs-4">Expiration Date</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" name="expDate" value="<?php echo $expiration; ?>"/>
+                            <?php 
+                            $currentYear = date("Y");
+                            $currentMonth = date("m");
+                            ?>
+                            <select name="expMonth" id="expMonth">
+                            <option value="01" <?php echo ($currentMonth == "01")?"selected":""; ?>>January</option>
+                            <option value="02" <?php echo ($currentMonth == "02")?"selected":""; ?>>February</option>
+                            <option value="03" <?php echo ($currentMonth == "03")?"selected":""; ?>>March</option>
+                            <option value="04" <?php echo ($currentMonth == "04")?"selected":""; ?>>April</option>
+                            <option value="05" <?php echo ($currentMonth == "05")?"selected":""; ?>>May</option>
+                            <option value="06" <?php echo ($currentMonth == "06")?"selected":""; ?>>June</option>
+                            <option value="07" <?php echo ($currentMonth == "07")?"selected":""; ?>>July</option>
+                            <option value="08" <?php echo ($currentMonth == "08")?"selected":""; ?>>August</option>
+                            <option value="09" <?php echo ($currentMonth == "09")?"selected":""; ?>>September</option>
+                            <option value="10" <?php echo ($currentMonth == "10")?"selected":""; ?>>October</option>
+                            <option value="11" <?php echo ($currentMonth == "11")?"selected":""; ?>>November</option>
+                            <option value="12" <?php echo ($currentMonth == "12")?"selected":""; ?>>December</option>
+                            </select>
+                            <select name="expYear" id="expYear">
+                            <?php 
+                            $i = $currentYear;
+                            while ($i <= ($currentYear+6)) // this gives you six years in the future
+                            {
+                            ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php 
+                            $i++;
+                            } 
+                            ?>
+                            </select>
                         </div>
                 </div>
                 <br/><br/><br/>

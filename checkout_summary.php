@@ -68,6 +68,7 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
     <br/>
     Credit Card Number Ending in: <?php echo substr($CHECKOUT_MGR->getCardNumber(), -4); ?>
     <br/>
+    Credit Card Expiration: <?php echo $CHECKOUT_MGR->getExpirationMonth() . '/' . $CHECKOUT_MGR->getExpirationYear(); ?>
     <br/>
     <h3>Delivery Information</h3>
     <?php
