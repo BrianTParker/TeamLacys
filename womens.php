@@ -50,7 +50,7 @@ include "header.php";
                         </table>
                     </div>
                     
-                    <div class="tab-pane" id="SKirts">
+                    <div class="tab-pane" id="Skirts">
                         <table class="table">
                         <?php
                         $skirts_sql->setFetchMode(PDO::FETCH_ASSOC);
