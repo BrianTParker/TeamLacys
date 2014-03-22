@@ -61,7 +61,7 @@ echo '<div class="panel panel-default" style="text-align:center;">' . "\n";
 			echo '<br/>';
 			echo '<h4></h4/>';
 		}else{
-			echo '<p><i><h5>(No reviews yet)</h5></p> </i>';
+			echo '<p><i><h5>(Be the first to write a review!)</h5></p> </i>';
 		}
 				
 echo '<div class="panel-footer">' . "\n";

@@ -72,9 +72,7 @@ $total = 0;
 ?>
 
 <div class="row">
-
     <div class="col-sm-4 col-sm-offset-1">
-    
         <h1>Checkout</h1>
         
         <table class="table">
