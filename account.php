@@ -42,6 +42,10 @@ $ACCT_MGR = AccountManager::getInstance();
 			<input type="hidden" name="email" value="<?php echo $ACCT_MGR->getEmail(); ?>">
 			<button class="btn btn-default" name="changePassword" type="submit">Change Password</button>
 		</form>
+		<form method="POST" action="close_account.php">
+			
+			<button class="btn btn-default" name="closeAccount" type="submit">Close Account</button>
+		</form>
 		
 	</div>
 

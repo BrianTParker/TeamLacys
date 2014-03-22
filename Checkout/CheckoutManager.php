@@ -226,15 +226,16 @@ class CheckoutManager{
         $raw_date = new DateTime();
         $date = $raw_date->format('Y-m-d');
         
-        
+        $confirmation_code = substr(md5(uniqid(rand(), true)), 16, 16);
         
         //purchase_summary insert
-        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id)
-                    values (:amount_total, :purchase_date,:shipping_id)";
+        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id, confirmation_code)
+                    values (:amount_total, :purchase_date,:shipping_id, :confirmation_code)";
         $q2 = $DBH->prepare($sql2);
         $q2->execute(array(':amount_total'=>$this->getTotal(),
                           ':purchase_date'=>$date,
-                          ':shipping_id'=>$shippingId
+                          ':shipping_id'=>$shippingId,
+						  ':confirmation_code'=>$confirmation_code
                           ));
     
         
@@ -288,6 +289,7 @@ class CheckoutManager{
         
         $success = 1;
         return array("success" => $success,
+						"confirmation_code"=> $confirmation_code,
                          "errors" => $errors);
             
         

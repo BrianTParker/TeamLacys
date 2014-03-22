@@ -100,7 +100,7 @@ class AccountManager {
         $success = 0;
         $password = sha1($password);
         
-        $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "'");
+        $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "' and active = 1");
         if($STH->rowCount() == 1){
             $sql = $DBH->query("SELECT id, first_name, last_name from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
             $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -237,7 +237,7 @@ class AccountManager {
             }
 	    
             if($email != $this->getEmail()){
-                $STH = $DBH->query("select * from customers where email = '" . $email . "'");
+                $STH = $DBH->query("select * from customers where email = '" . $email . "' and active = 1");
                 if($STH->rowCount() == 1){
                 $errors['email'] = 'That email is already associated with an account';
                 }
@@ -322,7 +322,7 @@ class AccountManager {
                 $errors['email'] = 'The email must be a valid format';
             }
 	    
-	    $STH = $DBH->query("select * from customers where email = '" . $email . "'");
+	    $STH = $DBH->query("select * from customers where email = '" . $email . "' and active = 1");
 	    if($STH->rowCount() == 1){
 		$errors['email'] = 'That email is already associated with an account';
 	    }
@@ -393,7 +393,32 @@ class AccountManager {
     
     }
     
-    
+    public function closeAccount(){
+		global $DBH;
+		
+		$errors = array(); /* declare the array for later use */
+        $success = 0;
+		
+		$sql = "update customers set active = 0 where id = ?";
+		$q = $DBH->prepare($sql);
+		$q->execute(array($this->getId()));
+		
+		if(!$q)
+        {
+            //something went wrong, display the error
+            $errors['database'] = "There was an issue with the database";
+            return array("success" => $success,
+                         "errors" => $errors);
+            //echo mysql_error(); //debugging purposes, uncomment when needed
+        }
+        else
+        {
+            
+            $success = 1;
+            return array("success" => $success,
+                         "errors" => $errors);
+        }
+	}
     
     function isLoggedIn(){
         if(isset($_SESSION['firstName'])){
