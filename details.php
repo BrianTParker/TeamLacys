@@ -118,7 +118,7 @@ echo '<td><h3>' . $row['product_name'] . '</h3></td>' . "\n";
 	echo '</tr>';
 
 	echo '<td style="text-align:center;">';
-	//echo '<form class="form-inline">';
+	echo '<form class="form-inline">';
 	echo '<form id="addCartForm" method="POST" class="form">'; 
 	echo '<label>Qty</label>';
 	echo '<br/>';
