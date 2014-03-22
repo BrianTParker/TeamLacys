@@ -9,10 +9,16 @@ include "header.php";
                     <?php 
                     $pants_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'pants'");
                     $shirts_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'shirts'");
+                    $belts_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'belts'");
+                    $watches_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'watches'");
                     ?>
                     <li class="active"><a href="#Pants" data-toggle="tab">Pants</a></li>
                     
                     <li><a href="#Shirts" data-toggle="tab">Shirts</a></li>
+                    
+                    <li><a href="#Belts" data-toggle="tab">Belts</a></li>
+                    
+                    <li><a href="#Watches" data-toggle="tab">Watches</a></li>
                                 
                 </ul>
                 
@@ -38,6 +44,34 @@ include "header.php";
                         <?php
                         $shirts_sql->setFetchMode(PDO::FETCH_ASSOC);
                         while($row = $shirts_sql->fetch()) {
+                            echo '<tr>' . "\n";
+                            echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a></td>' . "\n";
+                            echo '<td><a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a></td>' . "\n";
+                            echo '</tr>' . "\n";
+                        }
+                        ?>                        
+                        </table>
+                    </div>
+                    
+                    <div class="tab-pane" id="Belts">
+                        <table class="table">
+                        <?php
+                        $belts_sql->setFetchMode(PDO::FETCH_ASSOC);
+                        while($row = $belts_sql->fetch()) {
+                            echo '<tr>' . "\n";
+                            echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a></td>' . "\n";
+                            echo '<td><a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a></td>' . "\n";
+                            echo '</tr>' . "\n";
+                        }
+                        ?>                        
+                        </table>
+                    </div>
+                    
+                    <div class="tab-pane" id="Watches">
+                        <table class="table">
+                        <?php
+                        $watches_sql->setFetchMode(PDO::FETCH_ASSOC);
+                        while($row = $watches_sql->fetch()) {
                             echo '<tr>' . "\n";
                             echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a></td>' . "\n";
                             echo '<td><a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a></td>' . "\n";
