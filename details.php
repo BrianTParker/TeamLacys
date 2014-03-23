@@ -163,7 +163,7 @@ $ACCT_MGR = AccountManager::getInstance();
 	?>
 	
 	</form>
-	</form>
+	
 
 	</table>
 

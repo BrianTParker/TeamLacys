@@ -7,8 +7,11 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
 $CART_MGR = CartManager::getInstance();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-    $status = $CHECKOUT_MGR->checkout();
+    if($CART_MGR->isEmpty()){
+		header("location: index.php");
+	}else{
+		$status = $CHECKOUT_MGR->checkout();
+	}
     
    
     

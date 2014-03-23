@@ -7,9 +7,11 @@ $ACCT_MGR = AccountManager::getInstance();
 ?>
 
 <div class="row">
-
+	
     <div class="col-sm-2 col-sm-offset-1">
+		<a href="./purchase_history.php?data=<?php echo $ACCT_MGR->getId(); ?>">View Purchase History</a>
 		<h1>Account</h1>
+		
 		<table class="table">
 		<tr>
 		<td>First Name:</td>
