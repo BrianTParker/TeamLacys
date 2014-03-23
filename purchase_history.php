@@ -42,7 +42,7 @@ if(!isset($userId)){
 			echo '<tr>' . "\n";
 			echo '<td><image src="' . $row['image_location'] . '" alt="' . $row['name'] . '"></td>' . "\n";
 			echo '<td>' . $row['name'] . '</td>' . "\n";
-			echo '<td>$' . $row['size'] . '</td>' . "\n";
+			echo '<td>' . $row['size'] . '</td>' . "\n";
 			echo '<td> x' . $row['quantity'] . '</td>' . "\n";
 			echo '<td>$' . number_format($row['amount'], 2) . '</td>';
 			echo '<td>' . $row['purchase_date'] . '</td>' . "\n";
