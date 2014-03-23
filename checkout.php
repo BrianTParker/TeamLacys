@@ -1,10 +1,12 @@
 <?php
 include "header.php";
 include_once( "Checkout/CheckoutManager.php" );
+include_once( "Account/AccountManager.php" );
 $total = 0;
 
 
 $CHECKOUT_MGR = CheckoutManager::getInstance();
+$ACCT_MGR = AccountManager::getInstance();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $CHECKOUT_MGR->getNewSummary();
@@ -22,6 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $state = $_POST['state'];
         $zip = $_POST['zip'];
         $total = $_POST['total'];
+		$saveCreditCard = $_POST['saveCreditCard'];
         
         
         //validate the checkout information
@@ -32,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($status["success"] === 1){
             $summary = array(
                         'cardType' => $cardType,'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
-                        'expirationMonth' => $expirationMonth, 'expirationYear' => $expirationYear,'shipping' => $shipping, 'street' => $street, 
+                        'expirationMonth' => $expirationMonth, 'expirationYear' => $expirationYear,'saveCreditCard'=>$saveCreditCard,'shipping' => $shipping, 'street' => $street, 
                         'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'total' => $total);
             $CHECKOUT_MGR->setCheckoutSummary($summary);
             header("location: checkout_summary.php");
@@ -60,7 +63,8 @@ if(!isset($cardName)){
     $cardName = '';
     $cardNumber = '';
     $security = '';
-    
+	$expMonth = '';
+	$expYear = '';
     $shipping = '';
     $street = '';
     $street2 = '';
@@ -119,6 +123,22 @@ $total = 0;
     </div>
     
     <div class="col-sm-4 col-sm-offset-1">
+	
+		<?php
+		$credit_info_sql = $DBH->query("select name_on_card, credit_card_number, card_type, security_code, expiration_date, expiration_month, expiration_year 
+										from customers c
+										join credit_card_info cc on cc.id = c.credit_card_id
+										where c.id = " . $ACCT_MGR->getId());
+		if($credit_info_sql->rowCount() >0){
+			$row = $credit_info_sql->fetch();
+			$cardName = $row['name_on_card'];
+			$cardNumber = $row['credit_card_number'];
+			$security = $row['security_code'];
+			$expMonth = $row['expiration_month'];
+			$expYear = $row['expiration_year'];
+		}
+		?>
+		
         <form class="form-horizontal" method="POST" action="">
             <h2>Credit Card Information</h2>
             <div class="form-group">
@@ -156,33 +176,46 @@ $total = 0;
                             $currentMonth = date("m");
                             ?>
                             <select name="expMonth" id="expMonth">
-                            <option value="01" <?php echo ($currentMonth == "01")?"selected":""; ?>>January</option>
-                            <option value="02" <?php echo ($currentMonth == "02")?"selected":""; ?>>February</option>
-                            <option value="03" <?php echo ($currentMonth == "03")?"selected":""; ?>>March</option>
-                            <option value="04" <?php echo ($currentMonth == "04")?"selected":""; ?>>April</option>
-                            <option value="05" <?php echo ($currentMonth == "05")?"selected":""; ?>>May</option>
-                            <option value="06" <?php echo ($currentMonth == "06")?"selected":""; ?>>June</option>
-                            <option value="07" <?php echo ($currentMonth == "07")?"selected":""; ?>>July</option>
-                            <option value="08" <?php echo ($currentMonth == "08")?"selected":""; ?>>August</option>
-                            <option value="09" <?php echo ($currentMonth == "09")?"selected":""; ?>>September</option>
-                            <option value="10" <?php echo ($currentMonth == "10")?"selected":""; ?>>October</option>
-                            <option value="11" <?php echo ($currentMonth == "11")?"selected":""; ?>>November</option>
-                            <option value="12" <?php echo ($currentMonth == "12")?"selected":""; ?>>December</option>
+                            <option value="01" <?php echo ($expMonth == "01")?"selected":""; ?>>January</option>
+                            <option value="02" <?php echo ($expMonth == "02")?"selected":""; ?>>February</option>
+                            <option value="03" <?php echo ($expMonth == "03")?"selected":""; ?>>March</option>
+                            <option value="04" <?php echo ($expMonth == "04")?"selected":""; ?>>April</option>
+                            <option value="05" <?php echo ($expMonth == "05")?"selected":""; ?>>May</option>
+                            <option value="06" <?php echo ($expMonth == "06")?"selected":""; ?>>June</option>
+                            <option value="07" <?php echo ($expMonth == "07")?"selected":""; ?>>July</option>
+                            <option value="08" <?php echo ($expMonth == "08")?"selected":""; ?>>August</option>
+                            <option value="09" <?php echo ($expMonth == "09")?"selected":""; ?>>September</option>
+                            <option value="10" <?php echo ($expMonth == "10")?"selected":""; ?>>October</option>
+                            <option value="11" <?php echo ($expMonth == "11")?"selected":""; ?>>November</option>
+                            <option value="12" <?php echo ($expMonth == "12")?"selected":""; ?>>December</option>
                             </select>
                             <select name="expYear" id="expYear">
                             <?php 
                             $i = $currentYear;
                             while ($i <= ($currentYear+6)) // this gives you six years in the future
                             {
-                            ?>
-                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                            <?php 
+                            
+							if($i == $expYear){
+								
+								echo '<option value="' . $i . '" selected>' . $i . '</option>';
+							}else{
+								echo '<option value="' . $i . '">' . $i . '</option>';
+							}
+                            
+                            
                             $i++;
                             } 
                             ?>
                             </select>
                         </div>
                 </div>
+				
+				<div class="radio-inline">
+                    <label>
+                        <input type="radio" name="saveCreditCard" value="save"/>
+                        Save Credit Card Information
+                      </label>
+                    </div>
                 <br/><br/><br/>
                 <div class="radio-inline">
                     <label>
