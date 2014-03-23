@@ -150,6 +150,10 @@ class CheckoutManager{
             return $_SESSION['summary']['expirationYear'];
         }
     }
+	
+	public function getExpirationDate(){
+		return $this->getExpirationMonth() . "/" . $this->getExpirationYear();
+	}
     
     public function getShippingOption(){
         if(isset($_SESSION['summary']['shipping'])){
@@ -186,6 +190,12 @@ class CheckoutManager{
             return $_SESSION['summary']['zip'];
         }
     }
+	
+	public function getSaveCreditCard(){
+		if(isset($_SESSION['summary']['saveCreditCard'])){
+			return $_SESSION['summary']['saveCreditCard'];
+		}
+	}
     
     public function checkout(){
         global $DBH;
@@ -259,6 +269,26 @@ class CheckoutManager{
         $CART_MGR = CartManager::getInstance();
 		$ACCT_MGR = AccountManager::getInstance();	
         
+		if($this->getSaveCreditCard() === "save"){
+			$credit_sql = "Insert into credit_card_info(name_on_card, credit_card_number, security_code, expiration_date, card_type, expiration_month, expiration_year)
+                        values (:name_on_card, :credit_card_number,:security_code, :expiration_date, :card_type, :expiration_month, :expiration_year)";
+            $credit_query = $DBH->prepare($credit_sql);
+            $credit_query->execute(array(':name_on_card'=>$this->getCardName(),
+                              ':credit_card_number'=>$this->getCardNumber(),
+                              ':security_code'=>$this->getCardSecurity(),
+                              ':expiration_date'=>$this->getExpirationDate(),
+                              ':card_type'=>$this->getCardType(),
+							  ':expiration_month'=>$this->getExpirationMonth(),
+							  ':expiration_year'=>$this->getExpirationYear()
+                              ));
+							  
+			$creditId = $DBH->lastInsertId();
+			
+			$save_sql = "update customers set credit_card_id = ? where id = ?";
+            $save_q = $DBH->prepare($save_sql);
+            $save_q->execute(array($creditId, $ACCT_MGR->getId()));
+		}
+		
         // for each item in the cart -nm
         foreach( $CART_MGR->getItems() as $index => $item ){
             
