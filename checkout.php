@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $zip = $_POST['zip'];
         $total = $_POST['total'];
 		$saveCreditCard = $_POST['saveCreditCard'];
+		
         
         
         //validate the checkout information
@@ -125,18 +126,21 @@ $total = 0;
     <div class="col-sm-4 col-sm-offset-1">
 	
 		<?php
-		$credit_info_sql = $DBH->query("select name_on_card, credit_card_number, card_type, security_code, expiration_date, expiration_month, expiration_year 
+			if (AccountManager::getInstance()->isLoggedIn()){
+			
+				$credit_info_sql = $DBH->query("select name_on_card, credit_card_number, card_type, security_code, expiration_date, expiration_month, expiration_year 
 										from customers c
 										join credit_card_info cc on cc.id = c.credit_card_id
 										where c.id = " . $ACCT_MGR->getId());
-		if($credit_info_sql->rowCount() >0){
-			$row = $credit_info_sql->fetch();
-			$cardName = $row['name_on_card'];
-			$cardNumber = $row['credit_card_number'];
-			$security = $row['security_code'];
-			$expMonth = $row['expiration_month'];
-			$expYear = $row['expiration_year'];
-		}
+				if($credit_info_sql->rowCount() >0){
+					$row = $credit_info_sql->fetch();
+					$cardName = $row['name_on_card'];
+					$cardNumber = $row['credit_card_number'];
+					$security = $row['security_code'];
+					$expMonth = $row['expiration_month'];
+					$expYear = $row['expiration_year'];
+				}
+			}
 		?>
 		
         <form class="form-horizontal" method="POST" action="">
@@ -210,12 +214,19 @@ $total = 0;
                         </div>
                 </div>
 				
-				<div class="radio-inline">
-                    <label>
-                        <input type="radio" name="saveCreditCard" value="save"/>
-                        Save Credit Card Information
-                      </label>
-                    </div>
+				<?php 
+				// display 'Save Credit Information' radio button only if an account is logged in -nm
+				if (AccountManager::getInstance()->isLoggedIn()){
+				
+					echo '<div class="radio-inline">';
+					echo '	<label>';
+					echo '		<input type="radio" name="saveCreditCard" value="save"/>';
+					echo '		Save Credit Card Information';
+					echo '	</label>';
+					echo '</div>';
+				} 
+				?>
+				
                 <br/><br/><br/>
                 <div class="radio-inline">
                     <label>

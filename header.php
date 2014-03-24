@@ -5,18 +5,15 @@
   <?php
   /**********************************INCLUDE*********************************** *
   * **************************************************************************** */
+ include "db_connect.php";
  include_once( __DIR__ . '/php/cart/CartManager.php' );
-  
-  /* <<<<<<< HEAD
-  =======
-  >>>>>>> origin/databasefix */
+ include_once( __DIR__ . '/Account/AccountManager.php' );
   ?>
   
   
   <?php 
   //session_start(); 
   ob_start();
-  //$_SESSION['firstName'] = null;
   ?>
   
   <!doctype html>
@@ -57,11 +54,6 @@
   </head>
   
   <body>
-  <?php
-  
-  include "db_connect.php";
-  
-  ?>
   
   <nav class="navbar navbar-inverse navbar-default" role="navigation">
     <div class="container-fluid">
@@ -89,9 +81,10 @@
         <ul class="nav navbar-nav navbar-right">
 			
           <?php
-            if(!isset($_SESSION['firstName'])){
-              echo '<li><a href="login.php">Log In</a></li>';
-              echo '<li><a href="newuser.php">Create Account</a></li>';
+            if(!AccountManager::getInstance()->isLoggedIn()){
+			  echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
+			  echo '<li><a href="login.php">Log In</a></li>';
+			  echo '<li><a href="newuser.php">Create Account</a></li>';
             }else{
 			  echo '<li><a href="account.php">My Account</a></li>';
               echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
