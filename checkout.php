@@ -24,13 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $state = $_POST['state'];
         $zip = $_POST['zip'];
         $total = $_POST['total'];
-		if (array_key_exists('saveCreditCard', $_POST)){
-		
-			$saveCreditCard = $_POST['saveCreditCard'];
-		}else{
-		
-			
-		}
+		$saveCreditCard = $_POST['saveCreditCard'];
 		
         
         
