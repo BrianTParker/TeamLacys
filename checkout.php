@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $zip = $_POST['zip'];
         $total = $_POST['total'];
 		$saveCreditCard = $_POST['saveCreditCard'];
+        $saveShipping = $_POST['saveShipping'];
 		
         
         
@@ -37,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $summary = array(
                         'cardType' => $cardType,'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
                         'expirationMonth' => $expirationMonth, 'expirationYear' => $expirationYear,'saveCreditCard'=>$saveCreditCard,'shipping' => $shipping, 'street' => $street, 
-                        'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'total' => $total);
+                        'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'saveShipping'=>$saveShipping,'total' => $total);
             $CHECKOUT_MGR->setCheckoutSummary($summary);
             header("location: checkout_summary.php");
         }else{
@@ -64,8 +65,8 @@ if(!isset($cardName)){
     $cardName = '';
     $cardNumber = '';
     $security = '';
-	$expMonth = '';
-	$expYear = '';
+	$expirationMonth = '';
+	$expirationYear = '';
     $shipping = '';
     $street = '';
     $street2 = '';
@@ -137,9 +138,23 @@ $total = 0;
 					$cardName = $row['name_on_card'];
 					$cardNumber = $row['credit_card_number'];
 					$security = $row['security_code'];
-					$expMonth = $row['expiration_month'];
-					$expYear = $row['expiration_year'];
+					$expirationMonth = $row['expiration_month'];
+					$expirationYear = $row['expiration_year'];
 				}
+                
+                $shipping_info_sql = $DBH->query("select street_address1, street_address2, city, state, zip
+                                                    from customers c
+                                                    join shipping sh on sh.id = c.shipping_id
+                                                    where c.id = " . $ACCT_MGR->getId());
+                if($shipping_info_sql->rowCount() >0){
+                    $row = $shipping_info_sql->fetch();
+                    $street = $row['street_address1'];
+                    $street2 = $row['street_address2'];
+                    $city = $row['city'];
+                    $state = $row['state'];
+                    $zip = $row['zip'];
+                }
+                                                    
 			}
 		?>
 		
@@ -180,18 +195,18 @@ $total = 0;
                             $currentMonth = date("m");
                             ?>
                             <select name="expMonth" id="expMonth">
-                            <option value="01" <?php echo ($expMonth == "01")?"selected":""; ?>>January</option>
-                            <option value="02" <?php echo ($expMonth == "02")?"selected":""; ?>>February</option>
-                            <option value="03" <?php echo ($expMonth == "03")?"selected":""; ?>>March</option>
-                            <option value="04" <?php echo ($expMonth == "04")?"selected":""; ?>>April</option>
-                            <option value="05" <?php echo ($expMonth == "05")?"selected":""; ?>>May</option>
-                            <option value="06" <?php echo ($expMonth == "06")?"selected":""; ?>>June</option>
-                            <option value="07" <?php echo ($expMonth == "07")?"selected":""; ?>>July</option>
-                            <option value="08" <?php echo ($expMonth == "08")?"selected":""; ?>>August</option>
-                            <option value="09" <?php echo ($expMonth == "09")?"selected":""; ?>>September</option>
-                            <option value="10" <?php echo ($expMonth == "10")?"selected":""; ?>>October</option>
-                            <option value="11" <?php echo ($expMonth == "11")?"selected":""; ?>>November</option>
-                            <option value="12" <?php echo ($expMonth == "12")?"selected":""; ?>>December</option>
+                            <option value="01" <?php echo ($expirationMonth == "01")?"selected":""; ?>>January</option>
+                            <option value="02" <?php echo ($expirationMonth == "02")?"selected":""; ?>>February</option>
+                            <option value="03" <?php echo ($expirationMonth == "03")?"selected":""; ?>>March</option>
+                            <option value="04" <?php echo ($expirationMonth == "04")?"selected":""; ?>>April</option>
+                            <option value="05" <?php echo ($expirationMonth == "05")?"selected":""; ?>>May</option>
+                            <option value="06" <?php echo ($expirationMonth == "06")?"selected":""; ?>>June</option>
+                            <option value="07" <?php echo ($expirationMonth == "07")?"selected":""; ?>>July</option>
+                            <option value="08" <?php echo ($expirationMonth == "08")?"selected":""; ?>>August</option>
+                            <option value="09" <?php echo ($expirationMonth == "09")?"selected":""; ?>>September</option>
+                            <option value="10" <?php echo ($expirationMonth == "10")?"selected":""; ?>>October</option>
+                            <option value="11" <?php echo ($expirationMonth == "11")?"selected":""; ?>>November</option>
+                            <option value="12" <?php echo ($expirationMonth == "12")?"selected":""; ?>>December</option>
                             </select>
                             <select name="expYear" id="expYear">
                             <?php 
@@ -199,7 +214,7 @@ $total = 0;
                             while ($i <= ($currentYear+6)) // this gives you six years in the future
                             {
                             
-							if($i == $expYear){
+							if($i == $expirationYear){
 								
 								echo '<option value="' . $i . '" selected>' . $i . '</option>';
 							}else{
@@ -265,57 +280,57 @@ $total = 0;
                         <div class="col-xs-6">
                             <select class="form-control" name="state"> 
                             <option value="" selected="selected">Select a State</option> 
-                            <option value="AL">Alabama</option> 
-                            <option value="AK">Alaska</option> 
-                            <option value="AZ">Arizona</option> 
-                            <option value="AR">Arkansas</option> 
-                            <option value="CA">California</option> 
-                            <option value="CO">Colorado</option> 
-                            <option value="CT">Connecticut</option> 
-                            <option value="DE">Delaware</option> 
-                            <option value="DC">District Of Columbia</option> 
-                            <option value="FL">Florida</option> 
-                            <option value="GA">Georgia</option> 
-                            <option value="HI">Hawaii</option> 
-                            <option value="ID">Idaho</option> 
-                            <option value="IL">Illinois</option> 
-                            <option value="IN">Indiana</option> 
-                            <option value="IA">Iowa</option> 
-                            <option value="KS">Kansas</option> 
-                            <option value="KY">Kentucky</option> 
-                            <option value="LA">Louisiana</option> 
-                            <option value="ME">Maine</option> 
-                            <option value="MD">Maryland</option> 
-                            <option value="MA">Massachusetts</option> 
-                            <option value="MI">Michigan</option> 
-                            <option value="MN">Minnesota</option> 
-                            <option value="MS">Mississippi</option> 
-                            <option value="MO">Missouri</option> 
-                            <option value="MT">Montana</option> 
-                            <option value="NE">Nebraska</option> 
-                            <option value="NV">Nevada</option> 
-                            <option value="NH">New Hampshire</option> 
-                            <option value="NJ">New Jersey</option> 
-                            <option value="NM">New Mexico</option> 
-                            <option value="NY">New York</option> 
-                            <option value="NC">North Carolina</option> 
-                            <option value="ND">North Dakota</option> 
-                            <option value="OH">Ohio</option> 
-                            <option value="OK">Oklahoma</option> 
-                            <option value="OR">Oregon</option> 
-                            <option value="PA">Pennsylvania</option> 
-                            <option value="RI">Rhode Island</option> 
-                            <option value="SC">South Carolina</option> 
-                            <option value="SD">South Dakota</option> 
-                            <option value="TN">Tennessee</option> 
-                            <option value="TX">Texas</option> 
-                            <option value="UT">Utah</option> 
-                            <option value="VT">Vermont</option> 
-                            <option value="VA">Virginia</option> 
-                            <option value="WA">Washington</option> 
-                            <option value="WV">West Virginia</option> 
-                            <option value="WI">Wisconsin</option> 
-                            <option value="WY">Wyoming</option>
+                            <option value="AL"<?php echo ($state == "AL")?"selected":""; ?>>Alabama</option> 
+                            <option value="AK"<?php echo ($state == "AK")?"selected":""; ?>>Alaska</option> 
+                            <option value="AZ"<?php echo ($state == "AZ")?"selected":""; ?>>Arizona</option> 
+                            <option value="AR"<?php echo ($state == "AR")?"selected":""; ?>>Arkansas</option> 
+                            <option value="CA"<?php echo ($state == "CA")?"selected":""; ?>>California</option> 
+                            <option value="CO"<?php echo ($state == "CO")?"selected":""; ?>>Colorado</option> 
+                            <option value="CT"<?php echo ($state == "CT")?"selected":""; ?>>Connecticut</option> 
+                            <option value="DE"<?php echo ($state == "DE")?"selected":""; ?>>Delaware</option> 
+                            <option value="DC"<?php echo ($state == "DC")?"selected":""; ?>>District Of Columbia</option> 
+                            <option value="FL"<?php echo ($state == "FL")?"selected":""; ?>>Florida</option> 
+                            <option value="GA"<?php echo ($state == "GA")?"selected":""; ?>>Georgia</option> 
+                            <option value="HI"<?php echo ($state == "HI")?"selected":""; ?>>Hawaii</option> 
+                            <option value="ID"<?php echo ($state == "ID")?"selected":""; ?>>Idaho</option> 
+                            <option value="IL"<?php echo ($state == "IL")?"selected":""; ?>>Illinois</option> 
+                            <option value="IN"<?php echo ($state == "IN")?"selected":""; ?>>Indiana</option> 
+                            <option value="IA"<?php echo ($state == "IA")?"selected":""; ?>>Iowa</option> 
+                            <option value="KS"<?php echo ($state == "KS")?"selected":""; ?>>Kansas</option> 
+                            <option value="KY"<?php echo ($state == "KY")?"selected":""; ?>>Kentucky</option> 
+                            <option value="LA"<?php echo ($state == "LA")?"selected":""; ?>>Louisiana</option> 
+                            <option value="ME"<?php echo ($state == "ME")?"selected":""; ?>>Maine</option> 
+                            <option value="MD"<?php echo ($state == "MD")?"selected":""; ?>>Maryland</option> 
+                            <option value="MA"<?php echo ($state == "MA")?"selected":""; ?>>Massachusetts</option> 
+                            <option value="MI"<?php echo ($state == "MI")?"selected":""; ?>>Michigan</option> 
+                            <option value="MN"<?php echo ($state == "MN")?"selected":""; ?>>Minnesota</option> 
+                            <option value="MS"<?php echo ($state == "MS")?"selected":""; ?>>Mississippi</option> 
+                            <option value="MO"<?php echo ($state == "MO")?"selected":""; ?>>Missouri</option> 
+                            <option value="MT"<?php echo ($state == "MT")?"selected":""; ?>>Montana</option> 
+                            <option value="NE"<?php echo ($state == "NE")?"selected":""; ?>>Nebraska</option> 
+                            <option value="NV"<?php echo ($state == "NV")?"selected":""; ?>>Nevada</option> 
+                            <option value="NH"<?php echo ($state == "NH")?"selected":""; ?>>New Hampshire</option> 
+                            <option value="NJ"<?php echo ($state == "NJ")?"selected":""; ?>>New Jersey</option> 
+                            <option value="NM"<?php echo ($state == "NM")?"selected":""; ?>>New Mexico</option> 
+                            <option value="NY"<?php echo ($state == "NY")?"selected":""; ?>>New York</option> 
+                            <option value="NC"<?php echo ($state == "NC")?"selected":""; ?>>North Carolina</option> 
+                            <option value="ND"<?php echo ($state == "ND")?"selected":""; ?>>North Dakota</option> 
+                            <option value="OH"<?php echo ($state == "OH")?"selected":""; ?>>Ohio</option> 
+                            <option value="OK"<?php echo ($state == "OK")?"selected":""; ?>>Oklahoma</option> 
+                            <option value="OR"<?php echo ($state == "OR")?"selected":""; ?>>Oregon</option> 
+                            <option value="PA"<?php echo ($state == "PA")?"selected":""; ?>>Pennsylvania</option> 
+                            <option value="RI"<?php echo ($state == "RI")?"selected":""; ?>>Rhode Island</option> 
+                            <option value="SC"<?php echo ($state == "SC")?"selected":""; ?>>South Carolina</option> 
+                            <option value="SD"<?php echo ($state == "SD")?"selected":""; ?>>South Dakota</option> 
+                            <option value="TN"<?php echo ($state == "TN")?"selected":""; ?>>Tennessee</option> 
+                            <option value="TX"<?php echo ($state == "TX")?"selected":""; ?>>Texas</option> 
+                            <option value="UT"<?php echo ($state == "UT")?"selected":""; ?>>Utah</option> 
+                            <option value="VT"<?php echo ($state == "VT")?"selected":""; ?>>Vermont</option> 
+                            <option value="VA"<?php echo ($state == "VA")?"selected":""; ?>>Virginia</option> 
+                            <option value="WA"<?php echo ($state == "WA")?"selected":""; ?>>Washington</option> 
+                            <option value="WV"<?php echo ($state == "WV")?"selected":""; ?>>West Virginia</option> 
+                            <option value="WI"<?php echo ($state == "WI")?"selected":""; ?>>Wisconsin</option> 
+                            <option value="WY"<?php echo ($state == "WY")?"selected":""; ?>>Wyoming</option>
                             </select>
                         </div>
                     </div>
@@ -327,6 +342,18 @@ $total = 0;
                             <input type="text" class="form-control" name="zip" value="<?php echo $zip; ?>"/>
                         </div>
                     </div>
+                    <?php 
+                    // display 'Save Shipping Information' radio button only if an account is logged in -bp
+                    if (AccountManager::getInstance()->isLoggedIn()){
+                    
+                        echo '<div class="radio-inline">';
+                        echo '	<label>';
+                        echo '		<input type="radio" name="saveShipping" value="save"/>';
+                        echo '		Save Shipping Information';
+                        echo '	</label>';
+                        echo '</div>';
+                    } 
+                    ?>
                     <input type="hidden" name="total" value="<?php echo $total; ?>"/>
                     <br/>
 				</div>
