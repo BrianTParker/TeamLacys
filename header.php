@@ -86,6 +86,7 @@
 			  echo '<li><a href="login.php">Log In</a></li>';
 			  echo '<li><a href="newuser.php">Create Account</a></li>';
             }else{
+			  echo "<li><a href='#'>Welcome ".$_SESSION['firstName']."</a></li>";
 			  echo '<li><a href="account.php">My Account</a></li>';
               echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
               echo '<li><a id="logout" href="">Logout</a></li>';
