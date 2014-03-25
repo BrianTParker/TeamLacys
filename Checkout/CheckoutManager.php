@@ -202,7 +202,8 @@ class CheckoutManager{
         $success = 0;
         $errors = array();
         $shippingId = null; //If the customer selected shipping this will get updated
-        
+        $CART_MGR = CartManager::getInstance();
+		$ACCT_MGR = AccountManager::getInstance();	
         //shipping insert
         if($this->getShippingOption() === "ship"){
             $sql = "Insert into shipping(street_address1, street_address2, city, state,zip)
@@ -226,6 +227,11 @@ class CheckoutManager{
             else
             {
                 $shippingId = $DBH->lastInsertId();
+                
+                //update the most recent shipping information for the customer
+                $save_shipping_sql = "update customers set shipping_id = ? where id = ?";
+                $save_shipping_q = $DBH->prepare($save_shipping_sql);
+                $save_shipping_q->execute(array($shippingId, $ACCT_MGR->getId()));
                 
             }
         }
@@ -266,8 +272,7 @@ class CheckoutManager{
         
         
         
-        $CART_MGR = CartManager::getInstance();
-		$ACCT_MGR = AccountManager::getInstance();	
+        
         
 		if($this->getSaveCreditCard() === "save"){
 			$credit_sql = "Insert into credit_card_info(name_on_card, credit_card_number, security_code, expiration_date, card_type, expiration_month, expiration_year)
