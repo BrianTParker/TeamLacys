@@ -3,125 +3,134 @@
 * **************************************************************************** */
 include "header.php";
 ?>
-<div class="row">
 
-    <div class="col-sm-10 col-sm-offset-1">
-	<div><?php
-		echo '<tr>' . "\n";
-			echo '<form action="./index.php">' . "\n";
-			echo '<button class="btn btn-default btn-xs pull-right" type="submit">Continue Shopping</button>' . "\n";
-			echo '</form>' . "\n";
-			echo '</tr>' . "\n";
-			?>
-		</div>
-        <h1>Cart</h1>
+<?php 
+	$subtotal 	= 0;
+	$salesTax	= .06;
+	$shipping	= 0;
+	$total		= 0;
+	
+	// get sub total -nm
+	foreach (CartManager::getInstance()->getItems() as $item){
+	
+		$subtotal += $item["price"];
+	}
+	
+	// sales tax -nm
+	$salesTax = $subtotal * .06;
+	
+	// shipping -nm
+	$shipping = CartManager::getInstance()->getItemCount() * 1;
+	
+	// order total -nm
+	$total = $subtotal + $salesTax + $shipping;
+?>
 
-		<table class="table table-condensed">
-            <head>
-                <th></th>
-                <th>Item</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Size</th>
-                <th>Sub Total</th>
-				<th></th>
-                <th></th>
-                
-            </head>
-        <?php
-            $subTotal = 0;
-            $total = 0;
-			// initialize cart manager -nm
-			$CART_MGR = CartManager::getInstance();
-			
-			
-			
-			if ($CART_MGR->isEmpty()){
-				
-				echo '<tr>';
-				echo '<td align="center"><i>You have nothing in your cart!</i></td>';
-				echo '</tr>';
+<h1>Cart</h1>
 
+<div>
+	<form action="./index.php">
+		<button class="btn btn-default pull-right">Continue Shopping</button>
+	</form>
+</div>
+
+<div>
+	<table class="table table-striped table-condensed table-responsive">
+		<th>Item</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Qty</th>
+		<th>Size</th>
+		<th>Total</th>
+		<th></th>
+		
+		<?php
+			if (CartManager::getInstance()->isEmpty()){
 			
-			}else{
+				echo "<tr><td>There are no items in your cart!</td></tr>";
 			
-				// for each item in the cart -nm
-				foreach( $CART_MGR->getItems() as $index => $item ){
-					$subTotal = 0;
-					//print_r( $item );
-					// print item to screen -nm
+			}else{ // list all items in cart -nm
+			
+				foreach (CartManager::getInstance()->getItems() as $index => $item){
+			
 					echo '<tr>';
-					echo '<td><img class="img-responsive" src="' . $item['image_location'] . '"/></td>' . "\n";
-					echo '<td>' . $item['name'] . '</td>' . "\n";
-					echo '<td>' . $item['description'] . '</td>' . "\n";
-					echo '<td>$' . number_format($item['price'], 2) . '</td>' . "\n";
-					echo '<td>';
-					echo '<form id="removeCartForm" method="POST" action="./php/cart/ajax/cart_remove_item.php">'; 
-					/* echo '<select name="quantity">';
-					echo '<option>1</option>';
-					echo '<option>2</option>';
-					echo '<option>3</option>';
-					echo '<option>4</option>';
-					echo '<option>5</option>';
-					echo '</select>'; */
-					echo $item[ 'quantity' ];
-					echo '</td>';
-					echo '<td>';
-					/* echo '<select name="size">';
-					echo '<option>S</option>';
-					echo '<option>M</option>';
-					echo '<option>L</option>';
-					echo '<option>XL</option>';
-					echo '<option>XXL</option>';
-					echo '</select>'; */
-					echo $item[ 'size' ];
-					echo '</td>';
+					echo '	<td>';
+					echo '		<img src="' . $item['image_location'] . ' " width=96 height=144 />';
+					echo '	</td>';
 					
-					$subTotal 	+= ( $item[ 'price' ] * $item[ 'quantity' ] );
-					$total 		+= ( $item[ 'price' ] * $item[ 'quantity' ] );
+					echo '	<td>';
+					echo '		<font>' . $item['name'] . '</font>';
+					echo '	</td>';
 					
-					echo '<td>$' . number_format($subTotal, 2) . '</td>';
+					echo '	<td>';
+					echo '		<font>' . $item['description'] . '</font>';
+					echo '	</td>';
 					
-					echo '<td>';
-					echo '<button type="submit" class="btn btn-danger btn-xs pull-right">Remove</button>';
-					echo '</td>';
+					echo '	<td>';
+					echo '		<font>$' . number_format($item['price'], 2) . '</font>';
+					echo '	</td>';
 					
-					echo '<input type="hidden" name="id" value="' . $item['id'] . '"/>';
-					echo '<input type="hidden" name="name" value="' . $item['name'] . '"/>';
-					echo '<input type="hidden" name="description" value="' . $item['description'] . '"/>';
-					echo '<input type="hidden" name="image_location" value="' . $item['image_location'] . '"/>';
-					echo '<input type="hidden" name="price" value="' . $item['price'] . '"/>';
-					echo '<input type="hidden" name="index" value="' . $index . '"/>';
-					echo '</form>' . "\n";
-					echo '</tr>' . "\n";        
+					echo '	<td>';
+					echo '		<font>' . $item['quantity'] . '</font>';
+					echo '	</td>';
+					
+					echo '	<td>';
+					echo '		<font>' . $item['size'] . '</font>';
+					echo '	</td>';
+					
+					echo '	<td>';
+					echo '		<font>$' . number_format($item["price"] * $item["quantity"], 2) . '</font>';
+					echo '	</td>';
+					
+					echo '	<td>';
+					echo '	<form id="removeCartForm" method="POST" action="./php/cart/ajax/cart_remove_item.php">';
+					echo '		<input type="hidden" name="id" 				value="' 	. $item['id'] 				. '"/>';
+					echo '		<input type="hidden" name="name" 			value="' 	. $item['name'] 			. '"/>';
+					echo '		<input type="hidden" name="description" 	value="' 	. $item['description'] 		. '"/>';
+					echo '		<input type="hidden" name="image_location" 	value="' 	. $item['image_location'] 	. '"/>';
+					echo '		<input type="hidden" name="price" 			value="' 	. $item['price'] 			. '"/>';
+					echo '		<input type="hidden" name="index" 			value="' 	. $index 					. '"/>';
+					echo '		<button type="submit" class="btn btn-danger btn-xs pull-right">Remove</button>';
+					echo '	</form>';
+					echo '	</td>';
+					echo '</tr>';
 				}
-
-				echo '</table>';
-
-				#echo '<div class="form-group">';
-				#echo '<div class="col-sm-4 col-sm-offset-0" align="left">';
-				#echo '<form action="./index.php">';
-				#echo '<button class="btn btn-primary btn-sm pull-left" type="submit">Continue Shopping</button>';
-						
-				echo '</form>';
-				echo '</div>';
-
-				echo '<div class="form-group">';
-				echo '<div class="col-sm-4 col-sm-offset-6" align="right">';
-				echo '<form action="checkout.php" method="POST" id="checkout">';
-				echo "<h4>Total: $" . number_format($total, 2) . "\n </h4>";
-				
-				echo '<input type="hidden" name="total" value="' . $total . '"/><br/>';
-				echo '<button class="btn btn-success btn-sm pull-right" type="submit" name="beginCheckout" value="Checkout">Check Out</button>';
-					
-				echo '</form>';
-				echo '</div>';
-				echo '</div>';
 			}
-        ?>
-    </div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		?>
+	</table>
+</div>
+
+<div class="pull-right">
+	
+	<table class="table">
+		
+		<tr>
+			<td><b>Subtotal:</b></td>
+			<td><?php echo "$" . number_format( $subtotal, 2 ); ?></td>
+		</tr>
+		
+		<tr>
+			<td><b>Sales Tax:</b></td>
+			<td><?php echo "$" . number_format( $salesTax, 2 ); ?></td>
+		</tr>
+		
+		<tr>
+			<td><b>Shipping Cost:</b></td>
+			<td><?php echo "$" . number_format( $shipping, 2 ); ?></td>
+		</tr>
+		
+		<tr>
+			<td><b>Total:</b></td>
+			<td><?php echo "$" . number_format( $total, 2 ); 	?></td>
+			<td>
+				<form action="./checkout.php" method="POST">
+					<button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout">Check Out</button>
+				</form>
+			</td>
+		</tr>
+		
+	</table>
 </div>
 
 <?php
