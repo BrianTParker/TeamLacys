@@ -65,7 +65,7 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
 			<td>$<?php echo number_format($tax, 2); ?></td>
 			
             </tr>
-            <?php $shipping = 4.99; ?>
+            <?php $shipping = CartManager::getInstance()->getItemCount() * 1; ?>
             
             		<tr>
 			<td></td>

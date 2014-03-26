@@ -5,40 +5,23 @@ include "header.php";
 ?>
 
 <?php 
-	$subtotal 	= 0;
-	$salesTax	= .06;
-	$shipping	= 0;
-	$total		= 0;
-	
-	// get sub total -nm
-	foreach (CartManager::getInstance()->getItems() as $item){
-	
-		$subtotal += $item["price"];
-	}
-	
-	// sales tax -nm
-	$salesTax = $subtotal * .06;
-	
-	// shipping -nm
-	$shipping = CartManager::getInstance()->getItemCount() * 1;
-	
-	// order total -nm
-	$total = $subtotal + $salesTax + $shipping;
+include_once( "Checkout/CheckoutManager.php" );
+
+$orderTotal	= CheckoutManager::getOrderTotal();
 ?>
 
 <div class="row">
 	
     <div class="col-sm-10 col-sm-offset-1">
-<h1>Cart</h1>
-
-</div>
-<div class="col-sm-2 col-sm-offset-9">
-	<form action="./index.php">
-		<button class="btn btn-default pull-right">Continue Shopping</button>
-	</form>
-    <br/>
-    <br/>
-</div>
+		<h1>Cart</h1>
+	</div>
+	<div class="col-sm-2 col-sm-offset-9">
+		<form action="./index.php">
+			<button class="btn btn-default pull-right">Continue Shopping</button>
+		</form>
+		<br/>
+		<br/>
+	</div>
 </div>
 <div class="row">
 <div class="col-sm-10 col-sm-offset-1">
@@ -117,22 +100,22 @@ include "header.php";
 		
 		<tr>
 			<td><b>Subtotal:</b></td>
-			<td><?php echo "$" . number_format( $subtotal, 2 ); ?></td>
+			<td><?php echo "$" . number_format( $orderTotal['sub'], 2 ); ?></td>
 		</tr>
 		
 		<tr>
 			<td><b>Sales Tax:</b></td>
-			<td><?php echo "$" . number_format( $salesTax, 2 ); ?></td>
+			<td><?php echo "$" . number_format( $orderTotal['tax'], 2 ); ?></td>
 		</tr>
 		
 		<tr>
 			<td><b>Shipping Cost:</b></td>
-			<td><?php echo "$" . number_format( $shipping, 2 ); ?></td>
+			<td><?php echo "$" . number_format( $orderTotal['ship'], 2 ); ?></td>
 		</tr>
 		
 		<tr>
 			<td><b>Total:</b></td>
-			<td><?php echo "$" . number_format( $total, 2 ); 	?></td>
+			<td><?php echo "$" . number_format( $orderTotal['grand'], 2 ); 	?></td>
 			<td>
 				<form method="POST" action="<?php
 					
