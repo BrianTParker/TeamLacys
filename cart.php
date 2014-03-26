@@ -85,12 +85,12 @@ include "header.php";
 					
 					echo '	<td>';
 					echo '	<form id="removeCartForm" method="POST" action="./php/cart/ajax/cart_remove_item.php">';
-					echo '		<input type="hidden" name="id" 				value="' 	. $item['id'] 				. '"/>';
-					echo '		<input type="hidden" name="name" 			value="' 	. $item['name'] 			. '"/>';
-					echo '		<input type="hidden" name="description" 	value="' 	. $item['description'] 		. '"/>';
-					echo '		<input type="hidden" name="image_location" 	value="' 	. $item['image_location'] 	. '"/>';
-					echo '		<input type="hidden" name="price" 			value="' 	. $item['price'] 			. '"/>';
-					echo '		<input type="hidden" name="index" 			value="' 	. $index 					. '"/>';
+					echo '		<input type="hidden" name="id" 				value="' . $item['id'] 				. '"/>';
+					echo '		<input type="hidden" name="name" 			value="' . $item['name'] 			. '"/>';
+					echo '		<input type="hidden" name="description" 	value="' . $item['description'] 	. '"/>';
+					echo '		<input type="hidden" name="image_location" 	value="' . $item['image_location'] 	. '"/>';
+					echo '		<input type="hidden" name="price" 			value="' . $item['price'] 			. '"/>';
+					echo '		<input type="hidden" name="index" 			value="' . $index 					. '"/>';
 					echo '		<button type="submit" class="btn btn-danger btn-xs pull-right">Remove</button>';
 					echo '	</form>';
 					echo '	</td>';
@@ -124,8 +124,25 @@ include "header.php";
 			<td><b>Total:</b></td>
 			<td><?php echo "$" . number_format( $total, 2 ); 	?></td>
 			<td>
-				<form action="./checkout.php" method="POST">
-					<button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout">Check Out</button>
+				<form method="POST" action="<?php
+					
+					if (AccountManager::getInstance()->isLoggedIn()){
+					
+						echo './checkout.php';
+					}else{
+					
+						echo './guestcheckout.php';
+					}
+				?>" >
+					
+					<?php 
+						if (!CartManager::getInstance()->isEmpty()){
+						
+							echo '<button class="btn btn-success btn-sm" type="submit" name="beginCheckout" value="Checkout" id="cartCheckout">Check Out</button>';
+						}
+					?>
+					
+					<input type="hidden" name="total" value="<?php echo $total; ?>"/>
 				</form>
 			</td>
 		</tr>
