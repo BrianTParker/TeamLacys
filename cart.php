@@ -25,7 +25,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 </div>
 <div class="row">
 <div class="col-sm-10 col-sm-offset-1">
-	<table class="table table-striped table-condensed table-responsive">
+	<table class="table table-condensed table-responsive">
 		<th>Item</th>
 		<th>Name</th>
 		<th>Description</th>
