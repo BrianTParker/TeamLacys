@@ -332,7 +332,28 @@ class CheckoutManager{
         
         
     }
-
+	
+	public static function getOrderTotal(){
+		
+		// KEYS: sub, tax, ship, grand
+		$orderTotal = array();
+		
+		$salesTax 	= .04;
+		$shipAmt	= 1;
+	
+		$orderTotal["sub"] = 0;
+	
+		foreach (CartManager::getInstance()->getItems() as $item){
+		
+			$orderTotal["sub"] += $item[ 'price' ] * $item[ 'quantity' ];
+		}
+		
+		$orderTotal[ "tax" ] 	= $orderTotal[ "sub" ] * $salesTax;
+		$orderTotal[ "ship" ]	= CartManager::getInstance()->getItemCount() * $shipAmt;
+		$orderTotal[ "grand" ]	= $orderTotal["sub"] + $orderTotal[ "tax" ] + $orderTotal[ "ship" ];
+		
+		return $orderTotal;
+	}
 }
 
 
