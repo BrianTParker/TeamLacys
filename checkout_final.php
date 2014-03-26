@@ -13,6 +13,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$status = $CHECKOUT_MGR->checkout();
 	}
     
+    $grandTotal = $_POST['grandTotal'];
+    $tax = $_POST['tax'];
+    $shipping = $_POST['shipping'];
    
     
     if($status["success"] === 1){
@@ -30,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo '        <th>Size</th>' . "\n";
         echo '        <th>Price</th>' . "\n";
         echo '        <th>Qty</th>' . "\n";
-        echo '        <th>Subtotal</th>' . "\n";
+        echo '        <th>Amount</th>' . "\n";
         echo '    </head>' . "\n";
             
             
@@ -51,20 +54,35 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 }
             
             echo '<tr>' . "\n";
+            echo '<tr>' . "\n";
 			echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
+			echo '<td></td>' . "\n";
+			echo '<td></td>' . "\n";
+			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
+			echo '<td></td>' . "\n";
+			echo '<td><strong>Sub Total</strong></td>' . "\n";
+			echo '<td>$' . number_format($total, 2) . '</td>' . "\n";
+            echo '<tr>' . "\n";
+			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
+			echo '<td></td>' . "\n";
+			echo '<td><strong>Tax</strong></td>' . "\n";
+			echo '<td>$' . number_format($tax, 2) . '</td>' . "\n";
+            echo '<tr>' . "\n";
+			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
+			echo '<td></td>' . "\n";
+			echo '<td><strong>Shipping</strong></td>' . "\n";
+			echo '<td>$' . number_format($shipping, 2) . '</td>' . "\n";
+            echo '<tr>' . "\n";
+			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
 			echo '<td><strong>Total</strong></td>' . "\n";
-			
-            echo '</tr>' . "\n";
-            echo '<tr>' . "\n";
-            echo '<td></td>' . "\n";
-            echo '<td></td>' . "\n";
-            echo '<td></td>' . "\n";
-            echo '<td></td>' . "\n";
-            echo '<td>$' . number_format($total, 2) . '</td>' . "\n";
-                
+			echo '<td>$' . number_format($grandTotal, 2) . '</td>' . "\n";    
             echo '</tr>' . "\n";
 			echo '<tr>' . "\n";
 			echo '<td><strong>Confirmation Code:</strong></td>' . "\n";

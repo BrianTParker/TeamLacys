@@ -19,7 +19,7 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
                 <th>Size</th>
                 <th>Price</th>
                 <th>Qty</th>
-                <th>Subtotal</th>
+                <th>Amount</th>
             </head>
             <?php
             $CART_MGR = CartManager::getInstance();
@@ -44,17 +44,51 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
             <td></td>
 			<td></td>
 			<td></td>
-			<td><strong>Total</strong></td>
+			<td></strong></td>
 			
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>$<?php echo number_format($total, 2); ?></td>
-                
+            		<tr>
+			<td></td>
+            <td></td>
+			<td></td>
+			<td><strong>Sub Total</strong></td>
+			<td>$<?php echo number_format($total, 2); ?></td>
+			
             </tr>
+            
+            <?php $tax = $total * .04; ?>
+            		<tr>
+			<td></td>
+            <td></td>
+			<td></td>
+			<td><strong>Tax</strong></td>
+			<td>$<?php echo number_format($tax, 2); ?></td>
+			
+            </tr>
+            <?php $shipping = 4.99; ?>
+            
+            		<tr>
+			<td></td>
+            <td></td>
+			<td></td>
+			<td><strong>Shipping</strong></td>
+			<td>$<?php echo number_format($shipping, 2); ?></td>
+			
+            </tr>
+            
+            </tr>
+            <?php $grandTotal = $total + $tax + $shipping; ?>
+            
+            		<tr>
+			<td></td>
+            <td></td>
+			<td></td>
+			<td><strong>Grand Total</strong></td>
+			<td>$<?php echo number_format($grandTotal, 2); ?></td>
+			
+            </tr>
+           
+            
         </table>
     
     
@@ -94,6 +128,9 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
     <br/>
     <br/>
     <form action="checkout_final.php" method="POST" class="form-group">
+    <input type="hidden" name="tax" value="<?php echo $tax; ?>">
+    <input type="hidden" name="shipping" value="<?php echo $shipping; ?>">
+    <input type="hidden" name="grandTotal" value="<?php echo $grandTotal; ?>">
     <button class="btn btn-default" name="finishCheckout" type="submit">Finish Checkout</button>
     </form>
     
