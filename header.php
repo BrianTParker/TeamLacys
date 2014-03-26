@@ -14,6 +14,9 @@
   <?php 
   //session_start(); 
   ob_start();
+  
+  ini_set('session.bug_compat_warn', 0);
+  ini_set('session.bug_compat_42', 0);
   ?>
   
   <!doctype html>

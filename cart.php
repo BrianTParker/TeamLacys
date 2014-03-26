@@ -26,15 +26,22 @@ include "header.php";
 	$total = $subtotal + $salesTax + $shipping;
 ?>
 
+<div class="row">
+	
+    <div class="col-sm-10 col-sm-offset-1">
 <h1>Cart</h1>
 
-<div>
+</div>
+<div class="col-sm-2 col-sm-offset-9">
 	<form action="./index.php">
 		<button class="btn btn-default pull-right">Continue Shopping</button>
 	</form>
+    <br/>
+    <br/>
 </div>
-
-<div>
+</div>
+<div class="row">
+<div class="col-sm-10 col-sm-offset-1">
 	<table class="table table-striped table-condensed table-responsive">
 		<th>Item</th>
 		<th>Name</th>
@@ -100,9 +107,12 @@ include "header.php";
 		?>
 	</table>
 </div>
+</div>
+</div>
+</div>
 
-<div class="pull-right">
-	
+<div class="row">
+	<div class="col-sm-3 col-sm-offset-8">
 	<table class="table">
 		
 		<tr>
@@ -148,6 +158,7 @@ include "header.php";
 		</tr>
 		
 	</table>
+</div>
 </div>
 
 <?php
