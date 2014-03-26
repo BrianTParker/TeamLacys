@@ -33,6 +33,7 @@ include "header.php";
 		or
 		<a href="./login.php">Login</a>/<a href="./newuser.php">Register</a>
 		
+		<input type="hidden" name="total" value="<?php echo $_POST["total"]; ?>"/>
 	</form>
 	
 </div>
