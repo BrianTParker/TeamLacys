@@ -3,6 +3,7 @@ include "header.php";
 include_once( "Checkout/CheckoutManager.php" );
 $total = 0;
 $CHECKOUT_MGR = CheckoutManager::getInstance();
+$orderTotal = $CHECKOUT_MGR->getOrderTotal();
 ?>
 
 <div class="row">
@@ -40,7 +41,7 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
                 }
             ?>
             		<tr>
-			<td></td>
+			<td><br/></td>
             <td></td>
 			<td></td>
 			<td></td>
@@ -56,35 +57,35 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
 			
             </tr>
             
-            <?php $tax = $total * .04; ?>
+            
             		<tr>
 			<td></td>
             <td></td>
 			<td></td>
 			<td><strong>Tax</strong></td>
-			<td>$<?php echo number_format($tax, 2); ?></td>
+			<td>$<?php echo number_format($orderTotal['tax'], 2); ?></td>
 			
             </tr>
-            <?php $shipping = CartManager::getInstance()->getItemCount() * 1; ?>
+           
             
             		<tr>
 			<td></td>
             <td></td>
 			<td></td>
 			<td><strong>Shipping</strong></td>
-			<td>$<?php echo number_format($shipping, 2); ?></td>
+			<td>$<?php echo number_format($orderTotal['ship'], 2); ?></td>
 			
             </tr>
             
             </tr>
-            <?php $grandTotal = $total + $tax + $shipping; ?>
+            
             
             		<tr>
 			<td></td>
             <td></td>
 			<td></td>
 			<td><strong>Grand Total</strong></td>
-			<td>$<?php echo number_format($grandTotal, 2); ?></td>
+			<td>$<?php echo number_format($orderTotal['grand'], 2); ?></td>
 			
             </tr>
            
@@ -128,9 +129,9 @@ $CHECKOUT_MGR = CheckoutManager::getInstance();
     <br/>
     <br/>
     <form action="checkout_final.php" method="POST" class="form-group">
-    <input type="hidden" name="tax" value="<?php echo $tax; ?>">
-    <input type="hidden" name="shipping" value="<?php echo $shipping; ?>">
-    <input type="hidden" name="grandTotal" value="<?php echo $grandTotal; ?>">
+    <input type="hidden" name="tax" value="<?php echo $orderTotal['tax']; ?>">
+    <input type="hidden" name="shipping" value="<?php echo $orderTotal['ship']; ?>">
+    <input type="hidden" name="grandTotal" value="<?php echo $orderTotal['grand']; ?>">
     <button class="btn btn-default" name="finishCheckout" type="submit">Finish Checkout</button>
     </form>
     

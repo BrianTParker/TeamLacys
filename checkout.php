@@ -7,6 +7,7 @@ $total = 0;
 
 $CHECKOUT_MGR = CheckoutManager::getInstance();
 $ACCT_MGR = AccountManager::getInstance();
+$orderTotal = $CHECKOUT_MGR->getOrderTotal();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $CHECKOUT_MGR->getNewSummary();
@@ -56,6 +57,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     
     }
+	
+	
     
     
     
@@ -87,7 +90,7 @@ $total = 0;
                 <th>Item</th>
                 <th>Price</th>
                 <th>Qty</th>
-                <th>Subtotal</th>
+                <th>Amount</th>
             </head>
                 
                 <?php
@@ -108,19 +111,41 @@ $total = 0;
                 }
                 ?>
 		<tr>
+			<td><br/></td>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><strong>Total</strong></td>
 			
 		</tr>
 		<tr>
 			<td></td>
 			<td></td>
-			<td></td>
+			<td><strong>Sub Total</strong></td>
 			<td>$<?php echo number_format($total, 2); ?></td>
 			
 		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>Sales Tax</strong></td>
+			<td>$<?php echo number_format($orderTotal['tax'], 2); ?></td>
+			
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>Shipping</strong></td>
+			<td>$<?php echo number_format($orderTotal['ship'], 2); ?></td>
+			
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>Total</strong></td>
+			<td>$<?php echo number_format($orderTotal['grand'], 2); ?></td>
+			
+		</tr>
+		
         </table>
     </div>
     

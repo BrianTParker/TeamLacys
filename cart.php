@@ -135,7 +135,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 						}
 					?>
 					
-					<input type="hidden" name="total" value="<?php echo $total; ?>"/>
+					<input type="hidden" name="total" value="<?php echo $orderTotal['grand']; ?>"/>
 				</form>
 			</td>
 		</tr>
