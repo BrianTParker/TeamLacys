@@ -17,7 +17,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 	</div>
 	<div class="col-sm-2 col-sm-offset-9">
 		<form action="./index.php">
-			<button class="btn btn-default pull-right">Continue Shopping</button>
+			<button class="btn btn-default btn-sm pull-right">Continue Shopping</button>
 		</form>
 		<br/>
 		<br/>
