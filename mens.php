@@ -38,11 +38,13 @@ include "header.php";
 						$count1 = $pants_count_sql->fetch();
 						
                         while($row = $pants_sql->fetch()) {
+							# get the image and description of product in one cell
                           	echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a>';
 							echo "<br/><br/>\n";
                             echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/><br/>\n";
 							echo '</td>';
+							# display pants 3 columns
 							if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
 							echo '</tr><tr>';
 							}
@@ -62,12 +64,15 @@ include "header.php";
 						$j = 0;
 						$count2 = $shirts_count_sql->fetch();
 						
+						
                         while($row = $shirts_sql->fetch()) {
+							# get the image and description of product in one cell
                           	echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a>';
 							echo "<br/><br/>\n";
                             echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/><br/>\n";
 							echo '</td>';
+							# display shirts in 3 columns
 							if (++$j % $per_row == 0 && $j >0 && $j < $count2) {
 							echo '</tr><tr>';
 							}
@@ -86,12 +91,15 @@ include "header.php";
                         $belts_sql->setFetchMode(PDO::FETCH_ASSOC);
 						$k = 0;
 						$count3 = $belts_count_sql->fetch();
+						
                         while($row = $belts_sql->fetch()) {
+							# get the image and description of product in one cell
                             echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a>';
 							echo "<br/><br/>\n";
                             echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/><br/>\n";
 							echo '</td>';
+							# display belts in 3 columns
 							if (++$k % $per_row == 0 && $k >0 && $k < $count3) {
 							echo '</tr><tr>';
 							}
@@ -112,11 +120,13 @@ include "header.php";
 						$count4 = $watches_count_sql->fetch();
 						
                         while($row = $watches_sql->fetch()) {
+							# get the image and description of product in one cell
                             echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"></a>';
 							echo "<br/><br/>\n";
                             echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/><br/>\n";
 							echo '</td>';
+							# display watches in 3 columns
 							if (++$l % $per_row == 0 && $l >0 && $l < $count4) {
 							echo '</tr><tr>';
 							}
