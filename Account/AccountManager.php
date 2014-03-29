@@ -60,12 +60,13 @@ class AccountManager {
             
     }
     
-    function setSessionVariables($firstName, $lastName, $email, $id, $phone){
+    function setSessionVariables($firstName, $lastName, $email, $id, $phone, $access_level){
         $_SESSION["firstName"] = $firstName;
         $_SESSION["lastName"] = $lastName;
         $_SESSION["email"] = $email;
         $_SESSION["id"] = $id;
         $_SESSION["phone"] = $phone;
+		$_SESSION["access_level"] = $access_level;
         
     }
     
@@ -93,6 +94,11 @@ class AccountManager {
 		}
 	}
     
+	function getAccessLevel(){
+		if(isset($_SESSION["access_level"])){
+			return $_SESSION["access_level"];
+		}
+	}
     
         
     function checkLogin($email, $password){
@@ -102,14 +108,15 @@ class AccountManager {
         
         $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "' and active = 1");
         if($STH->rowCount() == 1){
-            $sql = $DBH->query("SELECT id, first_name, last_name from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
+            $sql = $DBH->query("SELECT id, first_name, last_name, access_level from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
             $sql->setFetchMode(PDO::FETCH_ASSOC);
             $row = $sql->fetch();
             $id = $row['id'];
             $firstName = $row['first_name'];
             $lastName = $row['last_name'];
+			$access_level = $row['access_level'];
             
-            $this->setSessionVariables($firstName, $lastName, $email, $id);
+            $this->setSessionVariables($firstName, $lastName, $email, $id, $access_level);
             $success = 1;
             return $success;
    
@@ -275,7 +282,7 @@ class AccountManager {
         }
     }
     
-    function createNewAccount($firstName, $lastName, $email, $phone, $password, $password_check){
+    function createNewAccount($firstName, $lastName, $email, $phone, $password, $password_check, $access_level = 2, $active = 1){
     
     
         global $DBH;
@@ -356,14 +363,16 @@ class AccountManager {
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             
-            $sql = "Insert into customers(first_name, last_name, email, phone,password)
-                    values (:firstName, :lastName,:email, :phone, :password)";
+            $sql = "Insert into customers(first_name, last_name, email, phone,password, access_level, active)
+                    values (:firstName, :lastName,:email, :phone, :password, :access_level, :active)";
             $q = $DBH->prepare($sql);
             $q->execute(array(':firstName'=>$firstName,
                               ':lastName'=>$lastName,
                               ':password'=>$password,
                               ':email'=>$email,
-                              ':phone'=>$phone
+                              ':phone'=>$phone,
+							  ':access_level'=>$access_level,
+							  ':active'=>$active
                               ));
             
             //$result = mysql_query($sql);
@@ -378,7 +387,7 @@ class AccountManager {
             else
             {
                 $id = $DBH->lastInsertId();
-                $this->setSessionVariables($firstName, $lastName, $email, $id, $phone);
+                $this->setSessionVariables($firstName, $lastName, $email, $id, $phone, $access_level);
                 $success = 1;
                 return array("success" => $success,
                              "errors" => $errors);
