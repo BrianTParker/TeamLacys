@@ -27,9 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $total = $_POST['total'];
 		$saveCreditCard = $_POST['saveCreditCard'];
         $saveShipping = $_POST['saveShipping'];
-		
-        
-        
+		        
         //validate the checkout information
         $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip);
         
@@ -42,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'saveShipping'=>$saveShipping,'total' => $total);
             $CHECKOUT_MGR->setCheckoutSummary($summary);
             header("location: checkout_summary.php");
-        }else{
+        } else {
             echo '<div class="row">';
                 echo '<div class="col-sm-4 col-sm-offset-1">';
                 echo '</div>';
@@ -55,14 +53,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 echo '</div>';
             echo '</div>';
         }
-    
-    }
-	
-	
-    
-    
-    
+	}
 }
+
 
 if(!isset($cardName)){
     $cardName = '';
@@ -107,8 +100,7 @@ $total = 0;
                     $total += ($item['price'] * $item['quantity']);
                     echo '<td>$' . number_format($subTotal, 2) . '</td>';
                     echo '</tr>' . "\n";
-                    
-                }
+                 }
                 ?>
 		<tr>
 			<td><br/></td>
@@ -186,6 +178,7 @@ $total = 0;
         <form class="form-horizontal" method="POST" action="">
             <h2>Credit Card Information</h2>
             <div class="form-group">
+
                 <label for="" class="control-label col-xs-4">Card Type</label>
                 <div class="col-xs-4">
                         <select class="form-control" name="type">
@@ -195,6 +188,8 @@ $total = 0;
                     </div>
                 </div>
                 <div class="form-group">
+				
+				     <!--<label for="cardName">First Name</label> &nbsp;&nbsp&nbsp;&nbsp;<font color="red"><?php echo $cardNameError; ?></font>-->                
                     <label for="" class="control-label col-xs-4">Name on Card</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="name" value="<?php echo $cardName; ?>"/>
