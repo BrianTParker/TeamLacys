@@ -7,14 +7,18 @@ include "header.php";
 	   
 			<div class = text-center>
 				<!--This is generic image area which has image of men's generic products-->	
-				<img src = "img/img3.jpg" alt="Generic men's product" width= "850" height="200">
+				<img src = "img/img3.jpg" alt="Generic men's product" width= "850" height="150">
 				</br></br>
 			</div><!-- end of div for image -->
 			
 			<div class="tabbable"> <!-- Only required for left/right tabs -->
 				<ul class="nav nav-tabs">
+	
 					<?php 
-					$pants_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'pants'");
+					$pants_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
+									from products p
+									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'pants'");								
 					$pants_count_sql = $DBH->query("select count(*) from products where article_category = 'pants'");
 					$shirts_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'shirts'");
 					$shirts_count_sql = $DBH->query("select count(*) from products where article_category = 'shirts'");
@@ -23,6 +27,7 @@ include "header.php";
 					$watches_sql = $DBH->query("select id, name, description, image_location,price from products where age_category = 'adult' and gender_category = 'male' and article_category = 'watches'");
 					$watches_count_sql = $DBH->query("select count(*) from products where article_category = 'watches'");
 					$per_row = 3;
+					$promotion = false;
 					?>
 					<li class="active"><a href="#Pants" data-toggle="tab">Pants</a></li>
 					
@@ -41,18 +46,35 @@ include "header.php";
 						<?php
 						$pants_sql->setFetchMode(PDO::FETCH_ASSOC);
 						$i = 0;
-						$count1 = $pants_count_sql->fetch();
-								
+						$count1 = $pants_count_sql->fetch();							
 						
 						while($row = $pants_sql->fetch()) {
 							# get the image and description of product in one cell
 							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . 
-											'"width=200 height=250></a>';
+										'"width=200 height=250></a>';
 							echo "<br/><br/>\n";
-							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] .'</a>';
+							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
+							echo "<br/>\n";		
+																					
+							if(isset($row['percentage']) )
+							{
+								$promotion = true;
+								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
+								$exp_date = strtotime($row['expiration_date']);
+							}
+							if($promotion)
+							{
+								echo 'Reg. $ '. $row['price'];	
+								echo "</br>\n";
+								echo '<font color = "red">Sale $' . number_format($promotional_price, 2) ;
+							}
+							else
+							{
+								echo '$ '. $row['price'];	
+							}
 							echo "<br/><br/>\n";
 							echo '</td>';
-							
+																					
 							# display pants 4 columns
 							if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
 							echo '</tr><tr>';
