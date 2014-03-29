@@ -64,9 +64,8 @@ $ACCT_MGR = AccountManager::getInstance();
 						echo '<p class="text-center"><h2>' . $row['product_name'] . '</h2>' . "\n";
 					echo '</tr>';
 					
-					
 					echo '<tr>';
-						echo '<td style="text-align:left;"><h4>Regular Price: $' . $row['price'] . '</h4></td>' . "\n";
+						echo '<td style="text-align:left;"><h5>Regular Price: $' . $row['price'] . '</h5>' . "\n";
 						if(isset($row['percentage']) ){
 							$promotion = true;
 							$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
@@ -74,8 +73,10 @@ $ACCT_MGR = AccountManager::getInstance();
 						}
 						
 						if($promotion){
-							echo '<td>Sale Price: $' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <strong>' . $row['percentage'] * 100 . '% off!</strong></td>' . "\n"; 
+							echo '<h5>Sale Price: $' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <strong><font color="red">' . $row['percentage'] * 100 . '% off!</font></strong></h5></td>' . "\n"; 
 						}
+						
+						echo '</td>';
 					echo '</tr>';
 					
 					
