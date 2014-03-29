@@ -37,12 +37,26 @@ class CheckoutManager{
             $errors[] = 'The card name cannot be blank.';
             
         }else{
-            if(!ctype_alnum((str_replace(' ','',$cardName)))){
-                $errors[] = 'The card name can only contain letters and digits.';
+			//Original by Brian
+			//if(!ctype_alnum((str_replace(' ','',$cardName)))){
+            //    $errors[] = 'The card name can only contain letters and digits.';
+            //}
+			
+			//Added by Liza - 3/28
+			if(!ctype_alpha((str_replace(' ','',$cardName))))
+            {
+                $errors['cardName'] = 'The card holder name can only contain letters.';
+            }
+			
+			//Added by Liza -3/28
+			if(strlen($cardName) > 50)
+            {
+                $errors['firstName'] = 'The card holder name cannot be longer than 50 characters.';
             }
         }
         
         if(!empty($cardNumber)){
+			//Changed by Liza from >= to !=
             if(strlen($cardNumber) != 10){
 				$errors[] = "The credit card number must be 10 digits.";
 			}
@@ -70,7 +84,11 @@ class CheckoutManager{
             }
             
             if(!empty($city)){
-                
+				//Added by Liza - 3/28
+				if(!ctype_alpha((str_replace(' ','',$city))))
+				{
+					$errors['city'] = 'The city can only contain letters.';
+				}
             }else{
                 $errors[] = 'City cannot be blank';
             }
@@ -82,7 +100,16 @@ class CheckoutManager{
             }
             
             if(!empty($zip)){
-                
+				//Added by Liza -3/28
+				if(!is_numeric($zip)){
+					$errors[]= 'The zip code must be numeric only';
+				}
+				
+				//Added by Liza -3/28
+				if(strlen($zip) != 5){
+					$errors[] = 'The zip code must be 5 digits';
+				}
+
             }else{
                 $errors[] = 'Zip code cannot be blank';
             }
