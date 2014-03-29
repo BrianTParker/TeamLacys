@@ -37,7 +37,8 @@ $ACCT_MGR = AccountManager::getInstance();
 								where r.product_id = " . $productId);
 								
 
-	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price, pr.percentage, pr.expiration_date
+	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price, pr.percentage, pr.expiration_date,
+								p.quantity
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()							
 								where p.id = " . $productId);
@@ -88,11 +89,15 @@ $ACCT_MGR = AccountManager::getInstance();
 							<form id="addCartForm" method="POST" class="form-inline">
 								<label>Qty: &nbsp&nbsp&nbsp&nbsp&nbsp</label>
 									<select style="width:60px" class="form-control" name="quantity">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+										<?php
+										if($row['quantity'] > 0){
+											for($i = 1; $i <= $row['quantity']; $i++){
+												echo '<option>' . $i . '</option>' . "\n";
+											}
+										}else{
+											echo '<option>1</option>' . "\n";
+										}
+										?>										
 									</select>
 								<br/><br/>
 								<label>Size: &nbsp&nbsp&nbsp&nbsp</label>
@@ -113,7 +118,15 @@ $ACCT_MGR = AccountManager::getInstance();
 								<br/><br/>
 	
 	
-								<p style="text-align:center;"><button type="submit" class="btn btn-warning btn-lg" ">Add to cart</button></p>
+								<p style="text-align:center;">
+									<?php
+									if($row['quantity'] > 0){
+										echo '<button type="submit" class="btn btn-warning btn-lg">Add to cart</button>' . "\n";
+									}else{
+										echo '<button type="submit" class="btn btn-warning btn-lg" disabled>Out of Stock</button>' . "\n";
+									}
+									?>
+									</p>
 									<input type="hidden" name="id" value="<?php echo $row['product_id']; ?>"/>
 									<input type="hidden" name="name" value="<?php echo $row['product_name']; ?>"/>
 									<input type="hidden" name="description" value="<?php echo $row['product_desc']; ?>"/>
