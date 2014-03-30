@@ -316,6 +316,9 @@ $total = 0;
                         Pick Up in Store
                       </label>
                     </div>
+				<div id="storeSelect">
+					
+				</div>
 		        <div id="shippingInput">
                     <h2>Shipping Information </h2> <br/>
                     <div class="form-group">

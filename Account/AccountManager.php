@@ -431,7 +431,15 @@ class AccountManager {
     
     function isLoggedIn(){
         if(isset($_SESSION['firstName'])){
-            return true;
+			
+			if($_SESSION['access_level'] != 3){
+				return true;
+			}else{
+				return false;
+			}
+				
+			
+            
         }else{
             return false;
         }
