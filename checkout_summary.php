@@ -123,7 +123,8 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
         echo "<br/>";
         
     }else{
-        echo "Customer will pickup in store";
+        echo "Customer will pickup at store location: <br/>";
+		echo '<strong>' . $CHECKOUT_MGR->getStoreLocationText() . '</strong>';
     }
     ?>
     <br/>

@@ -25,12 +25,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $state = $_POST['state'];
         $zip = $_POST['zip'];
         $total = $_POST['total'];
+		
 		if(isset($_POST['saveCreditCard'])){
 			$saveCreditCard = $_POST['saveCreditCard'];
 		}
 		if(isset($_POST['saveShipping'])){
 			$saveShipping = $_POST['saveShipping'];
 		}
+		$storeLocation = $_POST['storeLocation'];
 		
 		$nameError = '';
 		$numberError='';
@@ -39,10 +41,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$cityError = '';
 		$stateError = '';
 		$zipError = '';
+		$storeLocationError = '';
         
 		        
         //validate the checkout information
-        $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip);
+        $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip, $storeLocation);
         
         
         
@@ -50,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $summary = array(
                         'cardType' => $cardType,'name' => $cardName, 'number' => $cardNumber, 'security' => $security, 
                         'expirationMonth' => $expirationMonth, 'expirationYear' => $expirationYear,'saveCreditCard'=>$saveCreditCard,'shipping' => $shipping, 'street' => $street, 
-                        'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'saveShipping'=>$saveShipping,'total' => $total);
+                        'street2' => $street2, 'city' => $city, 'state'=> $state, 'zip' => $zip, 'saveShipping'=>$saveShipping,'total' => $total, 'storeLocation'=>$storeLocation);
             $CHECKOUT_MGR->setCheckoutSummary($summary);
             header("location: checkout_summary.php");
         } else {
@@ -76,6 +79,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if(isset($status['errors']['zip'])){
 				$zipError = $status['errors']['zip'];
 			}
+			if(isset($status['errors']['storeLocation'])){
+				$storeLocationError = $status['errors']['storeLocation'];
+			}
         }
 	}
 }
@@ -95,6 +101,7 @@ if(!isset($cardName)){
     $zip = '';
 	$saveShipping = '';
 	$saveCreditCard = '';
+	$storeLocation = '';
 	$nameError = '';
 	$numberError='';
 	$securityError = '';
@@ -102,6 +109,7 @@ if(!isset($cardName)){
 	$cityError = '';
 	$stateError = '';
 	$zipError = '';
+	$storeLocationError = '';
 	
 }
 $total = 0;
@@ -184,7 +192,9 @@ $total = 0;
 										from customers c
 										join credit_card_info cc on cc.id = c.credit_card_id
 										where c.id = " . $ACCT_MGR->getId());
+				
 				if($credit_info_sql->rowCount() >0){
+					
 					$row = $credit_info_sql->fetch();
 					$cardName = $row['name_on_card'];
 					$cardNumber = $row['credit_card_number'];
@@ -306,17 +316,39 @@ $total = 0;
                 <br/><br/><br/>
                 <div class="radio-inline">
                     <label>
-                        <input type="radio" name="shipping" value="ship" checked="true"/>
+                        <input type="radio" name="shipping" value="ship" <?php echo ($shipping == "ship" || empty($shipping))?'checked="true"':""; ?>/>
                         Ship to Address
                       </label>
                     </div>
                     <div class="radio-inline">
                       <label>
-                        <input type="radio" name="shipping" value="pickup"/>
+                        <input type="radio" name="shipping" value="pickup" <?php echo ($shipping == "pickup")?'checked="true"':""; ?>/>
                         Pick Up in Store
                       </label>
                     </div>
-		        <div id="shippingInput">
+					
+				<div id="storeSelect" <?php echo ($shipping == "ship" || empty($shipping))?'style="display:none"':""; ?>>
+					
+					<div class="form-group">
+                        <label for="" class="control-label col-xs-4">Select Store Location</label>
+                        <div class="col-xs-6">
+                            <select class="form-control" name="storeLocation"> 
+							<option value="" selected="selected">Select a Store Location</option> 
+
+							<?php 
+							$store_sql = $DBH->query("select id,street_address, city, state, zip from store_locations");
+							while($row = $store_sql->fetch()){
+								echo '<option value="' . $row['id'] . '" ' .(($storeLocation == $row['id'])?'selected':"") . '>'. $row['street_address'] . ' ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'] . '</option>' . "\n"; 
+							}
+							
+							?>
+							</select>
+							<font color="red"><?php echo $storeLocationError; ?></font>
+						</div>
+					</div>
+				</div>
+				
+		        <div id="shippingInput" <?php echo ($shipping == "pickup")?'style="display:none"':""; ?>>
                     <h2>Shipping Information </h2> <br/>
                     <div class="form-group">
                         <label for="" class="control-label col-xs-4">Street</label>
