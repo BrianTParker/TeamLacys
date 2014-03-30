@@ -46,6 +46,19 @@
 		window.location.href = "./newuser.php";
 	} );
 	
+	// guest login AJAX -nm
+	$( "#guestUserForm" ).submit( function( event ){
+	
+		event.preventDefault();
+		
+		$.post( "./Account/account_guest_login.php", function( data ){
+		
+			// load the checkout page -nm
+			//window.location.href = "./checkout.php";
+			alert(data);
+		} );
+	} );
+	
 	// add to cart AJAX functionality -nm
 	$( "#logout" ).click( function( event ){
 	
