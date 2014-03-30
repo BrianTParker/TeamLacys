@@ -75,8 +75,10 @@
     $("input[name='shipping']").change(function(){
         if($(this).val() === "pickup"){
             $("#shippingInput").hide();
+			$("#storeSelect").show();
         }else{
             $("#shippingInput").show();
+			$("#storeSelect").hide();
         }
     });
 	

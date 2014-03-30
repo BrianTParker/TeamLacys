@@ -28,7 +28,7 @@ class CheckoutManager{
     }
     
     
-    public function validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip){
+    public function validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip, $storeLocation){
         
         $errors = array(); /* declare the array for later use */
         $success = 0;
@@ -86,7 +86,11 @@ class CheckoutManager{
             }else{
                 $errors['zip'] = 'Zip code cannot be blank';
             }
-        }
+        }else{
+			if(empty($storeLocation)){
+				$errors['storeLocation'] = 'You must select a store location';
+			}
+		}
         
         if(!empty($errors)){
             return array("success" => $success,
@@ -196,12 +200,26 @@ class CheckoutManager{
 			return $_SESSION['summary']['saveCreditCard'];
 		}
 	}
+	
+	public function getStoreLocationId(){
+		if(isset($_SESSION['summary']['storeLocation'])){
+			return $_SESSION['summary']['storeLocation'];
+		}
+	}
+	
+	public function getStoreLocationText(){
+		global $DBH;
+		$store_sql = $DBH->query("select id,street_address, city, state, zip from store_locations where id = " . $this->getStoreLocationId());
+		$row = $store_sql->fetch();
+		return $row['street_address'] . ' ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'];
+	}
     
     public function checkout(){
         global $DBH;
         $success = 0;
         $errors = array();
         $shippingId = null; //If the customer selected shipping this will get updated
+		
         $CART_MGR = CartManager::getInstance();
 		$ACCT_MGR = AccountManager::getInstance();	
         //shipping insert
@@ -245,13 +263,14 @@ class CheckoutManager{
         $confirmation_code = substr(md5(uniqid(rand(), true)), 16, 16);
         
         //purchase_summary insert
-        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id, confirmation_code)
-                    values (:amount_total, :purchase_date,:shipping_id, :confirmation_code)";
+        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id, confirmation_code, store_location_id)
+                    values (:amount_total, :purchase_date,:shipping_id, :confirmation_code, :store_location_id)";
         $q2 = $DBH->prepare($sql2);
         $q2->execute(array(':amount_total'=>$this->getTotal(),
                           ':purchase_date'=>$date,
                           ':shipping_id'=>$shippingId,
-						  ':confirmation_code'=>$confirmation_code
+						  ':confirmation_code'=>$confirmation_code,
+						  ':store_location_id'=>$this->getStoreLocationId()
                           ));
     
         
@@ -274,7 +293,7 @@ class CheckoutManager{
         
         
         
-		if($this->getSaveCreditCard() === "save"){
+		if($this->getSaveCreditCard() == "save"){
 			$credit_sql = "Insert into credit_card_info(name_on_card, credit_card_number, security_code, expiration_date, card_type, expiration_month, expiration_year)
                         values (:name_on_card, :credit_card_number,:security_code, :expiration_date, :card_type, :expiration_month, :expiration_year)";
             $credit_query = $DBH->prepare($credit_sql);
