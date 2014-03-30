@@ -10,7 +10,7 @@ include __DIR__ . "/../db_connect.php"; // relative path include -nm
  */
 class AccountManager {
     
-    // session ID -nm
+    
     protected static $instance = null;
 
     protected function __construct()
@@ -127,7 +127,7 @@ class AccountManager {
         else {
             return $success;
 
-        }// end method -nm
+        }
     }
     
     public function changePassword($email, $oldPassword, $newPassword, $newPasswordCheck){

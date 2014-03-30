@@ -26,7 +26,7 @@ include "header.php";
 		
 		<div class="form-group">
 			<label for="guestPhone">Phone Number</label>
-			<input type="tel" class="form-control" id="guestPhone" placeholder="Enter Phone Number" required>
+			<input type="tel" class="form-control" id="guestPhone" placeholder="Enter Phone Number">
 		</div>
 		
 		<button type="submit" class="btn btn-success">Continue Checkout</button>
