@@ -49,6 +49,7 @@ include "header.php";
 						$count1 = $pants_count_sql->fetch();							
 						
 						while($row = $pants_sql->fetch()) {
+							$promotion = false;
 							# get the image and description of product in one cell
 							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . 
 										'"width=200 height=250></a>';
