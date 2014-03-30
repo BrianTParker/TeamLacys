@@ -308,6 +308,10 @@ class CheckoutManager{
                               ':size'=>$item['size'],
                               ':purchase_summary_id'=>$summaryId
                               ));
+							  
+			$quantity_sql = "update products set quantity = quantity - ? where id = ?";
+			$quantity = $DBH->prepare($quantity_sql);
+			$quantity->execute(array($item['quantity'], $item['id']));
             
           
                         
@@ -323,6 +327,7 @@ class CheckoutManager{
         }
         
         $success = 1;
+		
         return array("success" => $success,
 						"confirmation_code"=> $confirmation_code,
                          "errors" => $errors);
