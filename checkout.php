@@ -25,8 +25,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $state = $_POST['state'];
         $zip = $_POST['zip'];
         $total = $_POST['total'];
-		$saveCreditCard = $_POST['saveCreditCard'];
-        $saveShipping = $_POST['saveShipping'];
+		if(isset($_POST['saveCreditCard'])){
+			$saveCreditCard = $_POST['saveCreditCard'];
+		}
+		if(isset($_POST['saveShipping'])){
+			$saveShipping = $_POST['saveShipping'];
+		}
+		
+		$nameError = '';
+		$numberError='';
+		$securityError = '';
+		$streetError = '';
+		$cityError = '';
+		$stateError = '';
+		$zipError = '';
+        
 		        
         //validate the checkout information
         $status = $CHECKOUT_MGR->validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip);
@@ -41,17 +54,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $CHECKOUT_MGR->setCheckoutSummary($summary);
             header("location: checkout_summary.php");
         } else {
-            echo '<div class="row">';
-                echo '<div class="col-sm-4 col-sm-offset-1">';
-                echo '</div>';
-                echo '<div class="col-sm-4 col-sm-offset-1">';
-                    foreach($status["errors"] as $key => $value) /* walk through the array so all the errors get displayed */
-                        {
-                            echo '<li>' . $value . '</li>'; 
-                        }
-                        echo '</ul>';
-                echo '</div>';
-            echo '</div>';
+            
+			if(isset($status['errors']['cardName'])){
+				$nameError = $status['errors']['cardName'];
+			}
+			if(isset($status['errors']['cardNumber'])){
+				$numberError = $status['errors']['cardNumber'];
+			}
+			if(isset($status['errors']['security'])){
+				$securityError = $status['errors']['security'];
+			}
+			if(isset($status['errors']['street'])){
+				$streetError = $status['errors']['street'];
+			}
+			if(isset($status['errors']['city'])){
+				$cityError = $status['errors']['city'];
+			}
+			if(isset($status['errors']['state'])){
+				$stateError = $status['errors']['state'];
+			}
+			if(isset($status['errors']['zip'])){
+				$zipError = $status['errors']['zip'];
+			}
         }
 	}
 }
@@ -69,6 +93,16 @@ if(!isset($cardName)){
     $city = '';
     $state = '';
     $zip = '';
+	$saveShipping = '';
+	$saveCreditCard = '';
+	$nameError = '';
+	$numberError='';
+	$securityError = '';
+	$streetError = '';
+	$cityError = '';
+	$stateError = '';
+	$zipError = '';
+	
 }
 $total = 0;
 ?>
@@ -192,19 +226,28 @@ $total = 0;
 				     <!--<label for="cardName">First Name</label> &nbsp;&nbsp&nbsp;&nbsp;<font color="red"><?php echo $cardNameError; ?></font>-->                
                     <label for="" class="control-label col-xs-4">Name on Card</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" name="name" value="<?php echo $cardName; ?>"/>
+							
+								
+								<input type="text" class="form-control" name="name" value="<?php echo $cardName; ?>"/> 
+								
+								<font color="red"><?php echo $nameError; ?></font>
+								
+							
                         </div>
+						
                 </div>
                 <div class="form-group">
                     <label for="" class="control-label col-xs-4">Card Number</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="number" value="<?php echo $cardNumber; ?>"/>
+							<font color="red"><?php echo $numberError; ?></font>
                         </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="control-label col-xs-4">Security Code</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="security" value="<?php echo $security; ?>"/>
+							<font color="red"><?php echo $securityError; ?></font>
                         </div>
                 </div>
                 <div class="form-group">
@@ -253,12 +296,10 @@ $total = 0;
 				// display 'Save Credit Information' radio button only if an account is logged in -nm
 				if (AccountManager::getInstance()->isLoggedIn()){
 				
-					echo '<div class="radio-inline">';
-					echo '	<label>';
-					echo '		<input type="radio" name="saveCreditCard" value="save"/>';
+					
+					echo '		<input type="checkbox" name="saveCreditCard" value="save"/>';
 					echo '		Save Credit Card Information';
-					echo '	</label>';
-					echo '</div>';
+					
 				} 
 				?>
 				
@@ -281,18 +322,21 @@ $total = 0;
                         <label for="" class="control-label col-xs-4">Street</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="street" value="<?php echo $street; ?>"/>
+							<font color="red"><?php echo $streetError; ?></font>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label col-xs-4">Street 2</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="street2" value="<?php echo $street2; ?>"/>
+							
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label col-xs-4">City</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="city" value="<?php echo $city; ?>"/>
+							<font color="red"><?php echo $cityError; ?></font>
                         </div>
                     </div>
                     <div class="form-group">
@@ -352,6 +396,7 @@ $total = 0;
                             <option value="WI"<?php echo ($state == "WI")?"selected":""; ?>>Wisconsin</option> 
                             <option value="WY"<?php echo ($state == "WY")?"selected":""; ?>>Wyoming</option>
                             </select>
+							<font color="red"><?php echo $stateError; ?></font>
                         </div>
                     </div>
 
@@ -360,18 +405,17 @@ $total = 0;
                         <label for="" class="control-label col-xs-4">Zip</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="zip" value="<?php echo $zip; ?>"/>
+							<font color="red"><?php echo $zipError; ?></font>
                         </div>
                     </div>
                     <?php 
                     // display 'Save Shipping Information' radio button only if an account is logged in -bp
                     if (AccountManager::getInstance()->isLoggedIn()){
                     
-                        echo '<div class="radio-inline">';
-                        echo '	<label>';
-                        echo '		<input type="radio" name="saveShipping" value="save"/>';
+                        
+                        echo '		<input type="checkbox" name="saveShipping" value="save"/>';
                         echo '		Save Shipping Information';
-                        echo '	</label>';
-                        echo '</div>';
+                        
                     } 
                     ?>
                     <input type="hidden" name="total" value="<?php echo $total; ?>"/>

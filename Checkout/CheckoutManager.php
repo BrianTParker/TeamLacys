@@ -34,31 +34,31 @@ class CheckoutManager{
         $success = 0;
         
         if(empty($cardName)){
-            $errors[] = 'The card name cannot be blank.';
+            $errors['cardName'] = 'The card name cannot be blank.';
             
         }else{
             if(!ctype_alnum((str_replace(' ','',$cardName)))){
-                $errors[] = 'The card name can only contain letters and digits.';
+                $errors['cardName'] = 'The card name can only contain letters and digits.';
             }
         }
         
         if(!empty($cardNumber)){
             if(strlen($cardNumber) != 10){
-				$errors[] = "The credit card number must be 10 digits.";
+				$errors['cardNumber'] = "The credit card number must be 10 digits.";
 			}
         }else{
-            $errors[] = 'The card number field cannot be blank.';
+            $errors['cardNumber'] = 'The card number field cannot be blank.';
         }
         
         if(!empty($security)){
             if(!is_numeric($security)){
-                $errors[]= 'The security code must be numeric only';
+                $errors['security']= 'The security code must be numeric only';
             }
             if(strlen($security) != 3){
-                $errors[] = 'The security code must be 3 digits';
+                $errors['security'] = 'The security code must be 3 digits';
             }
         }else{
-            $errors[] = 'The security code field cannot be blank';
+            $errors['security'] = 'The security code field cannot be blank';
         }
         
         
@@ -66,25 +66,25 @@ class CheckoutManager{
             if(!empty($street)){
                 
             }else{
-                $errors[] = 'Street address cannot be blank';
+                $errors['street'] = 'Street address cannot be blank';
             }
             
             if(!empty($city)){
                 
             }else{
-                $errors[] = 'City cannot be blank';
+                $errors['city'] = 'City cannot be blank';
             }
             
             if(!empty($state)){
                 
             }else{
-                $errors[] = 'State cannot be blank';
+                $errors['state'] = 'You must select a state';
             }
             
             if(!empty($zip)){
                 
             }else{
-                $errors[] = 'Zip code cannot be blank';
+                $errors['zip'] = 'Zip code cannot be blank';
             }
         }
         
