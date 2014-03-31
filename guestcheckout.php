@@ -11,29 +11,30 @@ include "header.php";
 	
 		<div class="form-group ">
 			<label for="guestFName">First Name</label>
-			<input type="text" class="form-control" id="guestFName" placeholder="Enter First Name" required>
+			<input type="text" class="form-control" id="guestFName" name="fName" placeholder="Enter First Name" required>
 		</div>
 		
 		<div class="form-group">
 			<label for="guestLName">Last Name</label>
-			<input type="text" class="form-control" id="guestLName" placeholder="Enter Last Name" required>
+			<input type="text" class="form-control" id="guestLName" name="lName" placeholder="Enter Last Name" required>
 		</div>
 		
 		<div class="form-group">
 			<label for="guestEmail">Email</label>
-			<input type="email" class="form-control" id="guestEmail" placeholder="Enter Email" required>
+			<input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter Email" required>
 		</div>
 		
 		<div class="form-group">
 			<label for="guestPhone">Phone Number</label>
-			<input type="tel" class="form-control" id="guestPhone" placeholder="Enter Phone Number">
+			<input type="tel" class="form-control" id="guestPhone" name="phone" placeholder="Enter Phone Number">
 		</div>
 		
 		<button type="submit" class="btn btn-success">Continue Checkout</button>
 		or
 		<a href="./login.php">Login</a>/<a href="./newuser.php">Register</a>
 		
-		<input type="hidden" name="total" value="<?php echo $_POST["total"]; ?>"/>
+		<input type="hidden" name="alvl" 	value="3"/>
+		<input type="hidden" name="active" 	value="0"/>
 	</form>
 	
 </div>
