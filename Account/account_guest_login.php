@@ -15,7 +15,7 @@ try {
 	
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
-		AccountManager::getInstance()->createNewAccount( $_POST[ "fName" ], $_POST[ "fName" ], 
+		AccountManager::getInstance()->createNewAccount( $_POST[ "fName" ], $_POST[ "lName" ], 
 														 $_POST[ "email" ], $_POST[ "phone" ],
 														 "password", 		"password",
 														 $_POST[ "alvl" ],  $_POST[ "active" ]);
