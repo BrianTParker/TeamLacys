@@ -26,3 +26,8 @@
   position: relative;
   max-width: 120px;
 }
+.table-product > thead > tr > td,
+.table-product > tbody > tr > td,
+.table-product > tfoot > tr > td {
+   border-top: 0px solid #ddd;
+}
