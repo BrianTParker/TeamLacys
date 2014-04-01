@@ -32,6 +32,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 		<th>Price</th>
 		<th>Qty</th>
 		<th>Size</th>
+        <th>Color</th>
 		<th>Total</th>
 		<th></th>
 		
@@ -67,6 +68,10 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 					
 					echo '	<td>';
 					echo '		<font>' . $item['size'] . '</font>';
+					echo '	</td>';
+                    
+                    echo '	<td>';
+					echo '		<font>' . $item['color'] . '</font>';
 					echo '	</td>';
 					
 					echo '	<td>';
