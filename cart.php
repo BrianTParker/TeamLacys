@@ -28,7 +28,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 	<table class="table table-condensed table-responsive">
 		<th>Item</th>
 		<th>Name</th>
-		<th>Description</th>
+		
 		<th>Price</th>
 		<th>Qty</th>
 		<th>Size</th>
@@ -54,9 +54,6 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 					echo '		<font>' . $item['name'] . '</font>';
 					echo '	</td>';
 					
-					echo '	<td>';
-					echo '		<font>' . $item['description'] . '</font>';
-					echo '	</td>';
 					
 					echo '	<td>';
 					echo '		<font>$' . number_format($item['price'], 2) . '</font>';
@@ -71,7 +68,11 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 					echo '	</td>';
                     
                     echo '	<td>';
+                    if(isset($item['color'])){
 					echo '		<font>' . $item['color'] . '</font>';
+                    }else{
+                    echo '		<font>N/A</font>';
+                    }
 					echo '	</td>';
 					
 					echo '	<td>';
@@ -82,7 +83,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 					echo '	<form id="removeCartForm" method="POST" action="./php/cart/ajax/cart_remove_item.php">';
 					echo '		<input type="hidden" name="id" 				value="' . $item['id'] 				. '"/>';
 					echo '		<input type="hidden" name="name" 			value="' . $item['name'] 			. '"/>';
-					echo '		<input type="hidden" name="description" 	value="' . $item['description'] 	. '"/>';
+				
 					echo '		<input type="hidden" name="image_location" 	value="' . $item['image_location'] 	. '"/>';
 					echo '		<input type="hidden" name="price" 			value="' . $item['price'] 			. '"/>';
 					echo '		<input type="hidden" name="index" 			value="' . $index 					. '"/>';

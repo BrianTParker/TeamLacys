@@ -315,16 +315,20 @@ class CheckoutManager{
 		
         // for each item in the cart -nm
         foreach( $CART_MGR->getItems() as $index => $item ){
-            
+            $color = null;
+            if(isset($item['color'])){
+                $color = $item['color'];
+            }
             //purchase_details insert
-            $sql3 = "Insert into purchase_details(customer_id, product_id, amount, quantity, size, purchase_summary_id)
-                        values (:customer_id, :product_id,:amount, :quantity, :size, :purchase_summary_id)";
+            $sql3 = "Insert into purchase_details(customer_id, product_id, amount, quantity, size, color, purchase_summary_id)
+                        values (:customer_id, :product_id,:amount, :quantity, :size, :color,:purchase_summary_id)";
             $q3 = $DBH->prepare($sql3);
             $q3->execute(array(':customer_id'=>$ACCT_MGR->getId(),
                               ':product_id'=>$item['id'],
                               ':amount'=>$item['price'],
                               ':quantity'=>$item['quantity'],
                               ':size'=>$item['size'],
+                              ':color'=>$color,
                               ':purchase_summary_id'=>$summaryId
                               ));
 							  

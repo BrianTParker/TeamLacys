@@ -125,6 +125,7 @@ $total = 0;
                 <th>Item</th>
                 <th>Price</th>
                 <th>Qty</th>
+                <th>Color</th>
                 <th>Amount</th>
             </head>
                 
@@ -138,6 +139,11 @@ $total = 0;
                     echo '<td>' . $item['name'] . '</td>' . "\n";
                     echo '<td>$' . number_format($item['price'], 2) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
+                    if(isset($item['color'])){
+					echo '<td>' . $item['color'] . '</td>' . "\n";
+                    }else{
+                    echo '<td>N/A</td>' . "\n";
+                    }
                     $subTotal += ($item['price'] * $item['quantity']);
                     $total += ($item['price'] * $item['quantity']);
                     echo '<td>$' . number_format($subTotal, 2) . '</td>';
@@ -149,11 +155,13 @@ $total = 0;
 			<td></td>
 			<td></td>
 			<td></td>
+            <td></td>
 			
 		</tr>
 		<tr>
 			<td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Sub Total</strong></td>
 			<td>$<?php echo number_format($total, 2); ?></td>
 			
@@ -161,6 +169,7 @@ $total = 0;
 		<tr>
 			<td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Sales Tax</strong></td>
 			<td>$<?php echo number_format($orderTotal['tax'], 2); ?></td>
 			
@@ -168,6 +177,7 @@ $total = 0;
 		<tr>
 			<td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Shipping</strong></td>
 			<td>$<?php echo number_format($orderTotal['ship'], 2); ?></td>
 			
@@ -175,6 +185,7 @@ $total = 0;
 		<tr>
 			<td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Total</strong></td>
 			<td>$<?php echo number_format($orderTotal['grand'], 2); ?></td>
 			

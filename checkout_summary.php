@@ -20,6 +20,7 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
                 <th>Size</th>
                 <th>Price</th>
                 <th>Qty</th>
+                <th>Color</th>
                 <th>Amount</th>
             </head>
             <?php
@@ -33,6 +34,11 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
                     echo '<td>' . $item['size'] . '</td>' . "\n";
                     echo '<td>$' . number_format($item['price']) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
+                    if(isset($item['color'])){
+					echo '<td>' . $item['color'] . '</td>' . "\n";
+                    }else{
+                    echo '<td>N/A</td>' . "\n";
+                    }
                     $subTotal += ($item['price'] * $item['quantity']);
                     $total += ($item['price'] * $item['quantity']);
                     echo '<td>$' . number_format($subTotal, 2) . '</td>';
@@ -45,6 +51,7 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
             <td></td>
 			<td></td>
 			<td></td>
+            <td></td>
 			<td></strong></td>
 			
             </tr>
@@ -52,6 +59,7 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
 			<td></td>
             <td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Sub Total</strong></td>
 			<td>$<?php echo number_format($total, 2); ?></td>
 			
@@ -62,6 +70,7 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
 			<td></td>
             <td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Tax</strong></td>
 			<td>$<?php echo number_format($orderTotal['tax'], 2); ?></td>
 			
@@ -72,6 +81,7 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
 			<td></td>
             <td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Shipping</strong></td>
 			<td>$<?php echo number_format($orderTotal['ship'], 2); ?></td>
 			
@@ -84,6 +94,7 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
 			<td></td>
             <td></td>
 			<td></td>
+            <td></td>
 			<td><strong>Grand Total</strong></td>
 			<td>$<?php echo number_format($orderTotal['grand'], 2); ?></td>
 			
