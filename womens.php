@@ -196,6 +196,7 @@ include "header.php";
 							{
 								echo '<strong>$'. $row['price'];	
 							}
+							
 							# if the item is added in last 7 days, display new item icon
 							if (strtotime($row['date_added']) > strtotime('-7 days'))
 							{
