@@ -8,7 +8,7 @@ include "header.php";
 	   
 			<!--<div class ="text-center">
 				<!--This is generic image area which has image of women's generic products-->	
-		<!--		<img src = "img/women.jpg" alt="Generic women's product" width= "850" height="150">
+			<!--<img src = "img/women.jpg" alt="Generic women's product" width= "850" height="150">
 				</br></br>
 			</div><!-- end of div for image -->
 			
