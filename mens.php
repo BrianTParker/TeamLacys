@@ -22,13 +22,11 @@ include "header.php";
 									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'pants'");								
 					$pants_count_sql = $DBH->query("select count(*) from products where article_category = 'pants'");
 
-
 					$shirts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
 									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'shirts'");	
 					$shirts_count_sql = $DBH->query("select count(*) from products where article_category = 'shirts'");
-
 
 					$belts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
 									from products p
@@ -36,12 +34,10 @@ include "header.php";
 									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'belts'");
 					$belts_count_sql = $DBH->query("select count(*) from products where article_category = 'belts'");
 
-
 					$watches_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
 									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'watches'");
-
 
 					$watches_count_sql = $DBH->query("select count(*) from products where article_category = 'watches'");
 					$per_row = 4;
@@ -67,16 +63,14 @@ include "header.php";
 						$count1 = $pants_count_sql->fetch();							
 						echo "<br/>\n";
 
-
 						while($row = $pants_sql->fetch()) {	
 							$promotion = false;
 							# get the image and description of product in one cell
-							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . 
-										'"width=192 height=240 class="img-thumbnail"></a>';
+							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
+											 class="img-thumbnailproduct"></a>';
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/>\n";		
-
 
 							if(isset($row['percentage']) )
 							{
@@ -96,7 +90,6 @@ include "header.php";
 							}
 							echo "<br/><br/>\n";
 							echo '</td>';
-
 
 							# display pants in 3 columns
 							if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
@@ -108,24 +101,22 @@ include "header.php";
 					</div> <!--end of pants tab-->
 					
 					<!-- shirts tab-->
-					<div class="tab-pane" id="Shirts"> 
+					<div class="tab-pane" id="Shirts">
 						<table class="table table-product">
 						<?php
 						$shirts_sql->setFetchMode(PDO::FETCH_ASSOC);
 						$j = 0;
 						$count2 = $shirts_count_sql->fetch();
 
-
 						echo "<br/>\n";
 						while($row = $shirts_sql->fetch()) {
 							$promotion = false;
 							# get the image and description of product in one cell
 							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
-											width=192 height=240 class="img-thumbnail"></a>';
+											 class="img-thumbnailproduct"></a>';
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/>\n";
-
 
 							if(isset($row['percentage']) )
 							{
@@ -145,7 +136,6 @@ include "header.php";
 							}
 							echo "<br/><br/>\n";
 							echo '</td>';
-
 
 							# display shirts in 3 columns
 							if (++$j % $per_row == 0 && $j >0 && $j < $count2) {
@@ -164,10 +154,8 @@ include "header.php";
 						$k = 0;
 						$count3 = $belts_count_sql->fetch();
 
-
 						echo "<br/>\n";
 						while($row = $belts_sql->fetch()) {
-
 
 							$promotion = false;
 							# get the image and description of product in one cell
@@ -176,7 +164,6 @@ include "header.php";
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/>\n";
-
 
 							if(isset($row['percentage']) )
 							{
@@ -200,10 +187,9 @@ include "header.php";
 
 							# display belts in 3 columns
 							if (++$k % $per_row == 0 && $k >0 && $k < $count3) {
-							echo '</tr><tr>';
+							echo '<tr></tr>';
 							}
 						}
-
 
 						?>                        
 						</table>
@@ -217,7 +203,6 @@ include "header.php";
 						$l = 0;
 						$count4 = $watches_count_sql->fetch();
 
-
 						echo "<br/>\n";
 						while($row = $watches_sql->fetch()) {
 							$promotion = false;
@@ -227,7 +212,6 @@ include "header.php";
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
 							echo "<br/>\n";
-
 
 							if(isset($row['percentage']) )
 							{
@@ -248,10 +232,9 @@ include "header.php";
 							echo "<br/><br/>\n";
 							echo '</td>';
 
-
 							# display watches in 3 columns
 							if (++$l % $per_row == 0 && $l >0 && $l < $count4) {
-							echo '</tr><tr>';
+							echo '<tr></tr>';
 							}
 						}
 					?>                        
