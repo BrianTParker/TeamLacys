@@ -82,7 +82,6 @@ $ACCT_MGR = AccountManager::getInstance();
 						{
 						
 							echo '<h5><font color = "gray">Regular Price: $' . $row['price'] . '</font></h5>' . "\n";
-							//echo '<h5><font color = "gray">Regular Price:  $'. $row['price'];	
 							echo '<h5><strong>Sale Price: $' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <font color="red">' . $row['percentage'] * 100 . '% off!</font></strong></h5></td>' . "\n"; 
 						}
 						else
@@ -101,7 +100,7 @@ $ACCT_MGR = AccountManager::getInstance();
 						<td style="text-align:left;">
 							<form id="addCartForm" method="POST" class="form-inline">
 								<label>Qty: &nbsp&nbsp&nbsp&nbsp&nbsp</label>
-									<select style="width:60px" class="form-control" name="quantity">
+									<select style="width:80px" class="form-control" name="quantity">
 										<?php
 										if($row['quantity'] > 0){
 											for($i = 1; $i <= $row['quantity']; $i++){
@@ -114,7 +113,7 @@ $ACCT_MGR = AccountManager::getInstance();
 									</select>
 								<br/><br/>
 								<label>Size: &nbsp&nbsp&nbsp&nbsp</label>
-									<select style="width:60px" class="form-control" name="size">
+									<select style="width:80px" class="form-control" name="size">
 										<option>S</option>
 										<option>M</option>
 										<option>L</option>
