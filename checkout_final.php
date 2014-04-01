@@ -33,6 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo '        <th>Size</th>' . "\n";
         echo '        <th>Price</th>' . "\n";
         echo '        <th>Qty</th>' . "\n";
+        echo '        <th>Color</th>' . "\n";
         echo '        <th>Amount</th>' . "\n";
         echo '    </head>' . "\n";
             
@@ -46,6 +47,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     echo '<td>' . $item['size'] . '</td>' . "\n";
                     echo '<td>$' . number_format($item['price']) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
+                    if(isset($item['color'])){
+					echo '<td>' . $item['color'] . '</td>' . "\n";
+                    }else{
+                    echo '<td>N/A</td>' . "\n";
+                    }
                     $subTotal += ($item['price'] * $item['quantity']);
                     $total += ($item['price'] * $item['quantity']);
                     echo '<td>$' . number_format($subTotal, 2) . '</td>';
@@ -59,24 +65,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
 			echo '<td><strong>Sub Total</strong></td>' . "\n";
 			echo '<td>$' . number_format($total, 2) . '</td>' . "\n";
             echo '<tr>' . "\n";
 			echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
 			echo '<td><strong>Tax</strong></td>' . "\n";
 			echo '<td>$' . number_format($tax, 2) . '</td>' . "\n";
             echo '<tr>' . "\n";
 			echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
 			echo '<td><strong>Shipping</strong></td>' . "\n";
 			echo '<td>$' . number_format($shipping, 2) . '</td>' . "\n";
             echo '<tr>' . "\n";
 			echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
 			echo '<td><strong>Total</strong></td>' . "\n";
 			echo '<td>$' . number_format($grandTotal, 2) . '</td>' . "\n";    
             echo '</tr>' . "\n";
@@ -86,9 +96,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
 			echo '<td></td>' . "\n";
+            echo '<td></td>' . "\n";
 			
             echo '</tr>' . "\n";
             echo '<tr>' . "\n";
+            echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";
             echo '<td></td>' . "\n";

@@ -110,7 +110,7 @@ $ACCT_MGR = AccountManager::getInstance();
 									</select>
 								<br/><br/>
 								<label>Color: &nbsp&nbsp</label>
-									<select style="width:100px" class="form-control" name="size">
+									<select style="width:100px" class="form-control" name="color">
 										<option>Beige</option>
 										<option>Black</option>
 										<option>Blue</option>
@@ -129,7 +129,7 @@ $ACCT_MGR = AccountManager::getInstance();
 									</p>
 									<input type="hidden" name="id" value="<?php echo $row['product_id']; ?>"/>
 									<input type="hidden" name="name" value="<?php echo $row['product_name']; ?>"/>
-									<input type="hidden" name="description" value="<?php echo $row['product_desc']; ?>"/>
+									
 									<input type="hidden" name="image_location" value="<?php echo $row['image_location']; ?>"/>
 									
 									<?php
