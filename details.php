@@ -53,7 +53,8 @@ $ACCT_MGR = AccountManager::getInstance();
 	<div class="row">
 		<div class="col-sm-2 col-sm-offset-1">
 			<?php
-				echo '<td><a href="./details.php?data=' . $row['product_id'] . '"><img src="' . $row['image_location'] . '" width=260 height=288 ></a></td>' . "\n";
+				echo '<br/><br/>';
+				echo '<td><a href="./details.php?data=' . $row['product_id'] . '"><img src="' . $row['image_location'] . '" ></a></td>' . "\n";
 			?>
 		</div>
 		
@@ -66,15 +67,27 @@ $ACCT_MGR = AccountManager::getInstance();
 					echo '</tr>';
 					
 					echo '<tr>';
-						echo '<td style="text-align:left;"><h5>Regular Price: $' . $row['price'] . '</h5>' . "\n";
+						echo '<td>';
 						if(isset($row['percentage']) ){
 							$promotion = true;
 							$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
 							$exp_date = strtotime($row['expiration_date']);
 						}
 						
-						if($promotion){
-							echo '<h5>Sale Price: $' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <strong><font color="red">' . $row['percentage'] * 100 . '% off!</font></strong></h5></td>' . "\n"; 
+						//if($promotion){
+						//	echo '<h5>Sale Price: $' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <strong><font color="red">' . $row['percentage'] * 100 . '% off!</font></strong></h5></td>' . "\n"; 
+						//}
+						
+						if($promotion)
+						{
+						
+							echo '<h5><font color = "gray">Regular Price: $' . $row['price'] . '</font></h5>' . "\n";
+							//echo '<h5><font color = "gray">Regular Price:  $'. $row['price'];	
+							echo '<h5><strong>Sale Price: $' . number_format($promotional_price, 2) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <font color="red">' . $row['percentage'] * 100 . '% off!</font></strong></h5></td>' . "\n"; 
+						}
+						else
+						{
+							echo '<h5><strong>Regular Price:  $'. $row['price'].'</strong></h5>';		
 						}
 						
 						echo '</td>';
