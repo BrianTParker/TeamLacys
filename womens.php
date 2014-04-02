@@ -16,22 +16,25 @@ include "header.php";
 				<ul class="nav nav-tabs">
 	
 					<?php 
-					$pants_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
+					$pants_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'pants'");								
+									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'pants'
+									order by p.date_added desc");							
 					$pants_count_sql = $DBH->query("select count(*) from products where article_category = 'pants'");
 
-					$shirts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
+					$shirts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'shirts'");	
+									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'shirts'
+									order by p.date_added desc");		
 					$shirts_count_sql = $DBH->query("select count(*) from products where article_category = 'shirts'");
 
-					$skirts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage,pr.expiration_date
+					$skirts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'skirts'");
+									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'skirts'
+									order by p.date_added desc");	
 					$skirts_count_sql = $DBH->query("select count(*) from products where article_category = 'skirts'");
 
 					$per_row = 4;
@@ -62,28 +65,37 @@ include "header.php";
 											 class="img-thumbnailproduct"></a>';
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";		
-
+							echo "<br/>\n";	
+							
 							if(isset($row['percentage']) )
 							{
 								$promotion = true;
 								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
 								$exp_date = strtotime($row['expiration_date']);
 							}
+							# if item item is on sale, display sale price and regular price
 							if($promotion)
 							{
 								echo '<font color = "gray">Reg. $'. $row['price'];	
 								echo "</br>\n";
 								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
 							}
+							# else display regular price
 							else
 							{
 								echo '<strong>$'. $row['price'];	
 							}
+							# if the item is added in last 7 days, display new item icon
+							if (strtotime($row['date_added']) > strtotime('-7 days'))
+							{
+								echo "</br>\n";
+								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
+							}
+
 							echo "<br/><br/>\n";
 							echo '</td>';
 
-							# display pants in 4 columns
+							# display pants in 3 columns
 							if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
 							echo '<tr></tr>';
 							}
@@ -108,28 +120,37 @@ include "header.php";
 											 class="img-thumbnailproduct"></a>';
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";
-
+							echo "<br/>\n";	
+							
 							if(isset($row['percentage']) )
 							{
 								$promotion = true;
 								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
 								$exp_date = strtotime($row['expiration_date']);
 							}
+							# if item item is on sale, display sale price and regular price
 							if($promotion)
 							{
 								echo '<font color = "gray">Reg. $'. $row['price'];	
 								echo "</br>\n";
 								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
 							}
+							# else display regular price
 							else
 							{
 								echo '<strong>$'. $row['price'];	
 							}
+							# if the item is added in last 7 days, display new item icon
+							if (strtotime($row['date_added']) > strtotime('-7 days'))
+							{
+								echo "</br>\n";
+								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
+							}
+							
 							echo "<br/><br/>\n";
 							echo '</td>';
 
-							# display shirts in 4 columns
+							# display shirts in 3 columns
 							if (++$j % $per_row == 0 && $j >0 && $j < $count2) {
 							echo '<tr></tr>';
 							}
@@ -152,27 +173,37 @@ include "header.php";
 							$promotion = false;
 							# get the image and description of product in one cell
 							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
-												class="img-thumbnail"></a>';
+											 class="img-thumbnailproduct"></a>';
 							echo "<br/><br/>\n";
 							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";
-
+							echo "<br/>\n";	
+							
 							if(isset($row['percentage']) )
 							{
 								$promotion = true;
 								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
 								$exp_date = strtotime($row['expiration_date']);
 							}
+							# if item item is on sale, display sale price and regular price
 							if($promotion)
 							{
 								echo '<font color = "gray">Reg. $'. $row['price'];	
 								echo "</br>\n";
 								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
 							}
+							# else display regular price
 							else
 							{
 								echo '<strong>$'. $row['price'];	
 							}
+							
+							# if the item is added in last 7 days, display new item icon
+							if (strtotime($row['date_added']) > strtotime('-7 days'))
+							{
+								echo "</br>\n";
+								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
+							}
+
 							echo "<br/><br/>\n";
 							echo '</td>';
 
