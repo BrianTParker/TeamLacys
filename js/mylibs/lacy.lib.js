@@ -55,8 +55,8 @@
 		$.post( "./Account/account_guest_login.php", $( this ).serialize(), function( data ){
 		
 			// load the checkout page -nm
-			window.location.href = "./checkout.php";
-			//alert(data);
+			//window.location.href = "./checkout.php";
+			console.log(data);
 		} );
 	} );
 	
