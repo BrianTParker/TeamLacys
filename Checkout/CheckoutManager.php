@@ -219,6 +219,7 @@ class CheckoutManager{
         $success = 0;
         $errors = array();
         $shippingId = null; //If the customer selected shipping this will get updated
+        $totals = $this->getOrderTotal();
 		
         $CART_MGR = CartManager::getInstance();
 		$ACCT_MGR = AccountManager::getInstance();	
@@ -263,14 +264,17 @@ class CheckoutManager{
         $confirmation_code = substr(md5(uniqid(rand(), true)), 16, 16);
         
         //purchase_summary insert
-        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id, confirmation_code, store_location_id)
-                    values (:amount_total, :purchase_date,:shipping_id, :confirmation_code, :store_location_id)";
+        $sql2 = "Insert into purchase_summary(amount_total, purchase_date, shipping_id, confirmation_code, store_location_id, shipping, sales_tax, grand_total)
+                    values (:amount_total, :purchase_date,:shipping_id, :confirmation_code, :store_location_id, :shipping, :sales_tax, :grand_total)";
         $q2 = $DBH->prepare($sql2);
         $q2->execute(array(':amount_total'=>$this->getTotal(),
                           ':purchase_date'=>$date,
                           ':shipping_id'=>$shippingId,
 						  ':confirmation_code'=>$confirmation_code,
-						  ':store_location_id'=>$this->getStoreLocationId()
+						  ':store_location_id'=>$this->getStoreLocationId(),
+                          ':shipping'=>$totals['ship'],
+                          ':sales_tax'=>$totals['tax'],
+                          ':grand_total'=>$totals['grand']
                           ));
     
         
