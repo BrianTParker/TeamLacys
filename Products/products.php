@@ -31,12 +31,8 @@
 				$promotion = true;
 				$promotional_price = ($price - ($price * $percentage));
 				$exp_date = strtotime($expiration_date);
-			}
-		if(isset($percentage) ) {
-			$promotion = true;
-			$promotional_price = ($price - ($price * $percentage));
-			$exp_date = strtotime($expiration_date);
 		}
+		
 	
 		if($promotion) {
 			echo '<font color = "gray">Reg. $'. $price;	
