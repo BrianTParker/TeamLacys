@@ -1,21 +1,37 @@
+<!--File Name : mens.php
+	Description : Displays categories page for men's products. User can navigate
+				  through tabs from navigation bar and user can review the products for men.
+				  The default tab displays men's pants category.
+--->
 
+
+
+<!-- include header file and products file-->
 <?php
-include "header.php";
+	include "header.php";
+	include_once "Products\products.php";
 ?>
+
 <div class="container-fluid">
 	<div class="row">
+	
 	   <div class="col-sm-8 col-sm-offset-2">
 	   
-			<div class ="text-center">
-				<!--This is generic image area which has image of men's generic products-->	
-				<img src = "img/img3.jpg" alt="Generic men's product" width= "850" height="150">
+			<!--This is generic image area which has image of men's generic products-->	
+			<div class ="text-center">	
+				<img src = "img/bannerMen.jpg" alt="Generic men's product" width= "850" height="150">
 				</br></br>
 			</div><!-- end of div for image -->
 			
-			<div class="tabbable"> <!-- Only required for left/right tabs -->
+			
+			<!-- Only required for left/right tabs -->
+			<div class="tabbable"> 
+				
 				<ul class="nav nav-tabs">
 	
 					<?php 
+					
+					//Formulate Queries
 					$pants_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
@@ -44,8 +60,11 @@ include "header.php";
 									order by p.date_added desc");
 
 					$watches_count_sql = $DBH->query("select count(*) from products where article_category = 'watches'");
+					
 					$per_row = 4;
+					
 					?>
+					
 					<!-- navigation bar -->
 					<li class="active"><a href="#Pants" data-toggle="tab">Pants</a></li>
 					
@@ -56,239 +75,161 @@ include "header.php";
 					<li><a href="#Watches" data-toggle="tab">Watches</a></li>
 								
 				</ul><!-- end of navigation bar -->
+				
 					
 				<div class="tab-content" >
-					<div class="tab-pane active" id="Pants"> <!-- pants tab -->
+				
+					<!-- pants tab -->
+					<div class="tab-pane active" id="Pants"> 
 					
 						<table class = "table table-product">
 						<?php
-						$pants_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$i = 0;
-						$count1 = $pants_count_sql->fetch();							
-						echo "<br/>\n";
-
-						while($row = $pants_sql->fetch()) {	
-							$promotion = false;
-							# get the image and description of product in one cell
-							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
-											 class="img-thumbnailproduct"></a>';
-							echo "<br/><br/>\n";
-							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";	
+							$pants_sql->setFetchMode(PDO::FETCH_ASSOC);
 							
-							if(isset($row['percentage']) )
-							{
-								$promotion = true;
-								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
-								$exp_date = strtotime($row['expiration_date']);
-							}
-							# if item item is on sale, display sale price and regular price
-							if($promotion)
-							{
-								echo '<font color = "gray">Reg. $'. $row['price'];	
-								echo "</br>\n";
-								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
-							}
-							# else display regular price
-							else
-							{
-								echo '<strong>$'. $row['price'];	
-							}
-							# if the item is added in last 7 days, display new item icon
-							if (strtotime($row['date_added']) > strtotime('-7 days'))
-							{
-								echo "</br>\n";
-								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
-							}
+							$i = 0;
+							$count1 = $pants_count_sql->fetch();							
+							echo "<br/>\n";
+							
+							while($row = $pants_sql->fetch()) {	
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
 
-							echo "<br/><br/>\n";
-							echo '</td>';
-
-							# display pants in 3 columns
-							if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
-							echo '<tr></tr>';
+								// display pants in 4 columns
+								if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
+								echo '<tr></tr>';
+								}
 							}
-						}
 						?>                        
 						</table>
 					</div> <!--end of pants tab-->
 					
+					
 					<!-- shirts tab-->
 					<div class="tab-pane" id="Shirts">
 						<table class="table table-product">
+						
 						<?php
-						$shirts_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$j = 0;
-						$count2 = $shirts_count_sql->fetch();
+							$shirts_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$j = 0;
+							$count2 = $shirts_count_sql->fetch();
 
-						echo "<br/>\n";
-						while($row = $shirts_sql->fetch()) {
-							$promotion = false;
-							# get the image and description of product in one cell
-							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
-											 class="img-thumbnailproduct"></a>';
-							echo "<br/><br/>\n";
-							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";	
-							
-							if(isset($row['percentage']) )
-							{
-								$promotion = true;
-								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
-								$exp_date = strtotime($row['expiration_date']);
+							echo "<br/>\n";
+							while($row = $shirts_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display shirts in 4 columns
+								if (++$j % $per_row == 0 && $j >0 && $j < $count2) {
+								echo '<tr></tr>';
+								}
 							}
-							# if item item is on sale, display sale price and regular price
-							if($promotion)
-							{
-								echo '<font color = "gray">Reg. $'. $row['price'];	
-								echo "</br>\n";
-								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
-							}
-							# else display regular price
-							else
-							{
-								echo '<strong>$'. $row['price'];	
-							}
-							# if the item is added in last 7 days, display new item icon
-							if (strtotime($row['date_added']) > strtotime('-7 days'))
-							{
-								echo "</br>\n";
-								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
-							}
-							
-							echo "<br/><br/>\n";
-							echo '</td>';
-
-							# display shirts in 3 columns
-							if (++$j % $per_row == 0 && $j >0 && $j < $count2) {
-							echo '<tr></tr>';
-							}
-						}
 						?>                        
 						</table>
 					</div><!-- end of shirts tab-->
 					
+					
 					<!-- Belts tab-->
 					<div class="tab-pane" id="Belts">
 						<table class="table table-product">
+						
 						<?php
-						$belts_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$k = 0;
-						$count3 = $belts_count_sql->fetch();
+							$belts_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$k = 0;
+							$count3 = $belts_count_sql->fetch();
 
-						echo "<br/>\n";
-						while($row = $belts_sql->fetch()) {
+							echo "<br/>\n";
+							while($row = $belts_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
 
-							$promotion = false;
-							# get the image and description of product in one cell
-							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
-											 class="img-thumbnailproduct"></a>';
-							echo "<br/><br/>\n";
-							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";	
-							
-							if(isset($row['percentage']) )
-							{
-								$promotion = true;
-								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
-								$exp_date = strtotime($row['expiration_date']);
+								// display belts in 4 columns
+								if (++$k % $per_row == 0 && $k >0 && $k < $count3) {
+								echo '<tr></tr>';
+								}
 							}
-							# if item item is on sale, display sale price and regular price
-							if($promotion)
-							{
-								echo '<font color = "gray">Reg. $'. $row['price'];	
-								echo "</br>\n";
-								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
-							}
-							# else display regular price
-							else
-							{
-								echo '<strong>$'. $row['price'];	
-							}
-							# if the item is added in last 7 days, display new item icon
-							if (strtotime($row['date_added']) > strtotime('-7 days'))
-							{
-								echo "</br>\n";
-								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
-							}
-							
-							echo "<br/><br/>\n";
-							echo '</td>';
-
-
-							# display belts in 3 columns
-							if (++$k % $per_row == 0 && $k >0 && $k < $count3) {
-							echo '<tr></tr>';
-							}
-						}
-
 						?>                        
 						</table>
 					</div> <!-- end of belts tab-->
 					
+					
 					<!-- Watches tab-->
 					<div class="tab-pane " id="Watches">
 						<table class="table table-product">
+						
 						<?php
-						$watches_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$l = 0;
-						$count4 = $watches_count_sql->fetch();
+							$watches_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$l = 0;
+							$count4 = $watches_count_sql->fetch();
 
-						echo "<br/>\n";
-						while($row = $watches_sql->fetch()) {
-							$promotion = false;
-							# get the image and description of product in one cell
-							echo '<td><a href="./details.php?data=' . $row['id'] . '"><img src="' . $row['image_location'] . '"
-											 class="img-thumbnailproduct"></a>';
-							echo "<br/><br/>\n";
-							echo '<a href="./details.php?data=' . $row['id'] . '">' . $row['name'] . '</a>';
-							echo "<br/>\n";	
+							echo "<br/>\n";
+							while($row = $watches_sql->fetch()) {
 							
-							if(isset($row['percentage']) )
-							{
-								$promotion = true;
-								$promotional_price = ($row['price'] - ($row['price'] * $row['percentage']));
-								$exp_date = strtotime($row['expiration_date']);
-							}
-							# if item item is on sale, display sale price and regular price
-							if($promotion)
-							{
-								echo '<font color = "gray">Reg. $'. $row['price'];	
-								echo "</br>\n";
-								echo '<font color = "red"><strong>Sale $' . number_format($promotional_price, 2) ;
-							}
-							# else display regular price
-							else
-							{
-								echo '<strong>$'. $row['price'];	
-							}
-							# if the item is added in last 7 days, display new item icon
-							if (strtotime($row['date_added']) > strtotime('-7 days'))
-							{
-								echo "</br>\n";
-								echo '<img src = "img/new-icon.png" alt="New Product Icon">';
-							}
-							
-							echo "<br/><br/>\n";
-							echo '</td>';
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
 
-							# display watches in 3 columns
-							if (++$l % $per_row == 0 && $l >0 && $l < $count4) {
-							echo '<tr></tr>';
+								// display watches in 4 columns
+								if (++$l % $per_row == 0 && $l >0 && $l < $count4) {
+								echo '<tr></tr>';
+								}
 							}
-						}
-					?>                        
-					</table>
+						?>                        
+						</table>
 					</div> <!-- end of watches tab-->
+					
 				</div><!-- end of tab-content-->
 				
 			</div><!-- end of tab-table-->
 		</div><!-- end of column and column offset-->
 	</div> <!-- end of row-->
 </div> <!-- end of container-fluid-->
+
 <br/><br/><br/><br/>
 
-
+<!-- include footer file
 <?php
-include "footer.php"
+	include "footer.php"
 ?>
+<!-- end of mens.php file-->
