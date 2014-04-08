@@ -315,7 +315,7 @@ $total = 0;
                             } 
                             ?>
                             </select>
-							<font color="red"><?php echo $expiredDateError; ?></font>
+							<font color="red"><?php echo "<br/>\n"; echo $expiredDateError; ?></font>
                         </div>
                 </div>
 				
