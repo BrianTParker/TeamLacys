@@ -395,15 +395,23 @@ class CheckoutManager{
 		return $orderTotal;
 	}
 	
+	//
+	// checkExpiredDate function checks for credit card's expiration date.
+	//
 	public function checkExpiredDate($month, $year) {
-		/* Get timestamp of midnight on day after expiration month. */
-		$exp_ts = mktime(0, 0, 0, $month + 1, 1, $year);
+		
+		// Get timestamp of midnight on day after expiration month.
+		$expirationTS = mktime(0, 0, 0, $month + 1, 1, $year);
 
-		$cur_ts = time();
-		/* Don't validate for dates more than 6 years in future. */
-		$max_ts = $cur_ts + (6 * 365 * 24 * 60 * 60);
+		// get current timestamp
+		$currentTS = time();
+		
+		// Don't validate for dates more than 6 years in future.
+		$maxTS = $currentTS + (6 * 365 * 24 * 60 * 60);
 
-		if ($exp_ts > $cur_ts && $exp_ts < $max_ts) {
+		// if expiration date is between current month and year to
+		// next 6 year then return true else return false
+		if ($expirationTS > $currentTS && $expirationTS < $maxTS) {
 			return true;
 		} 
 		else {
