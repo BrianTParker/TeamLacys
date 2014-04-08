@@ -28,7 +28,7 @@ class CheckoutManager{
     }
     
     
-    public function validateCheckout($cardName,$cardNumber,$security,$expirationMonth, $expirationYear,$shipping,$street,$street2,$city,$state,$zip, $storeLocation){
+    public function validateCheckout($cardName,$cardNumber,$security,$expirationMonth,$expirationYear,$shipping,$street,$street2,$city,$state,$zip, $storeLocation){
         
         $errors = array(); /* declare the array for later use */
         $success = 0;
@@ -61,6 +61,10 @@ class CheckoutManager{
             $errors['security'] = 'The security code field cannot be blank';
         }
         
+		if(!($this->checkExpiredDate($expirationMonth, $expirationYear)))
+		{
+			$errors['expiredDate'] = 'The Credit Card is expired';
+		}
         
         if($shipping === "ship"){
             if(!empty($street)){
@@ -82,7 +86,11 @@ class CheckoutManager{
             }
             
             if(!empty($zip)){
-                
+				if(preg_match("/^[0-9]{5}$/", $zip)) { 
+				}
+				else{
+					$errors['zip'] = 'Invalid Zip code. It must be 5 digits';
+				}
             }else{
                 $errors['zip'] = 'Zip code cannot be blank';
             }
@@ -385,6 +393,22 @@ class CheckoutManager{
 		$orderTotal[ "grand" ]	= $orderTotal["sub"] + $orderTotal[ "tax" ] + $orderTotal[ "ship" ];
 		
 		return $orderTotal;
+	}
+	
+	public function checkExpiredDate($month, $year) {
+		/* Get timestamp of midnight on day after expiration month. */
+		$exp_ts = mktime(0, 0, 0, $month + 1, 1, $year);
+
+		$cur_ts = time();
+		/* Don't validate for dates more than 6 years in future. */
+		$max_ts = $cur_ts + (6 * 365 * 24 * 60 * 60);
+
+		if ($exp_ts > $cur_ts && $exp_ts < $max_ts) {
+			return true;
+		} 
+		else {
+			return false;
+		}
 	}
 }
 

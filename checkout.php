@@ -37,6 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$nameError = '';
 		$numberError='';
 		$securityError = '';
+		$expiredDateError = '';
 		$streetError = '';
 		$cityError = '';
 		$stateError = '';
@@ -66,6 +67,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			}
 			if(isset($status['errors']['security'])){
 				$securityError = $status['errors']['security'];
+			}
+			if(isset($status['errors']['expiredDate'])){
+				$expiredDateError = $status['errors']['expiredDate'];
 			}
 			if(isset($status['errors']['street'])){
 				$streetError = $status['errors']['street'];
@@ -105,6 +109,7 @@ if(!isset($cardName)){
 	$nameError = '';
 	$numberError='';
 	$securityError = '';
+	$expiredDateError = '';
 	$streetError = '';
 	$cityError = '';
 	$stateError = '';
@@ -310,6 +315,7 @@ $total = 0;
                             } 
                             ?>
                             </select>
+							<font color="red"><?php echo $expiredDateError; ?></font>
                         </div>
                 </div>
 				
