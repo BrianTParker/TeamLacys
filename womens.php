@@ -1,15 +1,6 @@
-<!--File Name : womens.php
-	Description : Displays categories page for women's products. User can navigate
-				  through tabs from navigation bar and user can review the products for women.
-				  The default tab displays men's pants category.
---->
-
-
-
-<!-- include header file and products file-->
 <?php
 	include "header.php";
-	include_once "Products\products.php";
+	include_once "Products/products.php";
 ?>
 
 <div class="container-fluid">
