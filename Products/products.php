@@ -1,8 +1,3 @@
-<!--File Name : products.php
-	Description : Displays name, product image, sales price, regular price and New item 
-				  icon for products that is added in last 7 days in inventory.
---->
-
 <?php
 	
 	//
