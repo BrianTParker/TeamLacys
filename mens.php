@@ -61,6 +61,21 @@
 
 					$watches_count_sql = $DBH->query("select count(*) from products where article_category = 'watches'");
 					
+					$activewear_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+									from products p
+									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'active wear'
+									order by p.date_added desc");
+					$activewear_count_sql = $DBH->query("select count(*) from products where article_category = 'active wear'");
+					
+					$shoes_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+							from products p
+							left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+							where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'shoes'
+							order by p.date_added desc");
+					$shoes_count_sql = $DBH->query("select count(*) from products where article_category = 'shoes'");					
+					
+					
 					$per_row = 4;
 					
 					?>
@@ -73,6 +88,10 @@
 					<li><a href="#Belts" data-toggle="tab">Belts</a></li>
 					
 					<li><a href="#Watches" data-toggle="tab">Watches</a></li>
+					
+					<li><a href="#ActiveWear" data-toggle="tab">Active Wear</a></li>
+					
+					<li><a href="#Shoes" data-toggle="tab">Shoes</a></li>
 								
 				</ul><!-- end of navigation bar -->
 				
@@ -218,6 +237,74 @@
 						?>                        
 						</table>
 					</div> <!-- end of watches tab-->
+					
+					<!-- Active wear tab-->
+					<div class="tab-pane" id="ActiveWear">
+						<table class="table table-product">
+						
+						<?php
+							$activewear_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$n = 0;
+							$count6 = $activewear_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $activewear_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display active wear in 4 columns
+								if (++$n % $per_row == 0 && $n >0 && $n < $count6) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of Active wear tab-->
+					
+					<!-- Shoes tab-->
+					<div class="tab-pane" id="Shoes">
+						<table class="table table-product">
+						
+						<?php
+							$shoes_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$m = 0;
+							$count5 = $shoes_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $shoes_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display shoes in 4 columns
+								if (++$m % $per_row == 0 && $m >0 && $m < $count5) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of shoes tab-->
 					
 				</div><!-- end of tab-content-->
 				

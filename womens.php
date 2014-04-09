@@ -53,6 +53,20 @@
 									order by p.date_added desc");
 					$skirts_count_sql = $DBH->query("select count(*) from products where article_category = 'skirts'");
 					
+					$activewear_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+									from products p
+									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'active wear'
+									order by p.date_added desc");
+					$activewear_count_sql = $DBH->query("select count(*) from products where article_category = 'active wear'");
+					
+					$shoes_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+							from products p
+							left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+							where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'shoes'
+							order by p.date_added desc");
+					$shoes_count_sql = $DBH->query("select count(*) from products where article_category = 'shoes'");					
+					
 					$per_row = 4;
 					
 					?>
@@ -63,6 +77,10 @@
 					<li><a href="#Shirts" data-toggle="tab">Shirts</a></li>
 					
 					<li><a href="#Skirts" data-toggle="tab">Skirts</a></li>
+					
+					<li><a href="#ActiveWear" data-toggle="tab">Active Wear</a></li>
+					
+					<li><a href="#Shoes" data-toggle="tab">Shoes</a></li>
 								
 				</ul><!-- end of navigation bar -->
 				
@@ -165,7 +183,7 @@
 								echo "<br/><br/>\n";											
 								echo '</td>';
 
-								// display belts in 4 columns
+								// display skirts in 4 columns
 								if (++$k % $per_row == 0 && $k >0 && $k < $count3) {
 								echo '<tr></tr>';
 								}
@@ -174,6 +192,74 @@
 						</table>
 					</div> <!-- end of skirts tab-->
 					
+					<!-- Active wear tab-->
+					<div class="tab-pane" id="ActiveWear">
+						<table class="table table-product">
+						
+						<?php
+							$activewear_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$l = 0;
+							$count4 = $activewear_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $activewear_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display active wear in 4 columns
+								if (++$l % $per_row == 0 && $l >0 && $l < $count4) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of Active wear tab-->
+					
+					<!-- Shoes tab-->
+					<div class="tab-pane" id="Shoes">
+						<table class="table table-product">
+						
+						<?php
+							$shoes_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$m = 0;
+							$count5 = $shoes_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $shoes_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display shoes in 4 columns
+								if (++$m % $per_row == 0 && $m >0 && $m < $count5) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of shoes tab-->
+				
 				</div><!-- end of tab-content-->
 				
 			</div><!-- end of tab-table-->
