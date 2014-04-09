@@ -37,8 +37,9 @@ class CheckoutManager{
             $errors['cardName'] = 'The card name cannot be blank.';
             
         }else{
-            if(!ctype_alnum((str_replace(' ','',$cardName)))){
-                $errors['cardName'] = 'The card name can only contain letters and digits.';
+			//change by liza from alnum to alpha on 4/9
+            if(!ctype_alpha((str_replace(' ','',$cardName)))){
+                $errors['cardName'] = 'The card name can only contain letters.';
             }
         }
         
@@ -74,6 +75,10 @@ class CheckoutManager{
             }
             
             if(!empty($city)){
+				//change by liza from alnum to alpha on 4/9
+				if(!ctype_alpha((str_replace(' ','',$city)))){
+                $errors['city'] = 'The city can only contain letters.';
+            }
                 
             }else{
                 $errors['city'] = 'City cannot be blank';
