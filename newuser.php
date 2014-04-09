@@ -89,7 +89,7 @@ if(!isset($firstName)){
             <label for="phone">Phone (optional)</label>
             <div class="row">
                 <div class="col-xs-3">
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter Phone" value="<?php echo $phone;?>">
+            <input type="text" class="form-control" name="phone" id="phone" pattern="^[2-9]\d{2}-\d{3}-\d{4}$" placeholder="XXX-XXX-XXXX" value="<?php echo $phone;?>">
                             </div>
             </div>
           </div>
