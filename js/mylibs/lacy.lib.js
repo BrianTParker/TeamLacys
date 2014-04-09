@@ -56,7 +56,7 @@
 		
 			// load the checkout page -nm
 			window.location.href = "./checkout.php";
-			//alert(data);
+			//console.log(data);
 		} );
 	} );
 	

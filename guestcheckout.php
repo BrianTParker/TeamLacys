@@ -11,12 +11,12 @@ include "header.php";
 	
 		<div class="form-group ">
 			<label for="guestFName">First Name</label>
-			<input type="text" class="form-control" id="guestFName" name="fName" placeholder="Enter First Name" required>
+			<input type="text" maxlength="30" class="form-control" id="guestFName" name="fName" placeholder="Enter First Name" required>
 		</div>
 		
 		<div class="form-group">
 			<label for="guestLName">Last Name</label>
-			<input type="text" class="form-control" id="guestLName" name="lName" placeholder="Enter Last Name" required>
+			<input type="text" maxlength="30" class="form-control" id="guestLName" name="lName" placeholder="Enter Last Name" required>
 		</div>
 		
 		<div class="form-group">
@@ -26,7 +26,7 @@ include "header.php";
 		
 		<div class="form-group">
 			<label for="guestPhone">Phone Number</label>
-			<input type="tel" class="form-control" id="guestPhone" name="phone" placeholder="Enter Phone Number">
+			<input type="tel" class="form-control" pattern="^[2-9]\d{2}-\d{3}-\d{4}$" id="guestPhone" name="phone" placeholder="XXX-XXX-XXXX">
 		</div>
 		
 		<button type="submit" class="btn btn-success">Continue Checkout</button>

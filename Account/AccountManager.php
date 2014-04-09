@@ -286,7 +286,7 @@ class AccountManager {
     
     
         global $DBH;
-        global $firstName, $lastName, $email;
+        //global $firstName, $lastName, $email;
         $errors = array(); /* declare the array for later use */
         $success = 0;
 
@@ -357,11 +357,11 @@ class AccountManager {
         else
         {
         
-            $firstName = $_POST['firstName'];
+            /* $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $password = sha1($_POST['password']);
             $email = $_POST['email'];
-            $phone = $_POST['phone'];
+            $phone = $_POST['phone']; */
             
             $sql = "Insert into customers(first_name, last_name, email, phone,password, access_level, active)
                     values (:firstName, :lastName,:email, :phone, :password, :access_level, :active)";

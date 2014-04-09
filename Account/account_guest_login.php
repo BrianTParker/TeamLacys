@@ -15,10 +15,12 @@ try {
 	
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
-		AccountManager::getInstance()->createNewAccount( $_POST[ "fName" ], $_POST[ "lName" ], 
-														 $_POST[ "email" ], $_POST[ "phone" ],
-														 "password", 		"password",
-														 $_POST[ "alvl" ],  $_POST[ "active" ]);
+		$report = AccountManager::getInstance()->createNewAccount( $_POST[ "fName" ], $_POST[ "lName" ], 
+																   $_POST[ "email" ], $_POST[ "phone" ],
+																   "password", 		  "password",
+																   $_POST[ "alvl" ],  $_POST[ "active" ]);
+																   
+		print_r($report);
 	}
     
 }catch( Exception $e ){
