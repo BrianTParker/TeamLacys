@@ -42,156 +42,159 @@ include_once "Products/products.php";
 <div class="container-fluid">
 	<!--This first row is to display Sales Item Image banner image-->
 	<div class = "row">
-		<div class ="text-center">
-			<!--Image banner-->	
-			<img src = "img/img3.jpg" alt="Generic men's product" width= "850" height="150">
-			<a href = "top"></a>
-			</br></br>
-		</div><!-- end of div for image -->
-	</div>
-	
-	<!--This second row is to display the sales products-->
-	<div class = "row">
-		<!--This div is to list the products name navigation link-->
-		<div class="col-sm-2 col-sm-offset-1">
-			<br/><br/>
-			<li><a href="#men" >Men</a></li>
-			<li><a href="#women">Women</a></li>
-			<li><a href="#child">Children</a></li>
-			<li><a href="#kitchen">Kitchen & Dining</a></li>
-			<li><a href="#home">Home Essential</a></li>
-			<li><a href="#beauty">Beauty</a></li>
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class ="text-center">
+				<!--Image banner-->	
+					<img src = "img/img3.jpg" alt="Generic men's product" width= "850" height="150">
+					<a href = "top"></a>
+					</br></br>
+			</div><!-- end of div for image -->
+		
 			
-		
-		</div><!--end of div for product list-->
-		
-		<!--This div is to display the sales products image-->
-		<div class="col-sm-7 col-sm-offset-1">
-			<!--The first row is to display all men's sales item-->
-			<div class = "row">
-				<h4 id = "men"><strong><u>Men</u></strong></h4>
-				<table class = "table table-product">
-					<?php
-						$men_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$i = 0;
-						$count1 = $sale_men_count_sql->fetch();							
-						
-						echo "<br/>\n";
-								
-						while($row = $men_sql->fetch()) {	
-							if(isset($row['percentage']) )
-							{
-								echo '<td>';
-								echo displayProducts($row['id'], $row['image_location'], $row['name']);
-								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
-								echo '</td>';								
-
-								// display men's in 4 columns
-								if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
-									echo '<tr></tr>';
-								}
-							}
-
-						}
-					?>
+			<!-- Only required for left/right tabs -->
+			<div class="tabbable"> 
 				
-				</table>
-				<p class="text-right"><h5><a href = '#top'>Back to top </a></h5></p>
-			</div><!--end of div for men's sales item-->
-
-			<!--The second row is to display all women's sales item-->
-			<div class = "row">
-				<h4 id = "women"><strong><u>Women</u></strong></h4>
-				<table class = "table table-product">
-					<?php
-						$women_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$i = 0;
-						$count2 = $sale_women_count_sql->fetch();							
-						
-						echo "<br/>\n";
+				<ul class="nav nav-tabs">
+				<!-- navigation bar -->
+					<li class="active"><a href="#Men" data-toggle="tab">Men</a></li>
+					
+					<li><a href="#Women" data-toggle="tab">Women</a></li>
+					
+					<li><a href="#Children" data-toggle="tab">Children</a></li>
+					
+					<li><a href="#Kitchen" data-toggle="tab">Kitchen & Dining</a></li>
+					
+					<li><a href="#HomeEssentials" data-toggle="tab">Home Essentials</a></li>
+					
+					<li><a href="#Beauty" data-toggle="tab">Beauty</a></li>
 								
-						while($row = $women_sql->fetch()) {	
-							if(isset($row['percentage']) )
-							{
-								echo '<td>';
-								echo displayProducts($row['id'], $row['image_location'], $row['name']);
-								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
-								echo '</td>';								
+				</ul><!-- end of navigation bar -->
+				
+				
+				<div class="tab-content" >
+				
+					<!-- Men tab -->
+					<div class="tab-pane active" id="Men"> 
+						<table class = "table table-product">
+						<?php
+							$men_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$i = 0;
+							$count1 = $sale_men_count_sql->fetch();							
+						
+							echo "<br/>\n";
+								
+							while($row = $men_sql->fetch()) {	
+								if(isset($row['percentage']) )
+								{
+									echo '<td>';
+									echo displayProducts($row['id'], $row['image_location'], $row['name']);
+									echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+									echo '</td>';								
 
-								// display women's in 4 columns
-								if (++$i % $per_row == 0 && $i >0 && $i < $count2) {
-									echo '<tr></tr>';
+									// display men's in 4 columns
+									if (++$i % $per_row == 0 && $i >0 && $i < $count1) {
+										echo '<tr></tr>';
 								}
-							}
+								}
 
-						}
+							}
+						?>
+				
+						</table>
+						
+					</div><!--end of div for men's sales item-->
+
+					<!-- Women tab -->
+					<div class="tab-pane active" id="Women"> 
+						<table class = "table table-product">
+						<?php
+							$women_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$i = 0;
+							$count2 = $sale_women_count_sql->fetch();							
+						
+							echo "<br/>\n";
+								
+							while($row = $women_sql->fetch()) {	
+								if(isset($row['percentage']) )
+								{
+									echo '<td>';
+									echo displayProducts($row['id'], $row['image_location'], $row['name']);
+									echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+									echo '</td>';								
+
+									// display women's in 4 columns
+									if (++$i % $per_row == 0 && $i >0 && $i < $count2) {
+										echo '<tr></tr>';
+									}
+								}
+
+							}
 						?> 
 				
-				</table>
-				<p class="text-right"><h5><a href = '#top'>Back to top </a></h5></p>
-			</div><!--end of div for women's sales item-->
-			
-			
-			<!--The second row is to display all children's sales item-->
-			<div class = "row">
-				<h4 id = "child"><strong><u>Children</u></strong></h4>
-				<table class = "table table-product">
-					<?php
-						$child_sql->setFetchMode(PDO::FETCH_ASSOC);
-						$i = 0;
-						$count3 = $sale_child_count_sql->fetch();							
+						</table>
 						
-						echo "<br/>\n";
+					</div><!--end of div for women's sales item-->
+			
+			
+					<!-- Children tab -->
+					<div class="tab-pane active" id="Children"> 
+						<table class = "table table-product">
+						<?php
+							$child_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$i = 0;
+							$count3 = $sale_child_count_sql->fetch();							
+						
+							echo "<br/>\n";
 								
-						while($row = $child_sql->fetch()) {	
-							if(isset($row['percentage']) )
-							{
-								echo '<td>';
-								echo displayProducts($row['id'], $row['image_location'], $row['name']);
-								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
-								echo '</td>';								
+							while($row = $child_sql->fetch()) {	
+								if(isset($row['percentage']) )
+								{
+									echo '<td>';
+									echo displayProducts($row['id'], $row['image_location'], $row['name']);
+									echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+									echo '</td>';								
 
-								// display women's in 4 columns
-								if (++$i % $per_row == 0 && $i >0 && $i < $count3) {
-									echo '<tr></tr>';
+									// display children's in 4 columns
+									if (++$i % $per_row == 0 && $i >0 && $i < $count3) {
+										echo '<tr></tr>';
+									}
 								}
-							}
 
-						}
+							}
 						?> 
 				
-				</table>
-				<p class="text-right"><h5><a href = '#top'>Back to top </a></h5></p>
-			</div><!--end of div for women's sales item-->
+						</table>
+
+					</div><!--end of div for children's sales item-->
 			
-			<!--The second row is to display all child's sales item-->
-			<div class = "row">
-				<h4 id = "child"><strong><u>Kitchen & Dining</u></strong></h4>
-				<table class = "table table-product">
+					<!-- Kitchen tab -->
+					<div class="tab-pane active" id="Kitchen"> 
+						<table class = "table table-product">
 					
 				
-				</table>
-				<p class="text-right"><h5><a href = '#top'>Back to top </a></h5></p>
-			</div><!--end of div for child's sales item-->
-			
-			<!--The second row is to display all home essential's sales item-->
-			<div class = "row">
-				<h4 id = "home"><strong><u>Home Essentials</u></strong></h4>
-				<table class = "table table-product">
+						</table>
 					
-				</table>
-				<p class="text-right"><h5><a href = '#top'>Back to top </a></h5></p>
-			</div><!--end of div for child's home essentials item-->
+					</div><!--end of div for kitchen's sales item-->
 			
-			
-			<!--The second row is to display all beauty's sales item-->
-			<div class = "row">
-				<h4 id = "beauty"><strong><u>Beauty</u></strong></h4>
-				<table class = "table table-product">
+					<!-- Home tab -->
+					<div class="tab-pane active" id="HomeEssentials"> 
+						<table class = "table table-product">
 					
-				</table>
-				<p class="text-right"><h5><a href = '#top'>Back to top </a></h5></p>
-			</div><!--end of div for beauty essentials item-->
+				
+						</table>
+					
+					</div><!--end of div for home's sales item-->
+			
+					<!-- Beauty tab -->
+					<div class="tab-pane active" id="Beauty"> 
+						<table class = "table table-product">
+					
+				
+						</table>
+					
+					</div><!--end of div for kitchen's sales item-->
+				</div>
+			</div>
 		</div><!--end of column div to display sales items-->
 	
 		
