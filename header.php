@@ -74,7 +74,11 @@
           <li><a href="mens.php">Men</a></li>
           <li><a href="womens.php">Women</a></li>
           <li><a href="children.php">Children</a></li>
-        </ul>
+		  <li><a href="kitchen.php">Kitchen & Dining</a></li>
+		  <li><a href="homeEssential.php">Home Essentials</a></li>
+		  <li><a href="beauty.php">Beauty</a></li>
+		  <li><a href="salesItem.php">Sales</a></li>
+		</ul>
         <!--<form class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">
