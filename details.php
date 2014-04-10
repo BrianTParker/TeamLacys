@@ -42,7 +42,10 @@ $ACCT_MGR = AccountManager::getInstance();
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()							
 								where p.id = " . $productId);
-							
+								
+	$color_sql = $DBH->query("select color_name from colors");
+	
+	$size_sql = $DBH->query("select size from sizes");
 	
 ?>
 
@@ -114,20 +117,27 @@ $ACCT_MGR = AccountManager::getInstance();
 								<br/><br/>
 								<label>Size: &nbsp&nbsp&nbsp&nbsp</label>
 									<select style="width:80px" class="form-control" name="size">
-										<option>S</option>
-										<option>M</option>
-										<option>L</option>
-										<option>XL</option>
-										<option>XXL</option>
+										<?php
+										$size_sql->setFetchMode(PDO::FETCH_ASSOC);
+										while($sizeRow = $size_sql->fetch()){
+											echo '<option>' . $sizeRow['size'] . '</option>' . "\n";
+										}	
+										?>
+										
 									</select>
 								<br/><br/>
 								<label>Color: &nbsp&nbsp</label>
 									<select style="width:100px" class="form-control" name="color">
-										<option>Beige</option>
-										<option>Black</option>
-										<option>Blue</option>
+									<?php
+									$color_sql->setFetchMode(PDO::FETCH_ASSOC);
+									
+									while($colorRow = $color_sql->fetch()){
+										echo '<option>' . $colorRow['color_name'] . '</option>' . "\n";
+									}
+									?>
+										
 									</select>
-								<br/><br/>
+									<br/><br/>
 	
 	
 								<p style="text-align:center;">
