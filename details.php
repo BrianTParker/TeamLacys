@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-include_once( "Account/AccountManager.php" );
+
 
 $promotional_price = 0;
 $promotion = false;
@@ -42,7 +42,10 @@ $ACCT_MGR = AccountManager::getInstance();
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()							
 								where p.id = " . $productId);
-							
+								
+	$color_sql = $DBH->query("select color_name from colors");
+	
+	$size_sql = $DBH->query("select size from sizes");
 	
 ?>
 
@@ -114,20 +117,27 @@ $ACCT_MGR = AccountManager::getInstance();
 								<br/><br/>
 								<label>Size: &nbsp&nbsp&nbsp&nbsp</label>
 									<select style="width:80px" class="form-control" name="size">
-										<option>S</option>
-										<option>M</option>
-										<option>L</option>
-										<option>XL</option>
-										<option>XXL</option>
+										<?php
+										$size_sql->setFetchMode(PDO::FETCH_ASSOC);
+										while($sizeRow = $size_sql->fetch()){
+											echo '<option>' . $sizeRow['size'] . '</option>' . "\n";
+										}	
+										?>
+										
 									</select>
 								<br/><br/>
 								<label>Color: &nbsp&nbsp</label>
 									<select style="width:100px" class="form-control" name="color">
-										<option>Beige</option>
-										<option>Black</option>
-										<option>Blue</option>
+									<?php
+									$color_sql->setFetchMode(PDO::FETCH_ASSOC);
+									
+									while($colorRow = $color_sql->fetch()){
+										echo '<option>' . $colorRow['color_name'] . '</option>' . "\n";
+									}
+									?>
+										
 									</select>
-								<br/><br/>
+									<br/><br/>
 	
 	
 								<p style="text-align:center;">
@@ -137,6 +147,7 @@ $ACCT_MGR = AccountManager::getInstance();
 									}else{
 										echo '<button type="submit" class="btn btn-warning btn-lg" disabled>Out of Stock</button>' . "\n";
 									}
+									
 									?>
 									</p>
 									<input type="hidden" name="id" value="<?php echo $row['product_id']; ?>"/>
@@ -153,6 +164,17 @@ $ACCT_MGR = AccountManager::getInstance();
 									?>
 	
 							</form>
+							
+							<?php
+							
+							if($ACCT_MGR->getAccessLevel() == 1){
+								echo '<form class="form" method="POST" action="createPromotion.php">';
+								echo '<input type="hidden" value="' . $productId . '" name="productId">';
+								echo '<button type="submit" name="createPromotion" class="btn btn-warning btn-lg">Create Promotion</button>' . "\n";
+								echo '</form>';
+							}
+									
+							?>
 						</td>
 					</tr>
 					
@@ -218,7 +240,9 @@ $ACCT_MGR = AccountManager::getInstance();
 							echo '<p><i><h5>(Be the first to write a review!)</h5></p> </i>';
 						}
 					?>
-			</div>
+				</div>
+				
+				
 		</div>
     </div>
 </div>

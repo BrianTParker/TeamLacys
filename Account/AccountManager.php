@@ -108,15 +108,16 @@ class AccountManager {
         
         $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "' and active = 1");
         if($STH->rowCount() == 1){
-            $sql = $DBH->query("SELECT id, first_name, last_name, access_level from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
+            $sql = $DBH->query("SELECT id, first_name, last_name, phone, access_level from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
             $sql->setFetchMode(PDO::FETCH_ASSOC);
             $row = $sql->fetch();
             $id = $row['id'];
             $firstName = $row['first_name'];
             $lastName = $row['last_name'];
+			$phone = $row['phone'];
 			$access_level = $row['access_level'];
             
-            $this->setSessionVariables($firstName, $lastName, $email, $id, $access_level);
+            $this->setSessionVariables($firstName, $lastName, $email, $id, $phone,$access_level);
             $success = 1;
             return $success;
    
@@ -362,7 +363,7 @@ class AccountManager {
             $password = sha1($_POST['password']);
             $email = $_POST['email'];
             $phone = $_POST['phone']; */
-            
+            $password = sha1($password);
             $sql = "Insert into customers(first_name, last_name, email, phone,password, access_level, active)
                     values (:firstName, :lastName,:email, :phone, :password, :access_level, :active)";
             $q = $DBH->prepare($sql);

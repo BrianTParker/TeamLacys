@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-include_once( "Account/AccountManager.php" );
+
 ?>
 <div class="row">
    <div class="col-sm-3 col-sm-offset-1">
@@ -30,6 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     if($status === 1){
         header("location: index.php");
+		
     }else{
         echo "That email and password is not valid";
     }
