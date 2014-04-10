@@ -17,19 +17,20 @@ if(!isset($userId)){
 
 <div class="row">
 	
-    <div class="col-sm-6 col-sm-offset-1">
+    <div class="col-sm-8 col-sm-offset-1">
 		<h1>Purchase History</h1>
 		<table class="table">
 		<head>
-			<th></th>
+			<th>Confirmation Code</th>
+			<th>Purchase Date</th>
 			<th>Item</th>
 			<th>Size</th>
 			<th>Qty</th>
 			<th>Purchase Amount</th>
-			<th>Purchase Date</th>
+			
         </head>
 		<?php 
-		$history_sql = $DBH->query("select ps.amount_total, ps.purchase_date, pd.amount, pd.quantity, pd.size, p.name, p.image_location
+		$history_sql = $DBH->query("select ps.amount_total, ps.purchase_date, ps.confirmation_code, pd.amount, pd.quantity, pd.size, p.name, p.image_location
 				from purchase_summary ps 
 				join purchase_details pd on pd.purchase_summary_id = ps.id
 				join products p on p.id = pd.product_id
@@ -40,12 +41,14 @@ if(!isset($userId)){
 		//$history_sql->setFetchMode(PDO::FETCH_ASSOC);
 		while($row = $history_sql->fetch()){
 			echo '<tr>' . "\n";
-			echo '<td><image src="' . $row['image_location'] . '" alt="' . $row['name'] . '"></td>' . "\n";
+			//echo '<td><image src="' . $row['image_location'] . '" alt="' . $row['name'] . '"></td>' . "\n";
+			echo '<td>' . $row['confirmation_code'] . '</td>' . "\n";
+			echo '<td>' . $row['purchase_date'] . '</td>' . "\n";
 			echo '<td>' . $row['name'] . '</td>' . "\n";
 			echo '<td>' . $row['size'] . '</td>' . "\n";
 			echo '<td> x' . $row['quantity'] . '</td>' . "\n";
 			echo '<td>$' . number_format($row['amount'], 2) . '</td>';
-			echo '<td>' . $row['purchase_date'] . '</td>' . "\n";
+			
 			echo '</tr>' . "\n";
 		}
 		

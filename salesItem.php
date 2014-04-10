@@ -45,7 +45,7 @@ include_once "Products/products.php";
 		<div class="col-sm-8 col-sm-offset-2">
 			<div class ="text-center">
 				<!--Image banner-->	
-					<img src = "img/img3.jpg" alt="Generic men's product" width= "850" height="150">
+					<img src = "img/bannerSale.jpg" alt="Generic men's product" width= "870" height="150">
 					<a href = "top"></a>
 					</br></br>
 			</div><!-- end of div for image -->
@@ -196,9 +196,7 @@ include_once "Products/products.php";
 				</div>
 			</div>
 		</div><!--end of column div to display sales items-->
-	
-		
-	</div><!--end of second main row-->>
+	</div><!--end of second main row-->
 </div><!-- end of container-fluid-->
 	
 
