@@ -51,6 +51,20 @@
 									order by p.date_added desc");
 					$activewear_count_sql = $DBH->query("select count(*) from products where article_category = 'active wear'");
 					
+					$sleepwear_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+									from products p
+									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'sleep wear'
+									order by p.date_added desc");
+					$sleepwear_count_sql = $DBH->query("select count(*) from products where article_category = 'sleep wear'");
+					
+					$accessories_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+									from products p
+									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+									where p.age_category = 'adult' and p.gender_category = 'female' and p.article_category = 'accessories'
+									order by p.date_added desc");
+					$accessories_count_sql = $DBH->query("select count(*) from products where article_category = 'accessories'");
+					
 					$shoes_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 							from products p
 							left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
@@ -70,6 +84,10 @@
 					<li><a href="#Skirts" data-toggle="tab">Skirts</a></li>
 					
 					<li><a href="#ActiveWear" data-toggle="tab">Active Wear</a></li>
+					
+					<li><a href="#SleepWear" data-toggle="tab">Sleep Wear</a></li>
+					
+					<li><a href="#Accessories" data-toggle="tab">Accessories</a></li>
 					
 					<li><a href="#Shoes" data-toggle="tab">Shoes</a></li>
 								
@@ -250,6 +268,76 @@
 						?>                        
 						</table>
 					</div><!-- end of shoes tab-->
+					
+					
+					<!-- Sleep wear tab-->
+					<div class="tab-pane" id="SleepWear">
+						<table class="table table-product">
+						
+						<?php
+							$sleepwear_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$n = 0;
+							$count6 = $sleepwear_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $sleepwear_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display sleep wear in 4 columns
+								if (++$n % $per_row == 0 && $n >0 && $n < $count6) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of Sleep wear tab-->
+					
+					<!-- Accessories tab-->
+					<div class="tab-pane" id="Accessories">
+						<table class="table table-product">
+						
+						<?php
+							$accessories_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$p = 0;
+							$count7 = $accessories_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $accessories_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display accessories in 4 columns
+								if (++$p % $per_row == 0 && $p >0 && $p < $count7) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of Accessories tab-->  
+				
 				
 				</div><!-- end of tab-content-->
 				
