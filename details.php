@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-include_once( "Account/AccountManager.php" );
+
 
 $promotional_price = 0;
 $promotion = false;
@@ -147,6 +147,7 @@ $ACCT_MGR = AccountManager::getInstance();
 									}else{
 										echo '<button type="submit" class="btn btn-warning btn-lg" disabled>Out of Stock</button>' . "\n";
 									}
+									
 									?>
 									</p>
 									<input type="hidden" name="id" value="<?php echo $row['product_id']; ?>"/>
@@ -163,6 +164,17 @@ $ACCT_MGR = AccountManager::getInstance();
 									?>
 	
 							</form>
+							
+							<?php
+							
+							if($ACCT_MGR->getAccessLevel() == 1){
+								echo '<form class="form" method="POST" action="createPromotion.php">';
+								echo '<input type="hidden" value="' . $productId . '" name="productId">';
+								echo '<button type="submit" name="createPromotion" class="btn btn-warning btn-lg">Create Promotion</button>' . "\n";
+								echo '</form>';
+							}
+									
+							?>
 						</td>
 					</tr>
 					
@@ -228,7 +240,9 @@ $ACCT_MGR = AccountManager::getInstance();
 							echo '<p><i><h5>(Be the first to write a review!)</h5></p> </i>';
 						}
 					?>
-			</div>
+				</div>
+				
+				
 		</div>
     </div>
 </div>
