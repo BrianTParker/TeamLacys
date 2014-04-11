@@ -306,8 +306,8 @@
 
 <br/><br/><br/><br/>
 
-<!-- include footer file
+<!-- include footer file -->
 <?php
 	include "footer.php"
 ?>
-<!-- end of mens.php file-->
+<!-- end of mens.php file -->
