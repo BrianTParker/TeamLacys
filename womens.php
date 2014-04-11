@@ -8,7 +8,7 @@
 	
 	   <div class="col-sm-8 col-sm-offset-2">
 	   
-			<!--This is generic image area which has image of men's generic products-->	
+			<!--This is generic image area which has image of women's generic products-->	
 			<div class ="text-center">	
 				<img src = "img/bannerWomen.jpg" alt="Generic Women's product" width= "870" height="150">
 				</br></br>
@@ -348,8 +348,6 @@
 
 <br/><br/><br/><br/>
 
-<!-- include footer file
 <?php
 	include "footer.php"
 ?>
-<!-- end of mens.php file-->
