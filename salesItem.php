@@ -24,9 +24,9 @@ include_once "Products/products.php";
 	$women_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-								where p.age_category = 'adult' and p.gender_category = 'women'");
+								where p.age_category = 'adult' and p.gender_category = 'female'");
 								
-	$sale_women_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where p.gender_category = 'male' and pr.percentage !=0");
+	$sale_women_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where p.gender_category = 'female' and pr.percentage !=0");
 	
 	$child_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
@@ -105,7 +105,7 @@ include_once "Products/products.php";
 					</div><!--end of div for men's sales item-->
 
 					<!-- Women tab -->
-					<div class="tab-pane active" id="Women"> 
+					<div class="tab-pane" id="Women"> 
 						<table class = "table table-product">
 						<?php
 							$women_sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -137,7 +137,7 @@ include_once "Products/products.php";
 			
 			
 					<!-- Children tab -->
-					<div class="tab-pane active" id="Children"> 
+					<div class="tab-pane" id="Children"> 
 						<table class = "table table-product">
 						<?php
 							$child_sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -168,7 +168,7 @@ include_once "Products/products.php";
 					</div><!--end of div for children's sales item-->
 			
 					<!-- Kitchen tab -->
-					<div class="tab-pane active" id="Kitchen"> 
+					<div class="tab-pane" id="Kitchen"> 
 						<table class = "table table-product">
 					
 				
@@ -186,7 +186,7 @@ include_once "Products/products.php";
 					</div><!--end of div for home's sales item-->
 			
 					<!-- Beauty tab -->
-					<div class="tab-pane active" id="Beauty"> 
+					<div class="tab-pane" id="Beauty"> 
 						<table class = "table table-product">
 					
 				
