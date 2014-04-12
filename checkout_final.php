@@ -124,7 +124,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				
 		
 			
-		mail($to, $subject, $body, $headers);
+		//mail($to, $subject, $body, $headers);
 		
 
 		
