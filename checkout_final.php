@@ -1,10 +1,11 @@
 <?php
 include "header.php";
 include_once( "Checkout/CheckoutManager.php" );
-include_once( "Account/AccountManager.php" );
+
 $total = 0;
 $CHECKOUT_MGR = CheckoutManager::getInstance();
 $CART_MGR = CartManager::getInstance();
+$ACCT_MGR = AccountManager::getInstance();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($CART_MGR->isEmpty()){
@@ -37,11 +38,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo '        <th>Amount</th>' . "\n";
         echo '    </head>' . "\n";
             
-            
+				$emailSummary = "";
                 foreach( $CART_MGR->getItems() as $index => $item ){
                     $subTotal = 0;
                     //print_r( $item );
                     // print item to screen -nm
+					$emailSummary .= $item['name'] . " " . $item['size'] . " $" . number_format($item['price'], 2) . " x" . $item['quantity'] . " \n";
                     echo '<tr>' . "\n";
                     echo '<td>' . $item['name'] . '</td>' . "\n";
                     echo '<td>' . $item['size'] . '</td>' . "\n";
@@ -58,7 +60,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     echo '</tr>' . "\n";
                     
                 }
-            
+				
+				$emailSummary .= "\nTotal: " . number_format($total, 2);
+				$emailSummary .= "\nConfirmation# " . $status['confirmation_code'];
             
             echo '<tr>' . "\n";
 			
@@ -111,6 +115,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo '</table>' . "\n";
         $CART_MGR->emptyCart();
         $CHECKOUT_MGR->getNewSummary();
+		
+		$headers = 'From: sales@lacys.us';
+		$to = $ACCT_MGR->getEmail();
+		$subject = "Confirmation of Purchase";
+		$body = "Thank you for your purchase " . $ACCT_MGR->getFirstName() . ",\n
+				\n" . $emailSummary;
+				
+		
+			
+		//mail($to, $subject, $body, $headers);
+		
+
+		
         //header("location: index.php");
     }else{
         echo '<div class="row">';
