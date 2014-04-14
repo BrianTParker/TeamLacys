@@ -26,9 +26,9 @@ include_once "Products/products.php";
 					$bakeware_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-									where p.product_category = 'bakewear' 
+									where p.product_category = 'bakeware' 
 									order by p.date_added desc");								
-					$bakeware_count_sql = $DBH->query("select count(*) from products where product_category = 'bakewear'");
+					$bakeware_count_sql = $DBH->query("select count(*) from products where product_category = 'bakeware'");
 					
 					$cookware_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
@@ -57,9 +57,9 @@ include_once "Products/products.php";
 					?>
 					
 					<!-- navigation bar -->
-					<li class="active"><a href="#Bakeware" data-toggle="tab">Bakewear</a></li>
+					<li class="active"><a href="#Bakeware" data-toggle="tab">Bakeware</a></li>
 					
-					<li><a href="#Cookware" data-toggle="tab">Cookwear</a></li>
+					<li><a href="#Cookware" data-toggle="tab">Cookware</a></li>
 					
 					<li><a href="#dining" data-toggle="tab">Dining</a></li>
 					
