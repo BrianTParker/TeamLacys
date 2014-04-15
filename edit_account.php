@@ -56,7 +56,7 @@ if(!isset($firstName)){
                 $passwordError = "";
                 
                 
-                $status = $ACCT_MGR->editAccount($ACCT_MGR->getId(), $_POST['firstName'],$_POST['lastName'], $_POST['email'],$_POST['phone']);
+                $status = $ACCT_MGR->editAccount($ACCT_MGR->getId(), $_POST['firstName'],$_POST['lastName'], $_POST['email'],$_POST['phone'], $ACCT_MGR->getAccessLevel());
                 
                 if($status["success"] === 1){
                     header("location: account.php");
