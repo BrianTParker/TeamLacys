@@ -201,7 +201,7 @@ class AccountManager {
         
     }
     
-    public function editAccount($id,$firstName, $lastName, $email,$phone){
+    public function editAccount($id,$firstName, $lastName, $email,$phone, $accessLevel){
         global $DBH;
         $errors = array(); /* declare the array for later use */
         $success = 0;
@@ -275,8 +275,8 @@ class AccountManager {
         }
         else
         {
-            $id = $DBH->lastInsertId();
-            $this->setSessionVariables($firstName, $lastName, $email, $id, $phone);
+            
+            $this->setSessionVariables($firstName, $lastName, $email, $id, $phone, $accessLevel);
             $success = 1;
             return array("success" => $success,
                          "errors" => $errors);
