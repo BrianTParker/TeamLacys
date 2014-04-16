@@ -15,33 +15,36 @@ include_once "Products/products.php";
 	$men_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-								where p.age_category = 'adult' and p.gender_category = 'male'");
-								
-	
+								where p.age_category = 'adult' and p.gender_category = 'male' order by p.article_category");
 
-	$sale_men_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where p.gender_category = 'male' and pr.percentage !=0");
+	$sale_men_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id 
+								where p.gender_category = 'male' and pr.percentage !=0");
 	
 	$women_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
 								where p.age_category = 'adult' and p.gender_category = 'female'");
 								
-	$sale_women_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where p.gender_category = 'female' and pr.percentage !=0");
+	$sale_women_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id 
+								where p.gender_category = 'female' and pr.percentage !=0");
 	
 	$child_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
 								where p.age_category = 'child'");
 								
-	$sale_child_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where p.age_category = 'child' and pr.percentage !=0");
+	$sale_child_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id 
+								where p.age_category = 'child' and pr.percentage !=0");
 	
 	$kitchen_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-								where p.product_category = 'bakeware' or p.product_category = 'cookwear' or p.product_category = 'dining' or p.product_category = 'smallappliances'");
+								where p.product_category = 'bakeware' or p.product_category = 'cookwear' or p.product_category = 'dining' 
+								or p.product_category = 'smallappliances'");
 								
 	$sale_kitchen_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where 
-								p.product_category = 'bakeware' or p.product_category = 'cookwear' or p.product_category = 'dining' or p.product_category = 'smallappliances' and pr.percentage !=0");
+								p.product_category = 'bakeware' or p.product_category = 'cookwear' or p.product_category = 'dining' 
+								or p.product_category = 'smallappliances' and pr.percentage !=0");
 	
 	
 	$homeEssentials_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
@@ -56,10 +59,12 @@ include_once "Products/products.php";
 	$beauty_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, pr.percentage, pr.expiration_date
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-								where p.product_category = 'haircare' or p.product_category = 'perfume' or p.product_category = 'makeup' or p.product_category = 'cologne' ");
+								where p.product_category = 'haircare' or p.product_category = 'perfume' or p.product_category = 'makeup' 
+								or p.product_category = 'cologne'");
 								
 	$sale_beauty_count_sql = $DBH->query("select count(*) from products p left join promotions pr on pr.product_id = p.id where
-								p.product_category = 'haircare' or p.product_category = 'perfume' or p.product_category = 'makeup' or p.product_category = 'cologne' and pr.percentage !=0");
+								p.product_category = 'haircare' or p.product_category = 'perfume' or p.product_category = 'makeup' 
+								or p.product_category = 'cologne' and pr.percentage !=0");
 	
 	$per_row = 4;
 ?>
@@ -241,7 +246,7 @@ include_once "Products/products.php";
 									echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
 									echo '</td>';								
 
-									// display children's in 4 columns
+									// display home's in 4 columns
 									if (++$i % $per_row == 0 && $i >0 && $i < $count5) {
 										echo '<tr></tr>';
 									}
@@ -273,7 +278,7 @@ include_once "Products/products.php";
 									echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
 									echo '</td>';								
 
-									// display children's in 4 columns
+									// display beauty's in 4 columns
 									if (++$i % $per_row == 0 && $i >0 && $i < $count6) {
 										echo '<tr></tr>';
 									}
@@ -283,7 +288,7 @@ include_once "Products/products.php";
 						?> 
 						</table>
 					
-					</div><!--end of div for kitchen's sales item-->
+					</div><!--end of div for beauty's sales item-->
 				</div>
 			</div>
 		</div><!--end of column div to display sales items-->
