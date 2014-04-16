@@ -1,14 +1,4 @@
-<!--File name: Sales Item Page
-	Description: This file is used to display all sales items for all product categories 
--->
-	
-	
- <!-- include header file and products file
-  This is the section to formulate sql statement queries for each product categories and to count the sales items
-  under each categories
- --> 
-
- <?php
+<?php
 include "header.php";
 include_once "Products/products.php";
 
