@@ -328,7 +328,7 @@ class AccountManager {
 		// Added by Dhwani - 4/16
 		if(!empty($phone))
 		{
-			if(preg_match("^[2-9]\d{2}-\d{3}-\d{4}$^", $phone)) {
+			if(preg_match("/^([1]-)?[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone)) {
 			}
 			else
 			{
