@@ -240,6 +240,17 @@ class AccountManager {
         {
             $errors['lastName'] = 'The last name field must not be empty.';
         }
+		// Added by Dhwani - 4/16
+		if(!empty($phone))
+		{
+			if(preg_match("/^([1]-)?[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone)) {
+			}
+			else
+			{
+				$errors['phone'] = 'Invalid format. Use this format : 999-999-9999';
+			}
+			
+		}
         if(!empty($email)){
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'The email must be a valid format';
