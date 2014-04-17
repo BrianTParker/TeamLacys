@@ -10,7 +10,7 @@ include_once "Products/products.php";
 	   
 			<!--This is generic image area which has image of Home generic products-->	
 			<div class ="text-center">	
-				<img src = "img/bannerHome.jpg" alt="Generic Home product" width= "870" height="150">
+				<img src = "img/bannerHome.jpg" alt="Generic Home product" width= "100%" height="150">
 				</br></br>
 			</div><!-- end of div for image -->
 			
