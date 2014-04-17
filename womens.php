@@ -10,7 +10,7 @@
 	   
 			<!--This is generic image area which has image of women's generic products-->	
 			<div class ="text-center">	
-				<img src = "img/bannerWomen.jpg" alt="Generic Women's product" width= "870" height="150">
+				<img src = "img/bannerWomen.jpg" alt="Generic Women's product" width= "100%" height="150">
 				</br></br>
 			</div><!-- end of div for image -->
 			

@@ -65,7 +65,7 @@ include_once "Products/products.php";
 		<div class="col-sm-8 col-sm-offset-2">
 			<div class ="text-center">
 				<!--Image banner-->	
-					<img src = "img/bannerSale2.png" alt="Generic men's product" width= "870" height="150">
+					<img src = "img/bannerSale2.png" alt="Generic men's product" width= "100%" height="150">
 					<a href = "top"></a>
 					</br></br>
 			</div><!-- end of div for image -->
