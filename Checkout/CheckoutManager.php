@@ -61,10 +61,10 @@ class CheckoutManager{
         }else{
             $errors['security'] = 'The security code field cannot be blank';
         }
-        
+        // added by Dhwani
 		if(!($this->checkExpiredDate($expirationMonth, $expirationYear)))
 		{
-			$errors['expiredDate'] = 'The Credit Card is expired';
+			$errors['expiredDate'] = 'The Card is expired';
 		}
         
         if($shipping === "ship"){
@@ -89,7 +89,7 @@ class CheckoutManager{
             }else{
                 $errors['state'] = 'You must select a state';
             }
-            
+            // added by Dhwani
             if(!empty($zip)){
 				if(preg_match("/^[0-9]{5}$/", $zip)) { 
 				}

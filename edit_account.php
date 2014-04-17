@@ -12,6 +12,7 @@ if(!isset($firstName)){
     $phone = "";
     $firstNameError = "";
     $lastNameError = "";
+	$phoneError = "";
     $emailError = "";
     $passwordError = "";
 }
@@ -27,6 +28,7 @@ if(!isset($firstName)){
 			
 			$firstNameError = "";
 			$lastNameError = "";
+			$phoneError = "";
 			$emailError = "";
 			$passwordError = "";
             
@@ -52,6 +54,7 @@ if(!isset($firstName)){
             if(isset($_POST['saveAccountEdit'])){
                 $firstNameError = "";
                 $lastNameError = "";
+				$phoneError = "";
                 $emailError = "";
                 $passwordError = "";
                 
@@ -68,6 +71,9 @@ if(!isset($firstName)){
                     if(isset($status['errors']['lastName'])){
                         $lastNameError = $status['errors']['lastName'];
                     }
+					if(isset($status['errors']['phone'])){
+						$phoneError = $status['errors']['phone'];
+					}
                     if(isset($status['errors']['email'])){
                         $emailError = $status['errors']['email'];
                         
@@ -110,7 +116,7 @@ if(!isset($firstName)){
           
         echo '<div class="form-group">' . "\n";
           
-        echo '<label for="phone">Phone (optional)</label>' . "\n";
+        echo '<label for="phone">Phone (optional)</label>&nbsp;&nbsp&nbsp;&nbsp;<font color="red">' . $phoneError . '</font>' . "\n";
         echo '<div class="row">' . "\n";
         echo '<div class="col-xs-3">' . "\n";
         echo '<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter Phone" value="' .$phone . '">' . "\n";
