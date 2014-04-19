@@ -8,6 +8,8 @@
  include "db_connect.php";
  include_once( __DIR__ . '/php/cart/CartManager.php' );
  include_once( __DIR__ . '/Account/AccountManager.php' );
+ 
+ $ACCT_MGR = AccountManager::getInstance();
   ?>
   
   
@@ -93,6 +95,9 @@
 			  echo '<li><a href="login.php">Log In</a></li>';
 			  echo '<li><a href="newuser.php">Create Account</a></li>';
             }else{
+				if($ACCT_MGR->getAccessLevel() == 1){
+					echo "<li><a href='admin.php'>Admin</a></li>";
+				}
 			  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
 			  echo '<li><a href="account.php">My Account</a></li>';
               echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
