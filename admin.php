@@ -65,7 +65,7 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 					<div class = "tabbable">
 					<!-- Sales tab -->
 					
-					
+					</br>
 						
 							
 							<ul class = "nav nav-tabs">
@@ -81,7 +81,7 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 										<div class="tab-pane active" id="SalesByProduct"> 
 								
 							
-											<table class="table">
+											<table class="table table-admin">
 												<head>
 													<th>Product Name</th>
 													<th>Total Quantity Sold</th>
@@ -107,7 +107,7 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 										
 										<div class="tab-pane" id="SalesByCustomer">
 											
-											<table class="table">
+											<table class="table table-admin">
 												<head>
 													<th>Customer Name</th>
 													<th>Email</th>
@@ -133,7 +133,7 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 										
 										<div class="tab-pane" id="AllSales">
 											
-											<table class="table">
+											<table class="table table-admin">
 												<head>
 													<th>Customer Name</th>
 													<th>Email</th>
