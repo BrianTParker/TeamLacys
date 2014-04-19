@@ -30,7 +30,7 @@
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
   <footer>
-    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom" role="navigation">
+    <nav class="navbar navbar-inverse navbar-default lacyfooter" role="navigation">
       <div class="container">
         <div class="navbar-collapse collapse bottom-collapse">
         <div class="row">
