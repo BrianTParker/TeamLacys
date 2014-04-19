@@ -37,15 +37,15 @@
           <div class="col-md-4">
             <span class="glyphicon glyphicon-copyright-mark"></span>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-8">
             <ul class="nav navbar-nav">
               <li><a href="contact.php">Contact Us</a></li>
               <li><a href="privacy.php">Privacy Policy</a></li>
               <li><a href="about.php">About Us</a></li>
             </ul>
           </div>
-          <div class="col-md-3">
-          </div>
+         <!-- <div class="col-md-3">
+          </div>-->
         </div>
         </div>
         </div>
