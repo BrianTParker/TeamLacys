@@ -40,6 +40,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 			if (CartManager::getInstance()->isEmpty()){
 			
 				echo "<tr><td>There are no items in your cart!</td></tr>";
+				echo "</br></br></br></br></br></br></br>\n";
 			
 			}else{ // list all items in cart -nm
 			
@@ -147,8 +148,10 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 		</tr>
 		
 	</table>
+	</br>
 </div>
 </div>
+
 
 <?php
 include "footer.php";
