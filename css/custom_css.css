@@ -45,4 +45,9 @@
   -webkit-transition: all .2s ease-in-out;
           transition: all .2s ease-in-out;
 }
+.table-admin > tbody > tr > th,
+.table-admin > tfoot > tr > td {
+   border-top: 0px solid #ddd;
+}
+
 
