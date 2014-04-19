@@ -46,9 +46,6 @@
           </div>
           <div class="col-md-3">
           </div>
-          <div class="col-md-1">
-            <a class="navbar-brand text-right" href="index.php">Lacy's</a>
-          </div>
         </div>
         </div>
         </div>
