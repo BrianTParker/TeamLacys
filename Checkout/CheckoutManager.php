@@ -348,19 +348,10 @@ class CheckoutManager{
                               ':color'=>$color,
                               ':purchase_summary_id'=>$summaryId
                               ));
-			$availabilitySQL = $DBH->query("select av.id 
-                                            from availability av 
-                                            join colors c on c.id = av.color_id 
-                                            join sizes s on s.id = av.size_id 
-                                            where av.product_id = " . $item['id'] . "
-                                            and c.color_name = '" . $color . "' 
-                                            and s.size = '" . $item['size'] . "'");
-                                            
-            $availabilityRow = $availabilitySQL->fetch();
-            $availabilityID = $availabilityRow['id'];
-			$quantity_sql = "update availability set quantity = quantity - ? where id = ?";
+			
+			$quantity_sql = "update products set quantity = quantity - ? where id = ?";
 			$quantity = $DBH->prepare($quantity_sql);
-			$quantity->execute(array($item['quantity'], $availabilityID));
+			$quantity->execute(array($item['quantity'], $item['id']));
             
           
                         
