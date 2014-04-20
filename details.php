@@ -37,7 +37,7 @@ $ACCT_MGR = AccountManager::getInstance();
 								where r.product_id = " . $productId);
 								
 
-	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.price, pr.percentage, pr.expiration_date,
+	$details_sql = $DBH->query("select p.id as product_id, p.name as product_name, p.description as product_desc, p.image_location, p.has_color, p.has_size,p.price, pr.percentage, pr.expiration_date,
 								p.quantity
 								from products p
 								left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()							
@@ -115,29 +115,39 @@ $ACCT_MGR = AccountManager::getInstance();
 										?>										
 									</select>
 								<br/><br/>
-								<label>Size: &nbsp&nbsp&nbsp&nbsp</label>
-									<select style="width:80px" class="form-control" name="size">
-										<?php
-										$size_sql->setFetchMode(PDO::FETCH_ASSOC);
-										while($sizeRow = $size_sql->fetch()){
-											echo '<option>' . $sizeRow['size'] . '</option>' . "\n";
-										}	
-										?>
+								<?php
+								if($row['has_size'] == 1){
+									echo '<label>Size: &nbsp&nbsp&nbsp&nbsp</label>' . "\n";
+									echo '<select style="width:80px" class="form-control" name="size">' . "\n";
+									$size_sql->setFetchMode(PDO::FETCH_ASSOC);
+									while($sizeRow = $size_sql->fetch()){
+										echo '<option>' . $sizeRow['size'] . '</option>' . "\n";
+									}
+									echo '</select>' . "\n";
+									echo '<br/><br/>' . "\n";
+								}
+								?>
 										
-									</select>
-								<br/><br/>
-								<label>Color: &nbsp&nbsp</label>
-									<select style="width:100px" class="form-control" name="color">
-									<?php
+								<?php
+								if($row['has_color'] == 1){
+									echo '<label>Color: &nbsp&nbsp</label>' . "\n";
+									echo '<select style="width:100px" class="form-control" name="color">' . "\n";
 									$color_sql->setFetchMode(PDO::FETCH_ASSOC);
 									
 									while($colorRow = $color_sql->fetch()){
 										echo '<option>' . $colorRow['color_name'] . '</option>' . "\n";
 									}
-									?>
+									echo '</select>' . "\n";
+									echo '<br/><br/>' . "\n";
+								}
+								
+								?>
+								
+									
+									
 										
-									</select>
-									<br/><br/>
+									
+									
 	
 	
 								<p style="text-align:center;">
@@ -168,10 +178,12 @@ $ACCT_MGR = AccountManager::getInstance();
 							<?php
 							
 							if($ACCT_MGR->getAccessLevel() == 1){
+								echo '<div class="col-sm-3 col-sm-offset-3">';
 								echo '<form class="form" method="POST" action="createPromotion.php">';
 								echo '<input type="hidden" value="' . $productId . '" name="productId">';
 								echo '<button type="submit" name="createPromotion" class="btn btn-warning btn-lg">Create Promotion</button>' . "\n";
 								echo '</form>';
+								echo '</div>';
 							}
 									
 							?>
