@@ -168,12 +168,14 @@ $feedback_sql = $DBH->query("select * from feedback order by id desc");
 					
 					<!-- Feedback tab -->
 					<div class = "tab-pane fade" id="Feedback"> 
-						
-						<table class="table table-admin">
-						
+					<div class="col-md-5 col-md-offset-3">
+  				
 							<?php
 							$feedback_sql->setFetchMode(PDO::FETCH_ASSOC);
 							while($row = $feedback_sql->fetch()){
+								echo'</br>';
+								echo '<div class="well">';
+								echo '<table class="table table-admin">';
 								echo '<tr>' . "\n";
 								echo '<td><strong>Email:</strong> ' . $row['email'] . '</td>' . "\n";
 								echo '</tr>' . "\n";
@@ -187,13 +189,14 @@ $feedback_sql = $DBH->query("select * from feedback order by id desc");
 								echo '<td>' . $row['body'] . '</td>' . "\n";
 								echo '</tr>' . "\n";
 								echo '<tr>' . "\n";
-								echo '<td class="active"><br/></td>' . "\n";
+								echo '</table>';
+								echo '</div>';
 								
 							}
 							?>
 						
-						
-						</table>
+
+					</div>
 						
 					</div> <!--end of Feedback tab-->
 					
