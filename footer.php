@@ -30,25 +30,22 @@
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
   <footer>
-    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom" role="navigation">
+    <nav class="navbar navbar-inverse navbar-default lacyfooter" role="navigation">
       <div class="container">
         <div class="navbar-collapse collapse bottom-collapse">
         <div class="row">
           <div class="col-md-4">
             <span class="glyphicon glyphicon-copyright-mark"></span>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-8">
             <ul class="nav navbar-nav">
               <li><a href="contact.php">Contact Us</a></li>
               <li><a href="privacy.php">Privacy Policy</a></li>
               <li><a href="about.php">About Us</a></li>
             </ul>
           </div>
-          <div class="col-md-3">
-          </div>
-          <div class="col-md-1">
-            <a class="navbar-brand text-right" href="index.php">Lacy's</a>
-          </div>
+         <!-- <div class="col-md-3">
+          </div>-->
         </div>
         </div>
         </div>

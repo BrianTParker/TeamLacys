@@ -476,10 +476,9 @@ $total = 0;
                         </div>
                     </div>
 	        </form>
+		</div>
+	</div>
     <br/><br/><br/><br/>
-
-       
-
 
 
 <?php
