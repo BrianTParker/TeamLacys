@@ -34,6 +34,8 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 								join customers c on c.id = pd.customer_id
 								where ps.grand_total > 0
 								order by ps.purchase_date desc");
+								
+$feedback_sql = $DBH->query("select * from feedback order by id desc");
 ?>
 
 <div class="container-fluid">
@@ -145,7 +147,7 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 											<?php
 											$total_sales_sql->setFetchMode(PDO::FETCH_ASSOC);
 										
-										
+												
 												while($row = $total_sales_sql->fetch()){
 													echo '<tr>' . "\n";
 													echo '<td>' . $row['first_name'] . ' ' . $row['last_name'] . '</td>' . "\n";
@@ -166,7 +168,32 @@ $total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.pur
 					
 					<!-- Feedback tab -->
 					<div class = "tab-pane fade" id="Feedback"> 
-					
+						
+						<table class="table table-admin">
+						
+							<?php
+							$feedback_sql->setFetchMode(PDO::FETCH_ASSOC);
+							while($row = $feedback_sql->fetch()){
+								echo '<tr>' . "\n";
+								echo '<td><strong>Email:</strong> ' . $row['email'] . '</td>' . "\n";
+								echo '</tr>' . "\n";
+								echo '<tr>' . "\n";
+								echo '<td><strong>Name:</strong> ' . $row['name'] . '</td>' . "\n";
+								echo '</tr>' . "\n";
+								echo '<tr>' . "\n";
+								echo '<td><strong>Subject:</strong> ' . $row['subject'] . '</td>' . "\n";
+								echo '</tr>' . "\n";
+								echo '<tr>' . "\n";
+								echo '<td>' . $row['body'] . '</td>' . "\n";
+								echo '</tr>' . "\n";
+								echo '<tr>' . "\n";
+								echo '<td class="active"><br/></td>' . "\n";
+								
+							}
+							?>
+						
+						
+						</table>
 						
 					</div> <!--end of Feedback tab-->
 					
