@@ -87,8 +87,14 @@
           </div>
           <button type="submit" class="btn btn-default">Submit</button>
         </form>-->
+		
         <ul class="nav navbar-nav navbar-right">
-			
+			<form class="navbar-form navbar-right" role="search" method="POST" action="search.php">
+			<div class="form-group">
+			  <input name="searchString"type="text" class="form-control" placeholder="Search" required>
+			</div>
+			<button name="submit" type="submit" class="btn btn-default">Submit</button>
+			</form>
           <?php
             if(!AccountManager::getInstance()->isLoggedIn()){
 			  echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
