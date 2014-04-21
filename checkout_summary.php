@@ -31,7 +31,12 @@ $orderTotal = $CHECKOUT_MGR->getOrderTotal();
                     // print item to screen -nm
                     echo '<tr>' . "\n";
                     echo '<td>' . $item['name'] . '</td>' . "\n";
-                    echo '<td>' . $item['size'] . '</td>' . "\n";
+					if(isset($item['size'])){
+						echo '<td>' . $item['size'] . '</td>' . "\n";
+					}else{
+						echo '<td>N/A</td>' . "\n";
+					}
+                    
                     echo '<td>$' . number_format($item['price']) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
                     if(isset($item['color'])){

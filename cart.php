@@ -65,7 +65,11 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 					echo '	</td>';
 					
 					echo '	<td>';
-					echo '		<font>' . $item['size'] . '</font>';
+					if(isset($item['size'])){
+						echo '		<font>' . $item['size'] . '</font>';
+					}else{
+						echo '		<font>N/A</font>';
+					}
 					echo '	</td>';
                     
                     echo '	<td>';
