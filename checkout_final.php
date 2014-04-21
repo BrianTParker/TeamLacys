@@ -43,10 +43,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $subTotal = 0;
                     //print_r( $item );
                     // print item to screen -nm
-					$emailSummary .= $item['name'] . " " . $item['size'] . " $" . number_format($item['price'], 2) . " x" . $item['quantity'] . " \n";
+					if(isset($item['size'])){
+						$size = $item['size'];
+					}else{
+						$size = "N/A";
+					}
+					$emailSummary .= $item['name'] . " " . $size . " $" . number_format($item['price'], 2) . " x" . $item['quantity'] . " \n";
                     echo '<tr>' . "\n";
                     echo '<td>' . $item['name'] . '</td>' . "\n";
-                    echo '<td>' . $item['size'] . '</td>' . "\n";
+					
+					echo '<td>' . $size . '</td>' . "\n";
+					
                     echo '<td>$' . number_format($item['price']) . '</td>' . "\n";
                     echo '<td> x' . $item['quantity'] . '</td>' . "\n";
                     if(isset($item['color'])){
