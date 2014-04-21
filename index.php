@@ -21,7 +21,9 @@ include "header.php";
 				<div class="row">
 
 					<div class="col-sm-8 col-sm-offset-2">
-						<img src="img/mainMen.jpg" alt="First slide">
+						<a href="./mens.php">
+							<img src="img/mainMen.jpg" alt="First slide" width = "100%">
+						</a>
 						<div class="carousel-caption">
               
 						</div>
@@ -36,7 +38,9 @@ include "header.php";
 				<div class="row">
 
 					<div class="col-sm-8 col-sm-offset-2">
-						<img src="img/mainWomen.jpg" alt="First slide">
+						<a href="./womens.php">
+							<img src="img/mainWomen.jpg" alt="First slide" width = "100%">
+						</a>
 					</div>
 				</div>
 			</div>
@@ -48,7 +52,9 @@ include "header.php";
 				<div class="row">
 
 					<div class="col-sm-8 col-sm-offset-2">
-						<img src="img/mainChild.jpg" alt="First slide">
+						<a href="./children.php">
+							<img src="img/mainChild.jpg" alt="First slide" width = "100%">
+						</a>
 					</div>
 				</div>
 			</div>
@@ -60,7 +66,9 @@ include "header.php";
 				<div class="row">
 
 					<div class="col-sm-8 col-sm-offset-2">
-						<img src="img/mainKitchen.jpg" alt="First slide">
+						<a href="./kitchen.php">
+							<img src="img/mainKitchen.jpg" alt="First slide" width = "100%">
+						</a>
 					</div>
 				</div>
 			</div>
@@ -72,7 +80,9 @@ include "header.php";
 				<div class="row">
 
 					<div class="col-sm-8 col-sm-offset-2">
-						<img src="img/mainHome.jpg" alt="First slide">
+						<a href="./homeEssential.php">
+							<img src="img/mainHome.jpg" alt="First slide" width = "100%">
+						</a>
 					</div>
 				</div>
 			</div>
@@ -84,7 +94,9 @@ include "header.php";
 				<div class="row">
 
 					<div class="col-sm-8 col-sm-offset-2">
-						<img src="img/mainBeauty.jpg" alt="First slide">
+						<a href="./beauty.php">
+							<img src="img/mainBeauty.jpg" alt="First slide" width = "100%">
+						</a>
 					</div>
 				</div>
 			</div>
