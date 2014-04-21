@@ -15,6 +15,11 @@
 									or article_category like '%$searchString%'
 									or gender_category like '%$searchString%'
 									order by p.date_added desc");
+									
+			$stmt_count_sql = $DBH->query("select count(*) from products where name like '%$searchString%'
+									or product_category like '%$searchString%'
+									or article_category like '%$searchString%'
+									or gender_category like '%$searchString%'");
 			
 			
 		}
@@ -37,8 +42,8 @@ $per_row = 4;
 			<?php
 			
 			
-			$count1 = $stmt->fetch();			
-			
+			//$count1 = $stmt->fetch();			
+			$count1 = $stmt_count_sql->fetch();
 			
 			$i = 0;
 										
