@@ -81,12 +81,12 @@
 		  <li><a href="beauty.php">Beauty</a></li>
 		  <li><a href="salesItem.php">Sales</a></li>
 		</ul>
-        <!--<form class="navbar-form navbar-left" role="search">
+        <form action="search.php" method="POST" class="navbar-form navbar-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input name="searchString" type="text" class="form-control" placeholder="Search">
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>-->
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
         <ul class="nav navbar-nav navbar-right">
 			
           <?php
