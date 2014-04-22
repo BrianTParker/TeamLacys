@@ -16,8 +16,8 @@ include "header.php";
         If at any time you are dissatisfied, or if you have questions, 
         please contact us.<br/><br/>
 
-        888-888-8888<br/>
-        <li><a href="contact.php">Contact Us</a></li>
+        Phone: 888-888-8888<br/>
+        <li><a href="contact.php">Email</a></li>
     </div>
     
 </div>
