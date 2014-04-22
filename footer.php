@@ -1,3 +1,23 @@
+</div>
+ <div class="lacys_footer">
+  <hr style="border-top: 1px solid #ddd">
+    <div class="row">
+		<div class="col-md-5 col-md-offset-5">
+			<ul class="nav navbar-nav text-center">
+			  <li><a href="contact.php">Contact Us</a></li>
+			  <li><a href="privacy.php">Privacy Policy</a></li>
+			  <li><a href="about.php">About Us</a></li>
+			</ul>
+		</div>
+    </div>
+    <hr style="border-top: 1px solid #ddd">
+    <div class="row">
+		<div class="col-md-5 col-md-offset-4">
+	 <div style="text-align:center">© Contigo Solutions Inc, 5150 Sugarloaf Pkwy, 
+	     Lawrenceville, GA 30043<br> All rights reserved |Something about bootstrap</div>
+         </div>
+         </div>
+    </div>
 
   <!-- JavaScript at the bottom for fast page loading -->
 
@@ -29,19 +49,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  </br></br>
-  <hr style="border-top: 1px solid #ddd">
- <div class="container-fluid">	
-		<div class="col-md-5 col-md-offset-4">
-			<ul class="nav navbar-nav text-center">
-			  <li><a href="contact.php">Contact Us</a></li>
-			  <li><a href="privacy.php">Privacy Policy</a></li>
-			  <li><a href="about.php">About Us</a></li>
-			</ul>
-		</div>
-    </div><!-- /.container-fluid -->
-	 <p align="center" style="border-top: 1px solid #ddd">© Contigo Solutions Inc, 5150 Sugarloaf Pkwy, 
-	     Lawrenceville, GA 30043<br> All rights reserved |Something about bootstrap</p>
+
+
+ 
+   
   </body>
 </html>
 <?php ob_flush(); ?>

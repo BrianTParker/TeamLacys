@@ -51,6 +51,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/custom_css.css" rel="stylesheet">
+    <link href="css/footer_style.css" rel="stylesheet">
   
     <!-- All JavaScript at the bottom, except for Modernizr / Respond.
          Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
@@ -59,7 +60,7 @@
   </head>
   
   <body>
-  
+  <div class="lacys_wrapper">
   <nav class="navbar navbar-inverse navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -108,3 +109,4 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+<div id="lacys_content">

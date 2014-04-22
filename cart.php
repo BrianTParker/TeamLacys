@@ -102,8 +102,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 	</table>
 </div>
 </div>
-</div>
-</div>
+
 
 <div class="row">
 	<div class="col-sm-3 col-sm-offset-8">

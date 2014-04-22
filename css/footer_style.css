@@ -1,0 +1,21 @@
+
+
+.lacys_wrapper{
+    min-height:100%;
+    position:relative;
+
+        
+}
+
+.lacys_footer{
+    height:100px;
+    width:100%;
+    position:absolute;
+    left:0px;
+    bottom:100px;
+}
+
+#lacys_content {
+
+padding-bottom:200px; /* Height of the footer element */
+}
