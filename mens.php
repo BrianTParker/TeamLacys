@@ -36,6 +36,13 @@
 									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'shirts'
 									order by p.date_added desc");	
 					$shirts_count_sql = $DBH->query("select count(*) from products where article_category = 'shirts'");
+					
+					$suits_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+									from products p
+									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+									where p.age_category = 'adult' and p.gender_category = 'male' and p.article_category = 'suits'
+									order by p.date_added desc");	
+					$suits_count_sql = $DBH->query("select count(*) from products where article_category = 'suits'");
 
 					$belts_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
@@ -75,6 +82,8 @@
 					<li class="active"><a href="#Pants" data-toggle="tab">Pants</a></li>
 					
 					<li><a href="#Shirts" data-toggle="tab">Shirts</a></li>
+					
+					<li><a href="#Suits" data-toggle="tab">Suits</a></li>
 					
 					<li><a href="#Belts" data-toggle="tab">Belts</a></li>
 					
@@ -158,6 +167,40 @@
 						?>                        
 						</table>
 					</div><!-- end of shirts tab-->
+					
+					<!-- suits tab-->
+					<div class="tab-pane" id="Suits">
+						<table class="table table-product">
+						
+						<?php
+							$suits_sql->setFetchMode(PDO::FETCH_ASSOC);
+							$j = 0;
+							$count2 = $suits_count_sql->fetch();
+
+							echo "<br/>\n";
+							while($row = $suits_sql->fetch()) {
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+								
+								// display suits in 4 columns
+								if (++$j % $per_row == 0 && $j >0 && $j < $count2) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+					</div><!-- end of suites tab-->
 					
 					
 					<!-- Belts tab-->
