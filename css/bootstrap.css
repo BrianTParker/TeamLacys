@@ -3676,6 +3676,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     box-shadow: none;
   }
   .navbar-collapse.collapse {
+    text-align: center;
     display: block !important;
     height: auto !important;
     padding-bottom: 0;
@@ -3786,6 +3787,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-nav {
+  display: inline-block;
   margin: 7.5px -15px;
 }
 .navbar-nav > li > a {

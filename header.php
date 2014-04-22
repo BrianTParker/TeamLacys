@@ -60,11 +60,64 @@
   
   <body>
   
-  <div style="width:100%; text-align:center">
-	<img src="./img/logo01.png"/>
+	<div>
+		<div class="control-panel">
+			<ul>
+				<?php
+				  if(!AccountManager::getInstance()->isLoggedIn()){
+					  echo '<li><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					  echo '<li><a href="login.php">Log In</a></li>';
+					  echo '<li><a href="newuser.php">Create Account</a></li>';
+					}else{
+						if($ACCT_MGR->getAccessLevel() == 1){
+							echo "<li><a href='admin.php'>Admin</a></li>";
+						}
+					  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
+					  echo '<li><a href="account.php">My Account</a></li>';
+					  echo '<li><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					  echo '<li><a id="logout" href="">Logout</a></li>';
+					}
+				?>
+			</ul>
+		</div>
+	</div>
+   <!--<div class="" role="navigation">
+    <div class="container-fluid">
+
+      <div class="">
+        <form action="search.php" method="POST" class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+            <input name="searchString" type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+        <ul class="nav navbar-nav navbar-left">
+			
+
+            /* if(!AccountManager::getInstance()->isLoggedIn()){
+			  echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
+			  echo '<li><a href="login.php">Log In</a></li>';
+			  echo '<li><a href="newuser.php">Create Account</a></li>';
+            }else{
+				if($ACCT_MGR->getAccessLevel() == 1){
+					echo "<li><a href='admin.php'>Admin</a></li>";
+				}
+			  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
+			  echo '<li><a href="account.php">My Account</a></li>';
+              echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
+              echo '<li><a id="logout" href="">Logout</a></li>';
+            } */
+
+        </ul>
+      </div><!-- /.navbar-collapse -->
+  
+  <div id="logo">
+	<a href='./index.php'>
+		<img src="./img/logo01.png"/>
+	</a>
   </div>
   
-  <nav class="navbar navbar-inverse navbar-default" role="navigation">
+  <nav class="navbar navbar-inverse navbar-center" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -73,7 +126,6 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">Lacy's</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
@@ -91,24 +143,6 @@
           </div>
           <button type="submit" class="btn btn-default">Search</button>
         </form>
-        <ul class="nav navbar-nav navbar-right">
-			
-          <?php
-            if(!AccountManager::getInstance()->isLoggedIn()){
-			  echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
-			  echo '<li><a href="login.php">Log In</a></li>';
-			  echo '<li><a href="newuser.php">Create Account</a></li>';
-            }else{
-				if($ACCT_MGR->getAccessLevel() == 1){
-					echo "<li><a href='admin.php'>Admin</a></li>";
-				}
-			  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
-			  echo '<li><a href="account.php">My Account</a></li>';
-              echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
-              echo '<li><a id="logout" href="">Logout</a></li>';
-            }
-          ?>
-        </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>

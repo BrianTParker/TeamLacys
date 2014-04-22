@@ -50,6 +50,30 @@
    border-top: 0px solid #ddd;
 }
 
+.control-panel{
+	
+	width: 100%;
+	background: #e4e4e4;
+	height: 25px;
+	-webkit-box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.5);
+	box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.5);
+}
+
+.control-panel ul{
+	list-style-type: none;
+	margin-left: -50px;
+}
+
+.control-panel li{
+	display: inline;
+	padding-left: 25px;
+}
+
+#logo{
+	width:100%; 
+	text-align:center;
+	padding: 5px;
+}
 
 .lacyfooter{
 	margin-bottom: -20px;
