@@ -66,13 +66,16 @@
 
 .control-panel li{
 	display: inline;
-	padding-left: 25px;
+	padding-left: 15px;
 }
 
 #logo{
 	width:100%; 
-	text-align:center;
 	padding: 5px;
+}
+
+#search{
+	padding-top: 15px;
 }
 
 .lacyfooter{

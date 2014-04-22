@@ -65,17 +65,17 @@
 			<ul>
 				<?php
 				  if(!AccountManager::getInstance()->isLoggedIn()){
-					  echo '<li><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					  echo '<li><a href="login.php">Log In</a></li>';
 					  echo '<li><a href="newuser.php">Create Account</a></li>';
+					  echo '<li style="float: right"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					}else{
 						if($ACCT_MGR->getAccessLevel() == 1){
 							echo "<li><a href='admin.php'>Admin</a></li>";
 						}
 					  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
 					  echo '<li><a href="account.php">My Account</a></li>';
-					  echo '<li><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					  echo '<li><a id="logout" href="">Logout</a></li>';
+					  echo '<li style="float: right"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					}
 				?>
 			</ul>
@@ -111,10 +111,23 @@
         </ul>
       </div><!-- /.navbar-collapse -->
   
-  <div id="logo">
-	<a href='./index.php'>
-		<img src="./img/logo01.png"/>
-	</a>
+  <div class="container-fluid">
+		<div class="row">
+			<div id="logo">
+				<a href='./index.php'>
+					<img src="./img/logo01.png"/>
+				</a>
+			</div>
+			
+			<div>
+				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search">
+					  <div class="form-group">
+						<input name="searchString" type="text" class="form-control" placeholder="Search">
+					  </div>
+					  <button type="submit" class="btn btn-default">Search</button>
+				</form>
+			</div>
+		</div>
   </div>
   
   <nav class="navbar navbar-inverse navbar-center" role="navigation">
@@ -137,12 +150,6 @@
 		  <li><a href="beauty.php">Beauty</a></li>
 		  <li><a href="salesItem.php">Sales</a></li>
 		</ul>
-        <form action="search.php" method="POST" class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-            <input name="searchString" type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Search</button>
-        </form>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
