@@ -118,6 +118,8 @@ if(!isset($cardName)){
 	
 }
 $total = 0;
+
+$card_sql = $DBH->query("select card from card_types");
 ?>
 
 <div class="row">
@@ -240,10 +242,13 @@ $total = 0;
             <div class="form-group">
 
                 <label for="" class="control-label col-xs-4">Card Type</label>
-                <div class="col-xs-4">
+                <div class="col-xs-5">
                         <select class="form-control" name="type">
-                            <option>Visa</option>
-                            <option>Mastercard</option>
+                            <?php
+                            while($cardType = $card_sql->fetch(PDO::FETCH_ASSOC)){
+                                echo '<option>' . $cardType['card'] . '</option>' . "\n";
+                            }
+                            ?>
                         </select> 
                     </div>
                 </div>

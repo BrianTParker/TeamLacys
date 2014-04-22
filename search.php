@@ -5,21 +5,22 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
 		if(isset($_POST['searchString'])){
-			$searchString = $_POST['searchString'];
-			$split = explode(" ", $searchString);
+            
+			$_SESSION['searchString'] = $_POST['searchString'];
+			
 			$stmt = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
 									from products p
 									left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
-									where name like '%$searchString%'
-									or product_category like '%$searchString%'
-									or article_category like '%$searchString%'
-									or gender_category like '%$searchString%'
+									where name like '%" . $_SESSION['searchString'] . "%'
+									or product_category like '%" . $_SESSION['searchString'] . "%'
+									or article_category like '%" . $_SESSION['searchString'] . "%'
+									or gender_category like '%" . $_SESSION['searchString'] . "%'
 									order by p.date_added desc");
 									
-			$stmt_count_sql = $DBH->query("select count(*) from products where name like '%$searchString%'
-									or product_category like '%$searchString%'
-									or article_category like '%$searchString%'
-									or gender_category like '%$searchString%'");
+			$stmt_count_sql = $DBH->query("select count(*) from products where name like '%" . $_SESSION['searchString'] . "%'
+									or product_category like '%" . $_SESSION['searchString'] . "%'
+									or article_category like '%" . $_SESSION['searchString'] . "%'
+									or gender_category like '%" . $_SESSION['searchString'] . "'");
 			
 			
 		}
@@ -27,8 +28,8 @@
 if(!isset($stmt)){
 	$stmt = null;
 }
-if(!isset($searchString)){
-	$searchString = null;
+if(!isset($_SESSION['searchString'])){
+	$_SESSION['searchString'] = null;
 }
 
 $per_row = 4;
