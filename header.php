@@ -115,7 +115,7 @@
 		<div class="row">
 			<div id="logo">
 				<a href='./index.php'>
-					<img src="./img/logo01.png"/ style="float:left">
+					<img src="./img/logo02.png"/ style="float:left">
 				</a>
 				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search">
 					  <div class="form-group">
