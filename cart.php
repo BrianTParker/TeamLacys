@@ -120,7 +120,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 		</tr>
 		
 		<tr>
-			<td><b>Shipping Cost:</b></td>
+			<td><b>Estimated Shipping:</b></td>
 			<td><?php echo "$" . number_format( $orderTotal['ship'], 2 ); ?></td>
 		</tr>
 		
