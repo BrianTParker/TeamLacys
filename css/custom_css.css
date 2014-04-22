@@ -50,7 +50,46 @@
    border-top: 0px solid #ddd;
 }
 
+.control-panel{
+	
+	width: 100%;
+	background: #e4e4e4;
+	height: 25px;
+	-webkit-box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.5);
+	box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.5);
+}
+
+.control-panel ul{
+	list-style-type: none;
+	margin-left: -50px;
+}
+
+.control-panel li{
+	display: inline;
+	padding-left: 15px;
+}
+
+#logo{
+	width:100%; 
+	padding: 5px;
+}
+
+#search{
+	padding-top: 15px;
+}
 
 .lacyfooter{
 	margin-bottom: -20px;
 }
+.navbar-nav-lacys > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 5px;
+}
+@media (min-width: 768px) {
+  .navbar-nav-lacys {
+    float: center;
+    margin: 0;
+  }
+
+

@@ -60,37 +60,41 @@
   
   <body>
   
-  <nav class="navbar navbar-inverse navbar-default" role="navigation">
+	<div>
+		<div class="control-panel">
+			<ul>
+				<?php
+				  if(!AccountManager::getInstance()->isLoggedIn()){
+					  echo '<li style="padding-left: 200px"><a href="login.php">Log In</a></li>';
+					  echo '<li><a href="newuser.php">Create Account</a></li>';
+					  echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					}else{
+						if($ACCT_MGR->getAccessLevel() == 1){
+							echo '<li style="padding-left:200px"><a href="admin.php">Admin</a></li>';
+						}
+					  echo '<li><a href="account.php">Welcome, '.$_SESSION['firstName'].'</a></li>';
+					  echo '<li><a href="account.php">My Account</a></li>';
+					  echo '<li><a id="logout" href="">Logout</a></li>';
+					  echo '<li style="float: right; padding-right50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					}
+				?>
+			</ul>
+		</div>
+	</div>
+   <!--<div class="" role="navigation">
     <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.php">Lacy's</a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="mens.php">Men</a></li>
-          <li><a href="womens.php">Women</a></li>
-          <li><a href="children.php">Children</a></li>
-		  <li><a href="kitchen.php">Kitchen & Dining</a></li>
-		  <li><a href="homeEssential.php">Home Essentials</a></li>
-		  <li><a href="beauty.php">Beauty</a></li>
-		  <li><a href="salesItem.php">Sales</a></li>
-		</ul>
+
+      <div class="">
         <form action="search.php" method="POST" class="navbar-form navbar-right" role="search">
           <div class="form-group">
             <input name="searchString" type="text" class="form-control" placeholder="Search">
           </div>
           <button type="submit" class="btn btn-default">Search</button>
         </form>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-left">
 			
-          <?php
-            if(!AccountManager::getInstance()->isLoggedIn()){
+
+            /* if(!AccountManager::getInstance()->isLoggedIn()){
 			  echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
 			  echo '<li><a href="login.php">Log In</a></li>';
 			  echo '<li><a href="newuser.php">Create Account</a></li>';
@@ -102,9 +106,49 @@
 			  echo '<li><a href="account.php">My Account</a></li>';
               echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';
               echo '<li><a id="logout" href="">Logout</a></li>';
-            }
-          ?>
+            } */
+
         </ul>
+      </div><!-- /.navbar-collapse -->
+  
+  <div class="container-fluid">
+		<div class="row">
+			<div id="logo">
+				<a href='./index.php'>
+					<img src="./img/logo02.png"/ style="float:left; padding-left: 180px;">
+				</a>
+				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:200px;">
+					  <div class="form-group">
+						<input name="searchString" type="text" class="form-control" placeholder="Search">
+					  </div>
+					  <button type="submit" class="btn btn-default">Search</button>
+				</form>
+			</div>
+		</div>
+  </div>
+ 
+  <nav class="navbar navbar-inverse navbar-center" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+	  
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-nav-lacys">
+		  <li><a href="mens.php"><strong>Men</strong></a></li>
+          <li><a href="womens.php"><strong>Women</strong></a></li>
+          <li><a href="children.php"><strong>Children</strong></a></li>
+		  <li><a href="kitchen.php"><strong>Kitchen & Dining</strong></a></li>
+		  <li><a href="homeEssential.php"><strong>Home Essentials</strong></a></li>
+		  <li><a href="beauty.php"><strong>Beauty</strong></a></li>
+		  <li><a href="salesItem.php"><strong>Sales</strong></a></li>
+		</ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+  
