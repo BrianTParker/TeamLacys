@@ -81,3 +81,15 @@
 .lacyfooter{
 	margin-bottom: -20px;
 }
+.navbar-nav-lacys > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 5px;
+}
+@media (min-width: 768px) {
+  .navbar-nav-lacys {
+    float: center;
+    margin: 0;
+  }
+
+

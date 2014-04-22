@@ -67,7 +67,7 @@
 				  if(!AccountManager::getInstance()->isLoggedIn()){
 					  echo '<li><a href="login.php">Log In</a></li>';
 					  echo '<li><a href="newuser.php">Create Account</a></li>';
-					  echo '<li style="float: right"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					  echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					}else{
 						if($ACCT_MGR->getAccessLevel() == 1){
 							echo "<li><a href='admin.php'>Admin</a></li>";
@@ -75,7 +75,7 @@
 					  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
 					  echo '<li><a href="account.php">My Account</a></li>';
 					  echo '<li><a id="logout" href="">Logout</a></li>';
-					  echo '<li style="float: right"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					  echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					}
 				?>
 			</ul>
@@ -115,11 +115,8 @@
 		<div class="row">
 			<div id="logo">
 				<a href='./index.php'>
-					<img src="./img/logo01.png"/>
+					<img src="./img/logo01.png"/ style="float:left">
 				</a>
-			</div>
-			
-			<div>
 				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search">
 					  <div class="form-group">
 						<input name="searchString" type="text" class="form-control" placeholder="Search">
@@ -129,7 +126,7 @@
 			</div>
 		</div>
   </div>
-  
+ 
   <nav class="navbar navbar-inverse navbar-center" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -140,16 +137,18 @@
           <span class="icon-bar"></span>
         </button>
       </div>
+	  
       <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="mens.php">Men</a></li>
-          <li><a href="womens.php">Women</a></li>
-          <li><a href="children.php">Children</a></li>
-		  <li><a href="kitchen.php">Kitchen & Dining</a></li>
-		  <li><a href="homeEssential.php">Home Essentials</a></li>
-		  <li><a href="beauty.php">Beauty</a></li>
-		  <li><a href="salesItem.php">Sales</a></li>
+        <ul class="nav navbar-nav navbar-nav-lacys">
+		  <li><a href="mens.php"><strong>Men</strong></a></li>
+          <li><a href="womens.php"><strong>Women</strong></a></li>
+          <li><a href="children.php"><strong>Children</strong></a></li>
+		  <li><a href="kitchen.php"><strong>Kitchen & Dining</strong></a></li>
+		  <li><a href="homeEssential.php"><strong>Home Essentials</strong></a></li>
+		  <li><a href="beauty.php"><strong>Beauty</strong></a></li>
+		  <li><a href="salesItem.php"><strong>Sales</strong></a></li>
 		</ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+  
