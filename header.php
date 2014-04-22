@@ -58,6 +58,10 @@
   
   <body>
   
+  <div style="width:100%; text-align:center">
+	<img src="./img/logo01.png"/>
+  </div>
+  
   <nav class="navbar navbar-inverse navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
