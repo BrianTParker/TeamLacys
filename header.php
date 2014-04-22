@@ -65,17 +65,17 @@
 			<ul>
 				<?php
 				  if(!AccountManager::getInstance()->isLoggedIn()){
-					  echo '<li><a href="login.php">Log In</a></li>';
+					  echo '<li style="padding-left: 200px"><a href="login.php">Log In</a></li>';
 					  echo '<li><a href="newuser.php">Create Account</a></li>';
 					  echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					}else{
 						if($ACCT_MGR->getAccessLevel() == 1){
-							echo '<li><a href="admin.php">Admin</a></li>';
+							echo '<li style="padding-left:200px"><a href="admin.php">Admin</a></li>';
 						}
 					  echo '<li><a href="account.php">Welcome, '.$_SESSION['firstName'].'</a></li>';
 					  echo '<li><a href="account.php">My Account</a></li>';
 					  echo '<li><a id="logout" href="">Logout</a></li>';
-					  echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
+					  echo '<li style="float: right; padding-right50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 					}
 				?>
 			</ul>
@@ -115,9 +115,9 @@
 		<div class="row">
 			<div id="logo">
 				<a href='./index.php'>
-					<img src="./img/logo02.png"/ style="float:left">
+					<img src="./img/logo02.png"/ style="float:left; padding-left: 180px;">
 				</a>
-				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search">
+				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:200px;">
 					  <div class="form-group">
 						<input name="searchString" type="text" class="form-control" placeholder="Search">
 					  </div>
