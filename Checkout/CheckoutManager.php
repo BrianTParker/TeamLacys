@@ -414,7 +414,7 @@ class CheckoutManager{
 			$orderTotal["sub"] += $item[ 'price' ] * $item[ 'quantity' ];
 		}
 		
-		if ( $_SESSION[ "summary" ][ "shipping" ] == "pickup" ){
+		if ( isset( $_SESSION[ 'summary' ] ) && $_SESSION[ "summary" ][ "shipping" ] == "pickup" ){
 		
 			$orderTotal[ "ship" ]	= 0.00;
 		}else{
