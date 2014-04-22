@@ -11,7 +11,6 @@
   <script defer src="js/script.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/docs.min.js"></script>
   <script type="text/javascript" src="js/mylibs/lacy.lib.js"></script>
   <!-- end scripts-->
 
@@ -30,31 +29,20 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  <footer>
-    <nav class="navbar navbar-inverse navbar-default navbar-fixed-bottom" role="navigation">
-      <div class="container">
-        <div class="navbar-collapse collapse bottom-collapse">
-        <div class="row">
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-copyright-mark"></span>
-          </div>
-          <div class="col-md-4">
-            <ul class="nav navbar-nav">
-              <li><a href="contact.php">Contact Us</a></li>
-              <li><a href="privacy.php">Privacy Policy</a></li>
-              <li><a href="about.php">About Us</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-          </div>
-          <div class="col-md-1">
-            <a class="navbar-brand text-right" href="index.php">Lacy's</a>
-          </div>
-        </div>
-        </div>
-        </div>
-      </nav>
-    </footer>
+  </br></br>
+  <hr style="border-top: 1px solid #ddd; margin:0">
+ <div class="container-fluid">	
+		<div class="col-md-5 col-md-offset-4">
+			<ul class="nav navbar-nav text-center">
+			  <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+			  <li><a href="contact.php">Contact Us</a></li>
+			  <li><a href="privacy.php">Privacy Policy</a></li>
+			  <li><a href="about.php">About Us</a></li>
+			</ul>
+		</div>
+    </div><!-- /.container-fluid -->
+	 <p align="center" style="border-top: 1px solid #ddd; font-size: 11px;">© Contigo Solutions Inc, 5150 Sugarloaf Pkwy, 
+	     Lawrenceville, GA 30043<br> All rights reserved</p>
   </body>
 </html>
 <?php ob_flush(); ?>

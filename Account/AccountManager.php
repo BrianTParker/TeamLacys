@@ -34,6 +34,7 @@ class AccountManager {
 	
 	private $firstName,
             $lastName,
+			$phone,
             $email;
     
     
@@ -108,15 +109,16 @@ class AccountManager {
         
         $STH = $DBH->query("select * from customers where email = '" . $email . "' and password = '" . $password . "' and active = 1");
         if($STH->rowCount() == 1){
-            $sql = $DBH->query("SELECT id, first_name, last_name, access_level from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
+            $sql = $DBH->query("SELECT id, first_name, last_name, phone, access_level from customers where email = '" . $email . "' and password = '" . $password . "'"); 			
             $sql->setFetchMode(PDO::FETCH_ASSOC);
             $row = $sql->fetch();
             $id = $row['id'];
             $firstName = $row['first_name'];
             $lastName = $row['last_name'];
+			$phone = $row['phone'];
 			$access_level = $row['access_level'];
             
-            $this->setSessionVariables($firstName, $lastName, $email, $id, $access_level);
+            $this->setSessionVariables($firstName, $lastName, $email, $id, $phone,$access_level);
             $success = 1;
             return $success;
    
@@ -200,7 +202,7 @@ class AccountManager {
         
     }
     
-    public function editAccount($id,$firstName, $lastName, $email,$phone){
+    public function editAccount($id,$firstName, $lastName, $email,$phone, $accessLevel){
         global $DBH;
         $errors = array(); /* declare the array for later use */
         $success = 0;
@@ -238,6 +240,17 @@ class AccountManager {
         {
             $errors['lastName'] = 'The last name field must not be empty.';
         }
+		// Added by Dhwani - 4/16
+		if(!empty($phone))
+		{
+			if(preg_match("/^([1]-)?[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone)) {
+			}
+			else
+			{
+				$errors['phone'] = 'Invalid format. Use this format : 999-999-9999';
+			}
+			
+		}
         if(!empty($email)){
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'The email must be a valid format';
@@ -274,8 +287,8 @@ class AccountManager {
         }
         else
         {
-            $id = $DBH->lastInsertId();
-            $this->setSessionVariables($firstName, $lastName, $email, $id, $phone);
+            
+            $this->setSessionVariables($firstName, $lastName, $email, $id, $phone, $accessLevel);
             $success = 1;
             return array("success" => $success,
                          "errors" => $errors);
@@ -323,6 +336,17 @@ class AccountManager {
         {
             $errors['lastName'] = 'The last name field must not be empty.';
         }
+		// Added by Dhwani - 4/16
+		if(!empty($phone))
+		{
+			if(preg_match("/^([1]-)?[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone)) {
+			}
+			else
+			{
+				$errors['phone'] = 'Invalid format. Use this format : 999-999-9999';
+			}
+			
+		}
         
         if(!empty($email)){
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -362,7 +386,7 @@ class AccountManager {
             $password = sha1($_POST['password']);
             $email = $_POST['email'];
             $phone = $_POST['phone']; */
-            
+            $password = sha1($password);
             $sql = "Insert into customers(first_name, last_name, email, phone,password, access_level, active)
                     values (:firstName, :lastName,:email, :phone, :password, :access_level, :active)";
             $q = $DBH->prepare($sql);

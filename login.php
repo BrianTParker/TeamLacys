@@ -1,11 +1,33 @@
 <?php
 include "header.php";
-include_once( "Account/AccountManager.php" );
+
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $errorMessage = '';
+    $ACCT_MGR = AccountManager::getInstance();
+    $status = $ACCT_MGR->checkLogin($_POST['email'], $_POST['password']);
+    
+    if($status === 1){
+        header("location: index.php");
+		
+    }else{
+        $errorMessage = "That email and password is not valid";
+    }
+    
+
+}
+
+if(!isset($errorMessage)){
+    $errorMessage = '';
+}
+
 ?>
 <div class="row">
    <div class="col-sm-3 col-sm-offset-1">
         <form role="form" action="login.php" method="POST">
           <div class="form-group">
+          <font color="red"><?php echo $errorMessage; ?></font><br/>
             <label for="email">Email address</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
           </div>
@@ -20,22 +42,10 @@ include_once( "Account/AccountManager.php" );
 
    </div>
 </div>
+</br></br></br></br></br></br>
 
 <?php
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-    $ACCT_MGR = AccountManager::getInstance();
-    $status = $ACCT_MGR->checkLogin($_POST['email'], $_POST['password']);
-    
-    if($status === 1){
-        header("location: index.php");
-    }else{
-        echo "That email and password is not valid";
-    }
-    
-
-}
 
 include "footer.php";
 ?>

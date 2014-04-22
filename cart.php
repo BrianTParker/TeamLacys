@@ -40,6 +40,7 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 			if (CartManager::getInstance()->isEmpty()){
 			
 				echo "<tr><td>There are no items in your cart!</td></tr>";
+				echo "</br></br></br></br></br></br></br>\n";
 			
 			}else{ // list all items in cart -nm
 			
@@ -64,7 +65,11 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 					echo '	</td>';
 					
 					echo '	<td>';
-					echo '		<font>' . $item['size'] . '</font>';
+					if(isset($item['size'])){
+						echo '		<font>' . $item['size'] . '</font>';
+					}else{
+						echo '		<font>N/A</font>';
+					}
 					echo '	</td>';
                     
                     echo '	<td>';
@@ -147,8 +152,10 @@ $orderTotal	= CheckoutManager::getOrderTotal();
 		</tr>
 		
 	</table>
+	</br>
 </div>
 </div>
+
 
 <?php
 include "footer.php";

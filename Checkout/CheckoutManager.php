@@ -61,10 +61,10 @@ class CheckoutManager{
         }else{
             $errors['security'] = 'The security code field cannot be blank';
         }
-        
+        // added by Dhwani
 		if(!($this->checkExpiredDate($expirationMonth, $expirationYear)))
 		{
-			$errors['expiredDate'] = 'The Credit Card is expired';
+			$errors['expiredDate'] = 'The Card is expired';
 		}
         
         if($shipping === "ship"){
@@ -89,7 +89,7 @@ class CheckoutManager{
             }else{
                 $errors['state'] = 'You must select a state';
             }
-            
+            // added by Dhwani
             if(!empty($zip)){
 				if(preg_match("/^[0-9]{5}$/", $zip)) { 
 				}
@@ -333,9 +333,14 @@ class CheckoutManager{
         // for each item in the cart -nm
         foreach( $CART_MGR->getItems() as $index => $item ){
             $color = null;
+			$size = null;
             if(isset($item['color'])){
                 $color = $item['color'];
             }
+			
+			if(isset($item['size'])){
+				$size = $item['size'];
+			}
             //purchase_details insert
             $sql3 = "Insert into purchase_details(customer_id, product_id, amount, quantity, size, color, purchase_summary_id)
                         values (:customer_id, :product_id,:amount, :quantity, :size, :color,:purchase_summary_id)";
@@ -344,11 +349,11 @@ class CheckoutManager{
                               ':product_id'=>$item['id'],
                               ':amount'=>$item['price'],
                               ':quantity'=>$item['quantity'],
-                              ':size'=>$item['size'],
+                              ':size'=>$size,
                               ':color'=>$color,
                               ':purchase_summary_id'=>$summaryId
                               ));
-							  
+			
 			$quantity_sql = "update products set quantity = quantity - ? where id = ?";
 			$quantity = $DBH->prepare($quantity_sql);
 			$quantity->execute(array($item['quantity'], $item['id']));

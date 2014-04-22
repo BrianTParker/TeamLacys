@@ -8,6 +8,8 @@
  include "db_connect.php";
  include_once( __DIR__ . '/php/cart/CartManager.php' );
  include_once( __DIR__ . '/Account/AccountManager.php' );
+ 
+ $ACCT_MGR = AccountManager::getInstance();
   ?>
   
   
@@ -83,12 +85,12 @@
 		  <li><a href="beauty.php">Beauty</a></li>
 		  <li><a href="salesItem.php">Sales</a></li>
 		</ul>
-        <!--<form class="navbar-form navbar-left" role="search">
+        <form action="search.php" method="POST" class="navbar-form navbar-right" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input name="searchString" type="text" class="form-control" placeholder="Search">
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>-->
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
         <ul class="nav navbar-nav navbar-right">
 			
           <?php
@@ -97,6 +99,9 @@
 			  echo '<li><a href="login.php">Log In</a></li>';
 			  echo '<li><a href="newuser.php">Create Account</a></li>';
             }else{
+				if($ACCT_MGR->getAccessLevel() == 1){
+					echo "<li><a href='admin.php'>Admin</a></li>";
+				}
 			  echo "<li><a href='account.php'>Welcome, ".$_SESSION['firstName']."</a></li>";
 			  echo '<li><a href="account.php">My Account</a></li>';
               echo '<li><a id="cartmgr" href="cart.php">'. CartManager::getInstance() .'</a></li>';

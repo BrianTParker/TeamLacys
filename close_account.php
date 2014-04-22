@@ -1,6 +1,5 @@
 <?php
 include "header.php";
-include "Account/AccountManager.php";
 
 
 $ACCT_MGR = AccountManager::getInstance();

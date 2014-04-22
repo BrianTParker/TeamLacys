@@ -10,7 +10,7 @@
 	   
 			<!--This is generic image area which has image of men's generic products-->	
 			<div class ="text-center">	
-				<img src = "img/bannerChild.jpg" alt="Generic children's product" width= "870" height="150">
+				<img src = "img/bannerChild.jpg" alt="Generic children's product" width= "100%" height="150">
 				</br></br>
 			</div><!-- end of div for image -->
 								
@@ -59,6 +59,14 @@
 							where p.age_category = 'child' and p.gender_category = 'female' and p.article_category = 'shoes'
 							order by p.date_added desc");
 			$girls_shoes_count_sql = $DBH->query("select count(*) from products where article_category = 'shoes'");
+			
+			//Formulate Queries for NewBorn
+			$newborn_sql = $DBH->query("select p.id, p.name, p.description, p.image_location, p.price, p.date_added, pr.percentage,pr.expiration_date
+							from products p
+							left join promotions pr on pr.product_id = p.id and pr.expiration_date >= CURDATE()	
+							where p.age_category = 'newborn' and p.gender_category = 'unisex' and p.article_category = 'clothing'
+							order by p.date_added desc");
+			$newborn_count_sql = $DBH->query("select count(*) from products where article_category = 'clothing'");
 			
 			$per_row = 4;
 			
@@ -337,6 +345,43 @@
 						</div><!-- end of tab table class for girls -->
 					</div> <!-- end of tab-pane fade class for girls-->
 					<!-------------------------------------------------- end of girls tab --------------------------------------------->
+					<!-------------------------------------------------- New Born tab ------------------------------------------------->
+					
+					<div class = "tab-pane fade" id ="NewBorn">
+
+						<table class = "table table-product">
+						<?php
+							$newborn_sql->setFetchMode(PDO::FETCH_ASSOC);
+							
+							$i2 = 0;
+							$count12 = $newborn_count_sql->fetch();							
+							echo "<br/>\n";
+							
+							while($row = $newborn_sql->fetch()) {	
+								
+								echo '<td>';
+								
+								// If the item is added in inventory within last 7 days 
+								if (strtotime($row['date_added']) > strtotime('-7 days')) {
+									echo displayNewProductIcon();
+								}	
+								
+								echo displayProducts($row['id'], $row['image_location'], $row['name']);
+								echo displayPrice($row['price'], $row['percentage'], $row['expiration_date']);
+																
+								echo "<br/><br/>\n";											
+								echo '</td>';
+
+								// display clothing in 4 columns
+								if (++$i2 % $per_row == 0 && $i2 >0 && $i2 < $count12) {
+								echo '<tr></tr>';
+								}
+							}
+						?>                        
+						</table>
+								
+					</div> 
+					<!---------------------------------------------End of New Born tab ------------------------------------------------->
 						
 				</div><!-- end of tab-content-->
 				
@@ -347,8 +392,7 @@
 
 <br/><br/><br/><br/>
 
-<!-- include footer file
+
 <?php
 	include "footer.php"
 ?>
-<!-- end of mens.php file-->

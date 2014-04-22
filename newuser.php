@@ -12,6 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $firstNameError = "";
     $lastNameError = "";
     $emailError = "";
+	$phoneError = "";
     $passwordError = "";
     
     $ACCT_MGR = AccountManager::getInstance();
@@ -26,6 +27,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         if(isset($status['errors']['lastName'])){
             $lastNameError = $status['errors']['lastName'];
+        }
+		if(isset($status['errors']['phone'])){
+            $phoneError = $status['errors']['phone'];
         }
         if(isset($status['errors']['email'])){
             $emailError = $status['errors']['email'];
@@ -47,6 +51,7 @@ if(!isset($firstName)){
     $phone = "";
     $firstNameError = "";
     $lastNameError = "";
+	$phoneError = "";
     $emailError = "";
     $passwordError = "";
 }
@@ -86,10 +91,10 @@ if(!isset($firstName)){
           
           <div class="form-group">
           
-            <label for="phone">Phone (optional)</label>
+            <label for="phone">Phone (optional)</label>&nbsp;&nbsp&nbsp;&nbsp;<font color="red"><?php echo $phoneError; ?></font>
             <div class="row">
                 <div class="col-xs-3">
-            <input type="text" class="form-control" name="phone" id="phone" pattern="^[2-9]\d{2}-\d{3}-\d{4}$" placeholder="XXX-XXX-XXXX" value="<?php echo $phone;?>">
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="XXX-XXX-XXXX" value="<?php echo $phone;?>">
                             </div>
             </div>
           </div>
