@@ -1,4 +1,5 @@
 <?php
+$emptyCart = "yes";
 include "header.php";
 include_once( "Checkout/CheckoutManager.php" );
 
