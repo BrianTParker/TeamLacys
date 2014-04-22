@@ -27,7 +27,7 @@ $sales_by_customer_sql = $DBH->query("select * from
 										) a
 										order by a.total_amount desc");
 										
-$total_sales_sql = $DBH->query("select c.first_name, c.last_name,c.email, ps.purchase_date, ps.grand_total, ps.confirmation_code
+$total_sales_sql = $DBH->query("select distinct c.first_name, c.last_name,c.email, ps.purchase_date, ps.grand_total, ps.confirmation_code
 								from purchase_summary ps
 								join purchase_details pd on pd.purchase_summary_id = ps.id
 								join products p on p.id = pd.product_id

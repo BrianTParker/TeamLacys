@@ -25,12 +25,13 @@ if(!isset($userId)){
 			<th>Purchase Date</th>
 			<th>Item</th>
 			<th>Size</th>
+            <th>Color</th>
 			<th>Qty</th>
 			<th>Purchase Amount</th>
 			
         </head>
 		<?php 
-		$history_sql = $DBH->query("select ps.amount_total, ps.purchase_date, ps.confirmation_code, pd.amount, pd.quantity, pd.size, p.name, p.image_location
+		$history_sql = $DBH->query("select ps.amount_total, ps.purchase_date, ps.confirmation_code, pd.amount, pd.quantity, pd.size, pd.color,p.name, p.image_location
 				from purchase_summary ps 
 				join purchase_details pd on pd.purchase_summary_id = ps.id
 				join products p on p.id = pd.product_id
@@ -46,6 +47,7 @@ if(!isset($userId)){
 			echo '<td>' . $row['purchase_date'] . '</td>' . "\n";
 			echo '<td>' . $row['name'] . '</td>' . "\n";
 			echo '<td>' . $row['size'] . '</td>' . "\n";
+            echo '<td>' . $row['color'] . '</td>' . "\n";
 			echo '<td> x' . $row['quantity'] . '</td>' . "\n";
 			echo '<td>$' . number_format($row['amount'], 2) . '</td>';
 			
