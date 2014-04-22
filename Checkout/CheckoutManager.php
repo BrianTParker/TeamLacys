@@ -219,6 +219,12 @@ class CheckoutManager{
 			return $_SESSION['summary']['storeLocation'];
 		}
 	}
+    
+    public function getSaveShipping(){
+        if(isset($_SESSION['summary']['saveShipping'])){
+            return $_SESSION['summary']['saveShipping'];
+        }
+    }
 	
 	public function getStoreLocationText(){
 		global $DBH;
@@ -260,10 +266,16 @@ class CheckoutManager{
             {
                 $shippingId = $DBH->lastInsertId();
                 
-                //update the most recent shipping information for the customer
-                $save_shipping_sql = "update customers set shipping_id = ? where id = ?";
-                $save_shipping_q = $DBH->prepare($save_shipping_sql);
-                $save_shipping_q->execute(array($shippingId, $ACCT_MGR->getId()));
+                if($this->getSaveShipping() == 'save'){
+                    //update the most recent shipping information for the customer
+                    $save_shipping_sql = "update customers set shipping_id = ? where id = ?";
+                    $save_shipping_q = $DBH->prepare($save_shipping_sql);
+                    $save_shipping_q->execute(array($shippingId, $ACCT_MGR->getId()));
+                }else{
+                    $save_shipping_sql = "update customers set shipping_id = null where id = ?";
+                    $save_shipping_q = $DBH->prepare($save_shipping_sql);
+                    $save_shipping_q->execute(array($ACCT_MGR->getId()));
+                }
                 
             }
         }
@@ -328,7 +340,11 @@ class CheckoutManager{
 			$save_sql = "update customers set credit_card_id = ? where id = ?";
             $save_q = $DBH->prepare($save_sql);
             $save_q->execute(array($creditId, $ACCT_MGR->getId()));
-		}
+		}else{
+            $save_sql = "update customers set credit_card_id = null where id = ?";
+            $save_q = $DBH->prepare($save_sql);
+            $save_q->execute(array($ACCT_MGR->getId()));
+        }
 		
         // for each item in the cart -nm
         foreach( $CART_MGR->getItems() as $index => $item ){

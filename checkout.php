@@ -94,6 +94,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 if(!isset($cardName)){
     $cardName = '';
     $cardNumber = '';
+    
     $security = '';
 	$expirationMonth = '';
 	$expirationYear = '';
@@ -118,7 +119,7 @@ if(!isset($cardName)){
 	
 }
 $total = 0;
-
+$creditCardType = '';
 $card_sql = $DBH->query("select card from card_types");
 ?>
 
@@ -214,6 +215,7 @@ $card_sql = $DBH->query("select card from card_types");
 				if($credit_info_sql->rowCount() >0){
 					
 					$row = $credit_info_sql->fetch();
+                    $creditCardType = $row['card_type'];
 					$cardName = $row['name_on_card'];
 					$cardNumber = $row['credit_card_number'];
 					$security = $row['security_code'];
@@ -246,7 +248,8 @@ $card_sql = $DBH->query("select card from card_types");
                         <select class="form-control" name="type">
                             <?php
                             while($cardType = $card_sql->fetch(PDO::FETCH_ASSOC)){
-                                echo '<option>' . $cardType['card'] . '</option>' . "\n";
+                                echo '<option value="' . $cardType['card'] . '"' . (($creditCardType == $cardType['card'])?"selected":"") . '>' . $cardType['card'] . '</option>' . "\n";
+                                
                             }
                             ?>
                         </select> 
