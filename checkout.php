@@ -186,7 +186,7 @@ $card_sql = $DBH->query("select card from card_types");
 			<td></td>
 			<td></td>
             <td></td>
-			<td><strong>Shipping</strong></td>
+			<td><strong>Estimated Shipping</strong></td>
 			<td>$<?php echo number_format($orderTotal['ship'], 2); ?></td>
 			
 		</tr>

@@ -414,8 +414,15 @@ class CheckoutManager{
 			$orderTotal["sub"] += $item[ 'price' ] * $item[ 'quantity' ];
 		}
 		
+		if ( isset( $_SESSION[ 'summary' ] ) && $_SESSION[ "summary" ][ "shipping" ] == "pickup" ){
+		
+			$orderTotal[ "ship" ]	= 0.00;
+		}else{
+			
+			$orderTotal[ "ship" ]	= CartManager::getInstance()->getItemCount() * $shipAmt;
+		}
+		
 		$orderTotal[ "tax" ] 	= $orderTotal[ "sub" ] * $salesTax;
-		$orderTotal[ "ship" ]	= CartManager::getInstance()->getItemCount() * $shipAmt;
 		$orderTotal[ "grand" ]	= $orderTotal["sub"] + $orderTotal[ "tax" ] + $orderTotal[ "ship" ];
 		
 		return $orderTotal;
