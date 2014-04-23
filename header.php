@@ -61,20 +61,22 @@
   <body>
   
 	<div>
-		<div class="control-panel">
-			<ul>
+		<div class="collapse navbar-collapse">
+			<ul class ="nav navbar-nav navbar-nav-lacys">
 				<?php
 				  if(!AccountManager::getInstance()->isLoggedIn()){
-					  echo '<li style="padding-left: 200px"><a href="login.php">Log In</a></li>';
+					
+					 
+					  echo '<li><a href="login.php">Log In</a></li>';
 					  echo '<li><a href="newuser.php">Create Account</a></li>';
 					  if(isset($emptyCart)){
-						echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">Cart(0)</a></span></li>';
+						echo '<li style="float: right;color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">Cart(0)</a></span></li>';
 					  }else{
 							echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 						}
 					}else{
 						if($ACCT_MGR->getAccessLevel() == 1){
-							echo '<li style="padding-left:200px"><a href="admin.php">Admin</a></li>';
+							echo '<li><a href="admin.php">Admin</a></li>';
 						}
 					  echo '<li><a href="account.php">Welcome, '.$_SESSION['firstName'].'</a></li>';
 					  echo '<li><a href="account.php">My Account</a></li>';
@@ -85,6 +87,8 @@
 							echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 						}
 					}
+					
+					
 				?>
 			</ul>
 		</div>
