@@ -354,7 +354,7 @@ class AccountManager {
             }
 	    
 	    $STH = $DBH->query("select * from customers where email = '" . $email . "' and active = 1");
-	    if($STH->rowCount() == 1){
+	    if($STH->rowCount() == 1 && $active == 1){
 		$errors['email'] = 'That email is already associated with an account';
 	    }
         }else{
