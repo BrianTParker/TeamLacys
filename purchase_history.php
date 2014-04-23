@@ -37,7 +37,7 @@ if(!isset($userId)){
 				join products p on p.id = pd.product_id
 				join customers c on c.id = pd.customer_id
 				where c.id = " . $userId . "
-				order by ps.purchase_date desc");
+				order by pd.id desc");
 		
 		//$history_sql->setFetchMode(PDO::FETCH_ASSOC);
 		while($row = $history_sql->fetch()){
