@@ -125,11 +125,12 @@
   
   <div class="container-fluid">
 		<div class="row">
-			<div id="logo">
-				<a href='./index.php'>
-					<img src="./img/logo02.png"/ style="float:center;padding-left: 50px;">
-				</a>
-				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:100px;">
+			<div class="text-center" style="padding:0;">			
+				<form id="search" action="search.php" method="POST" class="navbar-form navbar-center" role="search"style="padding:0;">
+				<img src="./img/logo02.png"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					  <div class="form-group">
 						<input name="searchString" type="text" class="form-control" placeholder="Search">
 					  </div>
