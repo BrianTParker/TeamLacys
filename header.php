@@ -125,7 +125,7 @@
   
   <div class="container-fluid">
 		<div class="row">
-			<div class="text-center">			
+			<div class="text-center" style="padding:0;">			
 				<form id="search" action="search.php" method="POST" class="navbar-form navbar-center" role="search"style="padding:0;">
 				<img src="./img/logo02.png"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
