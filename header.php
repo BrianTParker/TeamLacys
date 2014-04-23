@@ -59,9 +59,9 @@
   </head>
   
   <body>
-  
+	
 	<div>
-		<div class="collapse navbar-collapse">
+		<div class="collapse navbar-collapse" style="background: #e4e4e4;">
 			<ul class ="nav navbar-nav navbar-nav-lacys">
 				<?php
 				  if(!AccountManager::getInstance()->isLoggedIn()){
@@ -127,9 +127,9 @@
 		<div class="row">
 			<div id="logo">
 				<a href='./index.php'>
-					<img src="./img/logo02.png"/ style="float:left; padding-left: 180px;">
+					<img src="./img/logo02.png"/ style="float:center;padding-left: 50px;">
 				</a>
-				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:200px;">
+				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:100px;">
 					  <div class="form-group">
 						<input name="searchString" type="text" class="form-control" placeholder="Search">
 					  </div>
