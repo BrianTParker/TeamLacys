@@ -59,22 +59,24 @@
   </head>
   
   <body>
-  
+	
 	<div>
-		<div class="control-panel">
-			<ul>
+		<div class="collapse navbar-collapse" style="background: #e4e4e4;">
+			<ul class ="nav navbar-nav navbar-nav-lacys">
 				<?php
 				  if(!AccountManager::getInstance()->isLoggedIn()){
-					  echo '<li style="padding-left: 200px"><a href="login.php">Log In</a></li>';
+					
+					 
+					  echo '<li><a href="login.php">Log In</a></li>';
 					  echo '<li><a href="newuser.php">Create Account</a></li>';
 					  if(isset($emptyCart)){
-						echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">Cart(0)</a></span></li>';
+						echo '<li style="float: right;color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">Cart(0)</a></span></li>';
 					  }else{
 							echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 						}
 					}else{
 						if($ACCT_MGR->getAccessLevel() == 1){
-							echo '<li style="padding-left:200px"><a href="admin.php">Admin</a></li>';
+							echo '<li><a href="admin.php">Admin</a></li>';
 						}
 					  echo '<li><a href="account.php">Welcome, '.$_SESSION['firstName'].'</a></li>';
 					  echo '<li><a href="account.php">My Account</a></li>';
@@ -85,6 +87,8 @@
 							echo '<li style="float: right; padding-right: 50px; color : #c0392b"><span class="glyphicon glyphicon-shopping-cart"><a href="cart.php">'. CartManager::getInstance() .'</a></span></li>';
 						}
 					}
+					
+					
 				?>
 			</ul>
 		</div>
@@ -123,9 +127,9 @@
 		<div class="row">
 			<div id="logo">
 				<a href='./index.php'>
-					<img src="./img/logo02.png"/ style="float:left; padding-left: 180px;">
+					<img src="./img/logo02.png"/ style="float:center;padding-left: 50px;">
 				</a>
-				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:200px;">
+				<form id="search" action="search.php" method="POST" class="navbar-form navbar-right" role="search" style="padding-right:100px;">
 					  <div class="form-group">
 						<input name="searchString" type="text" class="form-control" placeholder="Search">
 					  </div>
