@@ -8,7 +8,7 @@ $db_name="advanced_systems_project"; // Database name
     try {  
   # MySQL with PDO_MYSQL
   $DBH = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
-  
+  $DBH->query("SET time_zone = 'US/Eastern'");
   }
 	catch(PDOException $e) {
     echo $e->getMessage();
