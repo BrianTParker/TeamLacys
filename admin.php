@@ -33,7 +33,7 @@ $total_sales_sql = $DBH->query("select distinct c.first_name, c.last_name,c.emai
 								join products p on p.id = pd.product_id
 								join customers c on c.id = pd.customer_id
 								where ps.grand_total > 0
-								order by ps.purchase_date desc");
+								order by ps.id desc");
 								
 $feedback_sql = $DBH->query("select * from feedback order by id desc");
 ?>
