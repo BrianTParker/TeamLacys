@@ -46,8 +46,14 @@
 		window.location.href = "./newuser.php";
 	} );
 	
-	// guest login AJAX -nm
+	// guest login AJAX prevent default action -nm
 	$( "#guestUserForm" ).submit( function( event ){
+	
+		event.preventDefault();
+	} );
+	
+	// guest login AJAX -nm
+	$( "#guestUserForm" ).one( "submit", function( event ){
 	
 		event.preventDefault();
 		
