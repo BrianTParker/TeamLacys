@@ -12,12 +12,12 @@ include "header.php";
 		
 			<div class="form-group ">
 				<label for="guestFName">First Name</label>
-				<input type="text" maxlength="30" class="form-control" id="guestFName" name="fName" placeholder="Enter First Name" required>
+				<input type="text" maxlength="30" class="form-control" pattern="^[a-zA-Z]+$"  id="guestFName" name="fName" placeholder="Enter First Name" required>
 			</div>
 			
 			<div class="form-group">
 				<label for="guestLName">Last Name</label>
-				<input type="text" maxlength="30" class="form-control" id="guestLName" name="lName" placeholder="Enter Last Name" required>
+				<input type="text" maxlength="30" class="form-control" pattern="^[a-zA-Z]+$" id="guestLName" name="lName" placeholder="Enter Last Name" required>
 			</div>
 			
 			<div class="form-group">
